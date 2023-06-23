@@ -22,8 +22,8 @@ def join_to_json(output_dir, columns_subset=None, train_frac=0.8):
         df = pd.read_json(*args, **kwargs, dtype={"user_id": str})
         return df
 
-    for state in tqdm(states):
-    # for state in tqdm(["Other", "Vermont", "North Dakota", "Alaska", "Wyoming", "Delaware"]):
+#    for state in tqdm(states):
+    for state in tqdm(["Other", "Vermont", "North Dakota", "Alaska", "Wyoming", "Delaware"]):
         try:
             state_reviews = dd.read_json(
                 DATA_DIR / f"review-{state}.json", lines=True,
