@@ -1,6 +1,7 @@
 FROM rapidsai/rapidsai-dev:23.02-cuda11.8-devel-ubuntu22.04-py3.10 as base
 RUN mv /opt/conda/envs/rapids/include/boost/mp11 /opt/conda/envs/rapids/include/boost/mp11_do_not_use
 
+# The following environment variable require change!
 ENV METAJSONPARSER_PATH="/home2/faculty/pwesolowski/praca-mgr/parser-repo"
 
 RUN <<EOF cat > /root/tmp_bashrc && mv /root/tmp_bashrc /root/.bashrc
@@ -65,7 +66,7 @@ SHELL ["/bin/bash", "-i", "-c"]
 
 RUN conda activate rapids
 RUN conda develop ${METAJSONPARSER_PATH}/python_binding # alternative: setting PYTHONPATH every time
-RUN pip install unidecode lxml
+RUN pip install unidecode lxml joblib
 
 RUN sed -i '2i DISABLE_JUPYTER=true' /opt/docker/bin/entrypoint_source
 
