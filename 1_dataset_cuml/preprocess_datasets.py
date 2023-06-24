@@ -22,28 +22,14 @@ def join_to_json(output_dir, columns_subset=None, train_frac=0.8):
         df = pd.read_json(*args, **kwargs, dtype={"user_id": str})
         return df
 
-#    for state in tqdm(states):
-    for state in tqdm(["Other", "Vermont", "North Dakota", "Alaska", "Wyoming", "Delaware"]):
+    for state in tqdm(states):
+#     for state in tqdm(["Other", "Vermont", "North Dakota", "Alaska", "Wyoming", "Delaware"]):
         try:
             state_reviews = dd.read_json(
                 DATA_DIR / f"review-{state}.json", lines=True,
-                engine=read_json_user_id_str, blocksize="32 MiB"
+                engine=read_json_user_id_str, blocksize=None
             ).dropna(subset=["user_id", "rating"])
             state_reviews["rating"] = state_reviews["rating"].astype(int)
-
-            # Dividing into train and validation subsets
-            sorted_state_reviews = state_reviews.sort_values(["user_id", "time"], ascending=True)
-            g = sorted_state_reviews.groupby("user_id")
-            user_id_counts = state_reviews["user_id"].value_counts().compute()
-            flags = (
-                    g.cumcount() > (sorted_state_reviews["user_id"].map(
-                user_id_counts
-            ) * train_frac)
-            )
-            del user_id_counts
-
-            train_reviews = sorted_state_reviews.loc[~flags]
-            val_reviews = sorted_state_reviews.loc[flags]
 
             state_meta = pd.read_json(DATA_DIR / f"meta-{state}.json", lines=True).drop_duplicates(
                 "gmap_id").dropna(subset="category")
@@ -52,24 +38,23 @@ def join_to_json(output_dir, columns_subset=None, train_frac=0.8):
                 state_meta["category"].apply(lambda x: list(map(unidecode, x)))
             )
 
-            for reviews, which in zip([train_reviews, val_reviews], ["train", "val"]):
 
-                joined = reviews.join(state_meta.set_index("gmap_id"), on=["gmap_id"], lsuffix="_review",
-                                      rsuffix="_meta", how="inner")
-                joined["category"] = joined["category"].str.join('|')
+            joined = state_reviews.join(state_meta.set_index("gmap_id"), on=["gmap_id"], lsuffix="_review",
+                                  rsuffix="_meta", how="inner")
+            joined["category"] = joined["category"].str.join('|')
 
-                if columns_subset:
-                    joined = joined[columns_subset]
+            if columns_subset:
+                joined = joined[columns_subset]
 
-                parts_path = DATA_DIR / output_dir / f"{state}_{which}.json.parts"
-                dd.to_json(joined, parts_path)
-                with open(DATA_DIR / output_dir / f"{state}_{which}.json", "w") as f:
-                    for fname in parts_path.glob("*.part"):
-                        with open(fname) as src:
-                            for line in src:
-                                # for line in islice(src, 0, 5000):
-                                f.write(line)
-                shutil.rmtree(parts_path)
+            parts_path = DATA_DIR / output_dir / f"{state}.json.parts"
+            dd.to_json(joined, parts_path)
+            with open(DATA_DIR / output_dir / f"{state}.json", "w") as f:
+                for fname in parts_path.glob("*.part"):
+                    with open(fname) as src:
+                        for line in src:
+                            # for line in islice(src, 0, 5000):
+                            f.write(line)
+            shutil.rmtree(parts_path)
         except Exception as e:
             print("Exception", state, e)
             print("Going to the next state...")
@@ -84,7 +69,7 @@ if __name__ == "__main__":
 
     try:
         # join_to_json("joined_columns_all")
-        join_to_json("joined_columns_subset",
+        join_to_json("joined-cuml",
                      ["user_id", "gmap_id", "rating", "category", "latitude", "longitude", "time"])
     finally:
         client.shutdown()
