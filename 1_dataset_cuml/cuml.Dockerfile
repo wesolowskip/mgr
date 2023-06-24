@@ -1,7 +1,7 @@
 FROM rapidsai/rapidsai-dev:23.02-cuda11.8-devel-ubuntu22.04-py3.10 as base
 RUN mv /opt/conda/envs/rapids/include/boost/mp11 /opt/conda/envs/rapids/include/boost/mp11_do_not_use
 
-ENV METAJSONPARSER_PATH="/opt/meta-json-parser"
+ENV METAJSONPARSER_PATH="/home2/faculty/pwesolowski/praca-mgr/parser-repo"
 
 RUN <<EOF cat > /root/tmp_bashrc && mv /root/tmp_bashrc /root/.bashrc
 export PATH='/opt/conda/bin:/usr/local/nvidia/bin:/usr/local/cuda/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'
@@ -69,15 +69,17 @@ RUN pip install unidecode lxml
 
 RUN sed -i '2i DISABLE_JUPYTER=true' /opt/docker/bin/entrypoint_source
 
-RUN git clone https://github.com/wesolowskip/mgr.git /mgr
-
-RUN git clone https://github.com/wesolowskip/meta-json-parser.git -b rmm ${METAJSONPARSER_PATH}
-RUN git clone https://github.com/CLIUtils/CLI11.git -b v2.0.0 ${METAJSONPARSER_PATH}/third_parties/CLI11
-RUN git clone https://github.com/boostorg/mp11.git -b boost-1.82.0 ${METAJSONPARSER_PATH}/third_parties/mp11
-WORKDIR ${METAJSONPARSER_PATH}
-RUN git submodule update --init --recursive; exit 0 # git clone did not work (probably due to invalid version)
-
-RUN mkdir -p build
+# The following commands are commentected out due to convenience. Singularity containers are readonly by default
+# hence I store the repos under $HOME directory in the cluster which are then mounted to the container.
+#RUN git clone https://github.com/wesolowskip/mgr.git /mgr
+#
+#RUN git clone https://github.com/wesolowskip/meta-json-parser.git -b rmm ${METAJSONPARSER_PATH}
+#RUN git clone https://github.com/CLIUtils/CLI11.git -b v2.0.0 ${METAJSONPARSER_PATH}/third_parties/CLI11
+#RUN git clone https://github.com/boostorg/mp11.git -b boost-1.82.0 ${METAJSONPARSER_PATH}/third_parties/mp11
+#WORKDIR ${METAJSONPARSER_PATH}
+#RUN git submodule update --init --recursive; exit 0 # git clone did not work (probably due to invalid version)
+#
+#RUN mkdir -p build
 
 RUN <<EOF cat > /build.sh
 #!/bin/bash
