@@ -65,7 +65,7 @@ SHELL ["/bin/bash", "-i", "-c"]
 
 RUN conda activate rapids
 RUN conda develop ${METAJSONPARSER_PATH}/python_binding # alternative: setting PYTHONPATH every time
-RUN pip install unidecode
+RUN pip install unidecode lxml
 
 RUN sed -i '2i DISABLE_JUPYTER=true' /opt/docker/bin/entrypoint_source
 
