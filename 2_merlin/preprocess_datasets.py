@@ -32,9 +32,8 @@ def join_to_json(output_dir, columns_subset=None, train_frac=0.8, client=None):
             # Dividing into train and validation subsets
             state_reviews["user_id_time"] = state_reviews[["user_id", "time"]].apply(tuple, axis=1)
             sorted_state_reviews = state_reviews.sort_values("user_id_time", ascending=True)
-            sorted_state_reviews = sorted_state_reviews.set_index("user_id", sorted=True)
             g = sorted_state_reviews.groupby("user_id")
-            user_id_counts = sorted_state_reviews["user_id"].value_counts().compute()
+            user_id_counts = state_reviews["user_id"].value_counts().compute()
             flags = (
                     g.cumcount() > (sorted_state_reviews["user_id"].map(user_id_counts) * train_frac)
             )
