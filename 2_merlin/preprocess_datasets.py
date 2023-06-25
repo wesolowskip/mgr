@@ -32,12 +32,23 @@ def join_to_json(output_dir, columns_subset=None, train_frac=0.8, client=None):
             # Dividing into train and validation subsets
             state_reviews["user_id_time"] = state_reviews[["user_id", "time"]].apply(tuple, axis=1)
             sorted_state_reviews = state_reviews.sort_values("user_id_time", ascending=True)
+
+            sorted_state_reviews_path = DATA_DIR / output_dir / "tmp" / state / "sorted-state-reviews"
+            sorted_state_reviews_path.mkdir(parents=True, exist_ok=True)
+            sorted_state_reviews.to_parquet(sorted_state_reviews_path)
+            sorted_state_reviews = dd.read_parquet(sorted_state_reviews_path)
+
             g = sorted_state_reviews.groupby("user_id")
             user_id_counts = state_reviews["user_id"].value_counts().compute()
             flags = (
                     g.cumcount() > (sorted_state_reviews["user_id"].map(user_id_counts) * train_frac)
             )
+            flags_path = DATA_DIR / output_dir / "tmp" / state / "flags"
+            flags_path.mkdir(parents=True, exist_ok=True)
+            flags.to_parquet(flags_path)
             del user_id_counts
+
+            flags = dd.read_parquet(flags_path)
 
             train_reviews = sorted_state_reviews.loc[~flags]
             val_reviews = sorted_state_reviews.loc[flags]
@@ -67,6 +78,8 @@ def join_to_json(output_dir, columns_subset=None, train_frac=0.8, client=None):
                                 # for line in islice(src, 0, 5000):
                                 f.write(line)
                 shutil.rmtree(parts_path)
+                shutil.rmtree(flags_path)
+                shutil.rmtree(sorted_state_reviews_path)
         except Exception as e:
             print("Exception", state, e)
             if client is not None:
