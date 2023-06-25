@@ -41,17 +41,12 @@ def join_to_json(output_dir, columns_subset=None, train_frac=0.8, client=None):
             sorted_state_reviews.to_parquet(sorted_state_reviews_path)
             sorted_state_reviews = dd.read_parquet(sorted_state_reviews_path)
 
-            g = sorted_state_reviews.groupby("user_id")
             user_id_counts = state_reviews["user_id"].value_counts().compute()
-            flags = (
-                    g.cumcount() > (sorted_state_reviews["user_id"].map(user_id_counts) * train_frac)
-            )
-            flags_path = DATA_DIR / output_dir / "tmp" / state / "flags"
-            flags_path.mkdir(parents=True, exist_ok=True)
-            flags.to_parquet(flags_path)
-            del user_id_counts
-
-            flags = dd.read_parquet(flags_path)
+            print(user_id_counts.head())
+            which_da = sorted_state_reviews.groupby("user_id").cumcount().values
+            train_offset_da = (sorted_state_reviews["user_id"].map(user_id_counts) * train_frac).values
+            flags = (which_da > train_offset_da).compute()
+            print("Done flags")
 
             train_reviews = sorted_state_reviews.loc[~flags]
             val_reviews = sorted_state_reviews.loc[flags]
