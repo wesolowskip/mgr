@@ -11,7 +11,7 @@ from unidecode import unidecode
 DATA_DIR = Path(os.environ["DATA_DIR"])
 
 
-def join_to_json(output_dir, columns_subset=None):
+def join_to_json(output_dir, columns_subset=None, client=None):
     (DATA_DIR / output_dir).mkdir(parents=True, exist_ok=True)
 
     states = [re.findall(r"review-(.*?).json", str(x))[0] for x in DATA_DIR.glob("review-*.json")]
@@ -25,7 +25,7 @@ def join_to_json(output_dir, columns_subset=None):
         try:
             state_reviews = dd.read_json(
                 DATA_DIR / f"review-{state}.json", lines=True,
-                engine=read_json_user_id_str, blocksize=None
+                engine=read_json_user_id_str, blocksize="1 GiB"
             ).dropna(subset=["user_id", "rating"])
             state_reviews["rating"] = state_reviews["rating"].astype(int)
 
@@ -54,6 +54,8 @@ def join_to_json(output_dir, columns_subset=None):
             shutil.rmtree(parts_path)
         except Exception as e:
             print("Exception", state, e)
+            if client is not None:
+                print(client.get_worker_logs())
             print("Going to the next state...")
 
 
@@ -70,6 +72,7 @@ if __name__ == "__main__":
     try:
         # join_to_json("joined_columns_all")
         join_to_json("joined-cuml",
-                     ["user_id", "gmap_id", "rating", "category", "latitude", "longitude", "time"])
+                     ["user_id", "gmap_id", "rating", "category", "latitude", "longitude", "time"],
+                     client)
     finally:
         client.shutdown()

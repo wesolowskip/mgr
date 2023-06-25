@@ -11,7 +11,7 @@ from unidecode import unidecode
 DATA_DIR = Path(os.environ["DATA_DIR"])
 
 
-def join_to_json(output_dir, columns_subset=None, train_frac=0.8):
+def join_to_json(output_dir, columns_subset=None, train_frac=0.8, client=None):
     (DATA_DIR / output_dir).mkdir(parents=True, exist_ok=True)
 
     states = [re.findall(r"review-(.*?).json", str(x))[0] for x in DATA_DIR.glob("review-*.json")]
@@ -25,18 +25,18 @@ def join_to_json(output_dir, columns_subset=None, train_frac=0.8):
         try:
             state_reviews = dd.read_json(
                 DATA_DIR / f"review-{state}.json", lines=True,
-                engine=read_json_user_id_str, blocksize=None
+                engine=read_json_user_id_str, blocksize="1 GiB"
             ).dropna(subset=["user_id", "rating"])
             state_reviews["rating"] = state_reviews["rating"].astype(int)
 
             # Dividing into train and validation subsets
-            sorted_state_reviews = state_reviews.sort_values(["user_id", "time"], ascending=True)
+            state_reviews["user_id_time"] = state_reviews[["user_id", "time"]].apply(tuple, axis=1)
+            sorted_state_reviews = state_reviews.sort_values("user_id_time", ascending=True)
+            sorted_state_reviews = sorted_state_reviews.set_index("user_id", sorted=True)
             g = sorted_state_reviews.groupby("user_id")
-            user_id_counts = state_reviews["user_id"].value_counts().compute()
+            user_id_counts = sorted_state_reviews["user_id"].value_counts().compute()
             flags = (
-                    g.cumcount() > (sorted_state_reviews["user_id"].map(
-                user_id_counts
-            ) * train_frac)
+                    g.cumcount() > (sorted_state_reviews["user_id"].map(user_id_counts) * train_frac)
             )
             del user_id_counts
 
@@ -70,6 +70,8 @@ def join_to_json(output_dir, columns_subset=None, train_frac=0.8):
                 shutil.rmtree(parts_path)
         except Exception as e:
             print("Exception", state, e)
+            if client is not None:
+                print(client.get_worker_logs())
             print("Going to the next state...")
 
 
@@ -78,11 +80,15 @@ if __name__ == "__main__":
     from dask.distributed import Client
     import logging
 
-    client = Client(silence_logs=logging.ERROR, n_workers=1)
+    num_cpus = int(os.environ.get("SLURM_CPUS_PER_TASK", 1))
+    print(f"{num_cpus=}")
+    client = Client(silence_logs=logging.ERROR, n_workers=num_cpus,
+                    dashboard_address="0.0.0.0:8787")
 
     try:
         # join_to_json("joined_columns_all")
         join_to_json("joined-merlin",
-                     ["user_id", "gmap_id", "rating", "category", "latitude", "longitude", "time"])
+                     ["user_id", "gmap_id", "rating", "category", "latitude", "longitude", "time"],
+                     client=client)
     finally:
         client.shutdown()
