@@ -32,7 +32,7 @@ def join_to_json(output_dir, columns_subset=None, train_frac=0.8, client=None):
             # Dividing into train and validation subsets
             # state_reviews["user_id_time"] = state_reviews[["user_id", "time"]].apply(tuple, axis=1)
             sorted_state_reviews = state_reviews.sort_values("time", ascending=True)
-            sorted_state_reviews = sorted_state_reviews.set_index("user_id", sorted=False, sort=True)
+            sorted_state_reviews = sorted_state_reviews.set_index("user_id", sorted=False)
             if columns_subset:
                 sorted_state_reviews = sorted_state_reviews[
                     [x for x in columns_subset if x in sorted_state_reviews.columns]]
