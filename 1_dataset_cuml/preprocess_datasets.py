@@ -1,19 +1,17 @@
 import os
 import re
 import shutil
-from itertools import islice
 from pathlib import Path
 
-import dask
 import dask.dataframe as dd
 import pandas as pd
-from unidecode import unidecode
 from tqdm import tqdm
+from unidecode import unidecode
 
 DATA_DIR = Path(os.environ["DATA_DIR"])
 
 
-def join_to_json(output_dir, columns_subset=None, train_frac=0.8):
+def join_to_json(output_dir, columns_subset=None):
     (DATA_DIR / output_dir).mkdir(parents=True, exist_ok=True)
 
     states = [re.findall(r"review-(.*?).json", str(x))[0] for x in DATA_DIR.glob("review-*.json")]
@@ -23,7 +21,7 @@ def join_to_json(output_dir, columns_subset=None, train_frac=0.8):
         return df
 
     for state in tqdm(states):
-#     for state in tqdm(["Other", "Vermont", "North Dakota", "Alaska", "Wyoming", "Delaware"]):
+        #     for state in tqdm(["Other", "Vermont", "North Dakota", "Alaska", "Wyoming", "Delaware"]):
         try:
             state_reviews = dd.read_json(
                 DATA_DIR / f"review-{state}.json", lines=True,
@@ -38,9 +36,8 @@ def join_to_json(output_dir, columns_subset=None, train_frac=0.8):
                 state_meta["category"].apply(lambda x: list(map(unidecode, x)))
             )
 
-
             joined = state_reviews.join(state_meta.set_index("gmap_id"), on=["gmap_id"], lsuffix="_review",
-                                  rsuffix="_meta", how="inner")
+                                        rsuffix="_meta", how="inner")
             joined["category"] = joined["category"].str.join('|')
 
             if columns_subset:
@@ -65,7 +62,9 @@ if __name__ == "__main__":
     from dask.distributed import Client
     import logging
 
-    client = Client(silence_logs=logging.ERROR, n_workers=1)
+    num_cpus = int(os.environ.get("SLURM_CPUS_PER_TASK", 1))
+    print(f"{num_cpus=}")
+    client = Client(silence_logs=logging.ERROR, n_workers=num_cpus)
 
     try:
         # join_to_json("joined_columns_all")
