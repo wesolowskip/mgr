@@ -30,8 +30,8 @@ def join_to_json(output_dir, columns_subset=None, train_frac=0.8, client=None):
             state_reviews["rating"] = state_reviews["rating"].astype(int)
 
             # Dividing into train and validation subsets
-            # state_reviews["user_id_time"] = state_reviews[["user_id", "time"]].apply(tuple, axis=1)
-            sorted_state_reviews = state_reviews.sort_values("time", ascending=True)
+            state_reviews["user_id_time"] = state_reviews[["user_id", "time"]].apply(tuple, axis=1)
+            sorted_state_reviews = state_reviews.sort_values("user_id_time", ascending=True)
             if columns_subset:
                 sorted_state_reviews = sorted_state_reviews[
                     [x for x in columns_subset if x in sorted_state_reviews.columns]]
@@ -43,11 +43,17 @@ def join_to_json(output_dir, columns_subset=None, train_frac=0.8, client=None):
 
             user_id_counts = state_reviews["user_id"].value_counts().compute()
             print(user_id_counts.head())
-            which_da = sorted_state_reviews.groupby("user_id").cumcount().values
-            train_offset_da = (sorted_state_reviews["user_id"].map(user_id_counts) * train_frac).values
-            flags = (which_da > train_offset_da).compute()
+            which_da = sorted_state_reviews.groupby("user_id").cumcount().values.compute()
+            print("Done which_da")
+            train_offset_da = (sorted_state_reviews["user_id"].map(user_id_counts) * train_frac).values.compute()
+            print("Done train_offset_da")
+            flags = (which_da > train_offset_da)
             print("Done flags")
+            del train_offset_da
+            del which_da
+            del user_id_counts
 
+            sorted_state_reviews.set_index("user_id", sorted=True)
             train_reviews = sorted_state_reviews.loc[~flags]
             val_reviews = sorted_state_reviews.loc[flags]
 
