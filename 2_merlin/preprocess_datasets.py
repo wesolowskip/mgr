@@ -30,8 +30,11 @@ def join_to_json(output_dir, columns_subset=None, train_frac=0.8, client=None):
             state_reviews["rating"] = state_reviews["rating"].astype(int)
 
             # Dividing into train and validation subsets
-            state_reviews["user_id_time"] = state_reviews[["user_id", "time"]].apply(tuple, axis=1)
-            sorted_state_reviews = state_reviews.sort_values("user_id_time", ascending=True)
+            # state_reviews["user_id_time"] = state_reviews[["user_id", "time"]].apply(tuple, axis=1)
+            sorted_state_reviews = state_reviews.sort_values("time", ascending=True)
+            if columns_subset:
+                sorted_state_reviews = sorted_state_reviews[
+                    [x for x in columns_subset if x in sorted_state_reviews.columns]]
 
             sorted_state_reviews_path = DATA_DIR / output_dir / "tmp" / state / "sorted-state-reviews"
             sorted_state_reviews_path.mkdir(parents=True, exist_ok=True)
