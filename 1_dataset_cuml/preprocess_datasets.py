@@ -64,7 +64,8 @@ if __name__ == "__main__":
 
     num_cpus = int(os.environ.get("SLURM_CPUS_PER_TASK", 1))
     print(f"{num_cpus=}")
-    client = Client(silence_logs=logging.ERROR, n_workers=num_cpus)
+    client = Client(silence_logs=logging.ERROR, n_workers=num_cpus,
+                    dashboard_address="0.0.0.0:8787")
 
     try:
         # join_to_json("joined_columns_all")
