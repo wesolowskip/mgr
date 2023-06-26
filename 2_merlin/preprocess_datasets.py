@@ -12,6 +12,13 @@ from unidecode import unidecode
 DATA_DIR = Path(os.environ["DATA_DIR"])
 
 
+def cache_ddf(ddf, path):
+    shutil.rmtree(path, ignore_errors=True)
+    path.mkdir(parents=True, exist_ok=True)
+    ddf.to_parquet(path)
+    return dd.read_parquet(path)
+
+
 def join_to_json(output_dir, columns_subset=None, train_frac=0.8, client=None):
     (DATA_DIR / output_dir).mkdir(parents=True, exist_ok=True)
 
@@ -57,8 +64,17 @@ def join_to_json(output_dir, columns_subset=None, train_frac=0.8, client=None):
             del enumerate_groups
             del user_id_counts
 
-            train_reviews = sorted_state_reviews.loc[flags[~flags].index, :]
-            val_reviews = sorted_state_reviews.loc[flags[flags].index, :]
+            train_reviews_path = DATA_DIR / output_dir / "tmp" / state / "train-reviews"
+            train_reviews = cache_ddf(
+                sorted_state_reviews.loc[flags[~flags].index, :],
+                train_reviews_path
+            )
+
+            val_reviews_path = DATA_DIR / output_dir / "tmp" / state / "val-reviews"
+            val_reviews = cache_ddf(
+                sorted_state_reviews.loc[flags[flags].index, :],
+                val_reviews_path
+            )
             print("Done split")
             state_meta = pd.read_json(DATA_DIR / f"meta-{state}.json", lines=True).drop_duplicates(
                 "gmap_id").dropna(subset="category")
@@ -69,8 +85,8 @@ def join_to_json(output_dir, columns_subset=None, train_frac=0.8, client=None):
 
             for reviews, which in zip([train_reviews, val_reviews], ["train", "val"]):
 
-                joined = reviews.join(state_meta.set_index("gmap_id"), on=["gmap_id"], lsuffix="_review",
-                                      rsuffix="_meta", how="inner")
+                joined = reviews.reset_index().join(state_meta.set_index("gmap_id"), on=["gmap_id"], lsuffix="_review",
+                                                    rsuffix="_meta", how="inner")
                 joined["category"] = joined["category"].str.join('|')
 
                 if columns_subset:
@@ -86,7 +102,8 @@ def join_to_json(output_dir, columns_subset=None, train_frac=0.8, client=None):
                                 # for line in islice(src, 0, 5000):
                                 f.write(line)
                 shutil.rmtree(parts_path)
-                # shutil.rmtree(sorted_state_reviews_path)
+                shutil.rmtree(train_reviews_path)
+                shutil.rmtree(val_reviews_path)
         except Exception as e:
             tb = traceback.format_exc()
             print("Exception", state, e, tb)
