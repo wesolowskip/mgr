@@ -39,10 +39,8 @@ def join_to_json(output_dir, columns_subset=None, client=None, blocksize="1 GiB"
         return df
 
     for state in tqdm(states):
-        train_reviews_path = DATA_DIR / output_dir / "tmp" / state / "train_reviews.json"
-        val_reviews_path = DATA_DIR / output_dir / "tmp" / state / "val_reviews.json"
-
         #     for state in tqdm(["Other", "Vermont", "North Dakota", "Alaska", "Wyoming", "Delaware"]):
+        print(state)
         try:
 
             state_reviews = dd.read_json(
