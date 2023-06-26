@@ -36,7 +36,7 @@ def join_to_json(output_dir, columns_subset=None, client=None, blocksize="1 GiB"
         states = [re.findall(r"review-(.*?).json", str(x))[0] for x in DATA_DIR.glob("review-*.json")]
 
     def read_json_user_id_str(*args, **kwargs):
-        df = pd.read_json(*args, **kwargs, dtype={"user_id": str})
+        df = pd.read_json(*args, **kwargs, dtype={"user_id": str, "gmap_id": str})
         return df
 
     for state in tqdm(states):
@@ -102,8 +102,9 @@ def join_to_json(output_dir, columns_subset=None, client=None, blocksize="1 GiB"
                                        blocksize=blocksize
                                        )
             print("Done split")
-            state_meta = pd.read_json(DATA_DIR / f"meta-{state}.json", lines=True).drop_duplicates(
-                "gmap_id").dropna(subset="category")
+            state_meta = pd.read_json(
+                DATA_DIR / f"meta-{state}.json", lines=True, dtype={"gmap_id": str}
+            ).drop_duplicates("gmap_id").dropna(subset="category")
             # Removing unicode characters
             state_meta["category"] = (
                 state_meta["category"].apply(lambda x: list(map(unidecode, x)))
