@@ -102,8 +102,7 @@ if __name__ == "__main__":
                     dashboard_address="0.0.0.0:8797")
 
     try:
-        # join_to_json("joined_columns_all")
-        join_to_json("joined-merlin",
+        join_to_json("joined-recommender",
                      ["user_id", "gmap_id", "rating", "category", "latitude", "longitude", "time"],
                      client)
     finally:
