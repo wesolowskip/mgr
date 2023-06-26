@@ -114,16 +114,17 @@ def join_to_json(output_dir, columns_subset=None, client=None, blocksize="1 GiB"
                 save_path = DATA_DIR / output_dir / f"{state}_{which}.json"
                 open(save_path, "w").close()
 
-                def save_joined_chunk(df):
-                    joined = df.join(state_meta, on="gmap_id", rsuffix="_meta", how="inner")
-                    joined["category"] = joined["category"].str.join('|')
-                    if columns_subset:
-                        joined = joined[columns_subset]
-                    if joined.shape[0]:
-                        joined.to_json(save_path, orient="records", lines=True, mode='a')
+                with open(save_path, 'a') as f:
+                    def save_joined_chunk(df):
+                        joined = df.join(state_meta, on="gmap_id", rsuffix="_meta", how="inner")
+                        joined["category"] = joined["category"].str.join('|')
+                        if columns_subset:
+                            joined = joined[columns_subset]
+                        if joined.shape[0]:
+                            joined.to_json(f, orient="records", lines=True)
 
-                # NOTE THAT IT HAS TO BE DONE ON A SINGLE WORKER!!!!
-                reviews.map_partitions(save_joined_chunk).compute()
+                    for df in reviews.partitions:
+                        save_joined_chunk(df)
                 print(f"Finished {which} join")
             #     joined = reviews.join(state_meta.set_index("gmap_id"), on=["gmap_id"], lsuffix="_review",
             #                           rsuffix="_meta", how="inner")
