@@ -104,7 +104,7 @@ def join_to_json(output_dir, columns_subset=None, client=None, blocksize="1 GiB"
             print("Done split")
             state_meta = pd.read_json(
                 DATA_DIR / f"meta-{state}.json", lines=True, dtype={"gmap_id": str}
-            ).drop_duplicates("gmap_id").dropna(subset="category")
+            ).drop_duplicates("gmap_id").dropna(subset="category").set_index("gmap_id")
             # Removing unicode characters
             state_meta["category"] = (
                 state_meta["category"].apply(lambda x: list(map(unidecode, x)))
@@ -124,25 +124,8 @@ def join_to_json(output_dir, columns_subset=None, client=None, blocksize="1 GiB"
                             joined.to_json(f, orient="records", lines=True)
 
                     for df in reviews.partitions:
-                        save_joined_chunk(df)
+                        save_joined_chunk(df.compute())
                 print(f"Finished {which} join")
-            #     joined = reviews.join(state_meta.set_index("gmap_id"), on=["gmap_id"], lsuffix="_review",
-            #                           rsuffix="_meta", how="inner")
-            #     joined["category"] = joined["category"].str.join('|')
-            #
-            #     if columns_subset:
-            #         joined = joined[columns_subset]
-            #     print("Done join")
-            #
-            #     parts_path = DATA_DIR / output_dir / f"{state}_{which}.json.parts"
-            #     dd.to_json(joined, parts_path)
-            #     with open(DATA_DIR / output_dir / f"{state}_{which}.json", "w") as f:
-            #         for fname in parts_path.glob("*.part"):
-            #             with open(fname) as src:
-            #                 for line in src:
-            #                     # for line in islice(src, 0, 5000):
-            #                     f.write(line)
-            #     shutil.rmtree(parts_path)
         except Exception as e:
             tb = traceback.format_exc()
             print("Exception", state, e, tb)
