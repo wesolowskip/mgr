@@ -1,13 +1,12 @@
 import ast
-import json
 import os
 import re
-import shutil
 import traceback
 from pathlib import Path
 
 import dask.dataframe as dd
 import pandas as pd
+from dask_ml.model_selection import train_test_split
 from tqdm import tqdm
 from unidecode import unidecode
 
@@ -46,62 +45,19 @@ def join_to_json(output_dir, columns_subset=None, client=None, blocksize="1 GiB"
         #     for state in tqdm(["Other", "Vermont", "North Dakota", "Alaska", "Wyoming", "Delaware"]):
         try:
 
-            if not train_reviews_path.is_file() or not val_reviews_path.is_file():
+            state_reviews = dd.read_json(
+                DATA_DIR / f"review-{state}.json", lines=True,
+                engine=read_json_user_id_str, blocksize=blocksize
+            ).dropna(subset=["user_id", "rating"])
+            state_reviews["rating"] = state_reviews["rating"].astype(int)
 
-                state_reviews = dd.read_json(
-                    DATA_DIR / f"review-{state}.json", lines=True,
-                    engine=read_json_user_id_str, blocksize=blocksize
-                ).dropna(subset=["user_id", "rating"])
-                state_reviews["rating"] = state_reviews["rating"].astype(int)
+            if columns_subset:
+                state_reviews = state_reviews[
+                    [x for x in columns_subset if x in state_reviews.columns]]
 
-                sorted_state_reviews = state_reviews.set_index("user_id")
-                if columns_subset:
-                    sorted_state_reviews = sorted_state_reviews[
-                        [x for x in columns_subset if x in sorted_state_reviews.columns]]
-
-                # sorted_state_reviews_path = DATA_DIR / output_dir / "tmp" / state / "sorted-state-reviews"
-                # sorted_state_reviews_path.mkdir(parents=True, exist_ok=True)
-                # sorted_state_reviews.to_parquet(sorted_state_reviews_path)
-                # sorted_state_reviews = dd.read_parquet(sorted_state_reviews_path).set_index("user_id", sorted=True)
-
-                all_sorted_reviews_path = DATA_DIR / output_dir / "tmp" / state / "sorted-state-reviews.json.parts"
-                shutil.rmtree(all_sorted_reviews_path, ignore_errors=True)
-                all_sorted_reviews_path.mkdir(parents=True, exist_ok=True)
-                all_reviews_files = sorted_state_reviews.reset_index().to_json(all_sorted_reviews_path, lines=True)
-                print(all_reviews_files)
-
-                open(train_reviews_path, "w").close()
-                open(val_reviews_path, "w").close()
-
-                with (
-                    open(train_reviews_path, "a") as train_f,
-                    open(val_reviews_path, "a") as val_f
-                ):
-                    entries = []
-                    user_id = None
-                    for fname in all_reviews_files:
-                        with open(fname) as f:
-                            for line in f:
-                                entry = json.loads(line)
-                                if user_id is None:
-                                    user_id = entry["user_id"]
-                                if entry["user_id"] != user_id:
-                                    split_to_files(entries, train_f, val_f)
-                                    entries = []
-                                    user_id = entry["user_id"]
-                                entries.append(entry)
-                    if entries:
-                        split_to_files(entries, train_f, val_f)
-
-            train_reviews = dd.read_json(train_reviews_path, lines=True,
-                                         engine=read_json_user_id_str,
-                                         blocksize=blocksize
-                                         )
-            val_reviews = dd.read_json(val_reviews_path, lines=True,
-                                       engine=read_json_user_id_str,
-                                       blocksize=blocksize
-                                       )
+            train_reviews, val_reviews = train_test_split(state_reviews, test_size=0.2, random_state=0, shuffle=True)
             print("Done split")
+
             state_meta = pd.read_json(
                 DATA_DIR / f"meta-{state}.json", lines=True, dtype={"gmap_id": str}
             ).drop_duplicates("gmap_id").dropna(subset="category").set_index("gmap_id")
@@ -109,7 +65,8 @@ def join_to_json(output_dir, columns_subset=None, client=None, blocksize="1 GiB"
             state_meta["category"] = (
                 state_meta["category"].apply(lambda x: list(map(unidecode, x)))
             )
-            print("Start join")
+            print("Done reading state_meta")
+
             for reviews, which in zip([train_reviews, val_reviews], ["train", "val"]):
                 save_path = DATA_DIR / output_dir / f"{state}_{which}.json"
                 open(save_path, "w").close()
@@ -125,7 +82,7 @@ def join_to_json(output_dir, columns_subset=None, client=None, blocksize="1 GiB"
 
                     for df in reviews.partitions:
                         save_joined_chunk(df.compute())
-                print(f"Finished {which} join")
+                print(f"Done {which} join")
         except Exception as e:
             tb = traceback.format_exc()
             print("Exception", state, e, tb)
