@@ -1,6 +1,7 @@
 import os
 import re
 import shutil
+import traceback
 from pathlib import Path
 
 import dask.dataframe as dd
@@ -58,7 +59,8 @@ def join_to_json(output_dir, columns_subset=None, train_frac=0.8, client=None):
 
             train_reviews = sorted_state_reviews.loc[~flags]
             val_reviews = sorted_state_reviews.loc[flags]
-
+            print(f"{train_reviews.head()=}")
+            print("Done split")
             state_meta = pd.read_json(DATA_DIR / f"meta-{state}.json", lines=True).drop_duplicates(
                 "gmap_id").dropna(subset="category")
             # Removing unicode characters
@@ -74,6 +76,8 @@ def join_to_json(output_dir, columns_subset=None, train_frac=0.8, client=None):
 
                 if columns_subset:
                     joined = joined[columns_subset]
+                print(f"{joined.head()=}")
+                print("Done join")
 
                 parts_path = DATA_DIR / output_dir / f"{state}_{which}.json.parts"
                 dd.to_json(joined, parts_path)
@@ -86,9 +90,10 @@ def join_to_json(output_dir, columns_subset=None, train_frac=0.8, client=None):
                 shutil.rmtree(parts_path)
                 # shutil.rmtree(sorted_state_reviews_path)
         except Exception as e:
-            print("Exception", state, e)
+            tb = traceback.format_exc()
+            print("Exception", state, e, tb)
             if client is not None:
-                print(client.get_worker_logs())
+                print(f"{client.get_worker_logs()=}")
             print("Going to the next state...")
 
 
