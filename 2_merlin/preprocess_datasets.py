@@ -1,3 +1,4 @@
+import json
 import os
 import re
 import shutil
@@ -12,7 +13,20 @@ from unidecode import unidecode
 DATA_DIR = Path(os.environ["DATA_DIR"])
 
 
-def join_to_json(output_dir, columns_subset=None, train_frac=0.8, client=None):
+def dump_to_file(df, fh):
+    if df.shape[0]:
+        df.to_json(fh, orient="records", lines=True)
+
+
+def split_to_files(entries, train_f, val_f, train_frac=0.7):
+    df = pd.DataFrame(entries)
+    df.sort_values("time")
+    which_train = df.index <= train_frac * df.shape[0]
+    dump_to_file(df.loc[which_train, :], train_f)
+    dump_to_file(df.loc[~which_train, :], val_f)
+
+
+def join_to_json(output_dir, columns_subset=None, client=None, blocksize="1 GiB"):
     (DATA_DIR / output_dir).mkdir(parents=True, exist_ok=True)
 
     states = [re.findall(r"review-(.*?).json", str(x))[0] for x in DATA_DIR.glob("review-*.json")]
@@ -26,15 +40,11 @@ def join_to_json(output_dir, columns_subset=None, train_frac=0.8, client=None):
         try:
             state_reviews = dd.read_json(
                 DATA_DIR / f"review-{state}.json", lines=True,
-                engine=read_json_user_id_str, blocksize="1 GiB"
+                engine=read_json_user_id_str, blocksize=blocksize
             ).dropna(subset=["user_id", "rating"])
             state_reviews["rating"] = state_reviews["rating"].astype(int)
 
-            # Dividing into train and validation subsets
-            # state_reviews["user_id_time"] = state_reviews[["user_id", "time"]].apply(tuple, axis=1)
-            sorted_state_reviews = state_reviews.sort_values("time", ascending=True)
-            sorted_state_reviews = sorted_state_reviews.set_index("user_id")
-            print(f"{sorted_state_reviews.divisions=}")
+            sorted_state_reviews = state_reviews.set_index("user_id")
             if columns_subset:
                 sorted_state_reviews = sorted_state_reviews[
                     [x for x in columns_subset if x in sorted_state_reviews.columns]]
@@ -44,21 +54,45 @@ def join_to_json(output_dir, columns_subset=None, train_frac=0.8, client=None):
             # sorted_state_reviews.to_parquet(sorted_state_reviews_path)
             # sorted_state_reviews = dd.read_parquet(sorted_state_reviews_path).set_index("user_id", sorted=True)
 
-            user_id_counts = state_reviews["user_id"].value_counts().compute()
-            print("Done user_id_counts")
-            enumerate_groups = sorted_state_reviews.groupby("user_id").cumcount().compute()
-            print("Done enumerate_groups")
-            train_offset = (
-                    sorted_state_reviews.index.to_series().map(user_id_counts) * train_frac).compute()
-            print("Done train_offset")
-            flags = (enumerate_groups > train_offset)
-            print("Done flags")
-            del train_offset
-            del enumerate_groups
-            del user_id_counts
+            all_sorted_reviews_path = DATA_DIR / output_dir / "tmp" / state / "sorted-state-reviews.json.parts"
+            all_sorted_reviews_path.mkdir(parents=True, exist_ok=True)
+            all_reviews_files = sorted_state_reviews.reset_index().to_json(all_sorted_reviews_path, lines=True)
+            print(all_reviews_files)
 
-            train_reviews = sorted_state_reviews.loc[flags[~flags].index, :]
-            val_reviews = sorted_state_reviews.loc[flags[flags].index, :]
+            train_reviews_path = DATA_DIR / output_dir / "tmp" / state / "train_reviews.json"
+            val_reviews_path = DATA_DIR / output_dir / "tmp" / state / "val_reviews.json"
+
+            open(train_reviews_path, "w").close()
+            open(val_reviews_path, "w").close()
+
+            with (
+                open(train_reviews_path, "a") as train_f,
+                open(val_reviews_path, "a") as val_f
+            ):
+                entries = []
+                user_id = None
+                for fname in all_reviews_files:
+                    with open(fname) as f:
+                        for line in f:
+                            entry = json.loads(line)
+                            if user_id is None:
+                                user_id = entry["user_id"]
+                            if entry["user_id"] != user_id:
+                                split_to_files(entries, train_f, val_f)
+                                entries = []
+                                user_id = entry["user_id"]
+                            entries.append(entry)
+                if entries:
+                    split_to_files(entries, train_f, val_f)
+
+            train_reviews = dd.read_json(train_reviews_path, lines=True,
+                                         engine=read_json_user_id_str,
+                                         blocksize=blocksize
+                                         )
+            val_reviews = dd.read_json(val_reviews_path, lines=True,
+                                       engine=read_json_user_id_str,
+                                       blocksize=blocksize
+                                       )
             print("Done split")
             state_meta = pd.read_json(DATA_DIR / f"meta-{state}.json", lines=True).drop_duplicates(
                 "gmap_id").dropna(subset="category")
@@ -69,8 +103,8 @@ def join_to_json(output_dir, columns_subset=None, train_frac=0.8, client=None):
 
             for reviews, which in zip([train_reviews, val_reviews], ["train", "val"]):
 
-                joined = reviews.reset_index().join(state_meta.set_index("gmap_id"), on=["gmap_id"], lsuffix="_review",
-                                                    rsuffix="_meta", how="inner")
+                joined = reviews.join(state_meta.set_index("gmap_id"), on=["gmap_id"], lsuffix="_review",
+                                      rsuffix="_meta", how="inner")
                 joined["category"] = joined["category"].str.join('|')
 
                 if columns_subset:
@@ -92,6 +126,8 @@ def join_to_json(output_dir, columns_subset=None, train_frac=0.8, client=None):
             if client is not None:
                 print(f"{client.get_worker_logs()=}")
             print("Going to the next state...")
+        finally:
+            shutil.rmtree(DATA_DIR / output_dir / "tmp" / state)
 
 
 if __name__ == "__main__":
@@ -108,6 +144,6 @@ if __name__ == "__main__":
         # join_to_json("joined_columns_all")
         join_to_json("joined-merlin",
                      ["user_id", "gmap_id", "rating", "category", "latitude", "longitude", "time"],
-                     client=client)
+                     client)
     finally:
         client.shutdown()
