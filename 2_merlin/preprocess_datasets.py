@@ -30,7 +30,6 @@ def split_to_files(entries, train_f, val_f, train_frac=0.7):
 def join_to_json(output_dir, columns_subset=None, client=None, blocksize="1 GiB"):
     (DATA_DIR / output_dir).mkdir(parents=True, exist_ok=True)
 
-
     if "STATES" in os.environ:
         states = ast.literal_eval(os.environ["STATES"])
     else:
@@ -41,6 +40,12 @@ def join_to_json(output_dir, columns_subset=None, client=None, blocksize="1 GiB"
         return df
 
     for state in tqdm(states):
+        train_reviews_path = DATA_DIR / output_dir / "tmp" / state / "train_reviews.json"
+        val_reviews_path = DATA_DIR / output_dir / "tmp" / state / "val_reviews.json"
+
+        if train_reviews_path.is_file() and val_reviews_path.is_file():
+            continue
+
         #     for state in tqdm(["Other", "Vermont", "North Dakota", "Alaska", "Wyoming", "Delaware"]):
         try:
             state_reviews = dd.read_json(
@@ -60,12 +65,10 @@ def join_to_json(output_dir, columns_subset=None, client=None, blocksize="1 GiB"
             # sorted_state_reviews = dd.read_parquet(sorted_state_reviews_path).set_index("user_id", sorted=True)
 
             all_sorted_reviews_path = DATA_DIR / output_dir / "tmp" / state / "sorted-state-reviews.json.parts"
+            shutil.rmtree(all_sorted_reviews_path, ignore_errors=True)
             all_sorted_reviews_path.mkdir(parents=True, exist_ok=True)
             all_reviews_files = sorted_state_reviews.reset_index().to_json(all_sorted_reviews_path, lines=True)
             print(all_reviews_files)
-
-            train_reviews_path = DATA_DIR / output_dir / "tmp" / state / "train_reviews.json"
-            val_reviews_path = DATA_DIR / output_dir / "tmp" / state / "val_reviews.json"
 
             open(train_reviews_path, "w").close()
             open(val_reviews_path, "w").close()
