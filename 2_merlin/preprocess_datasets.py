@@ -102,8 +102,8 @@ def join_to_json(output_dir, columns_subset=None, train_frac=0.8, client=None):
                                 # for line in islice(src, 0, 5000):
                                 f.write(line)
                 shutil.rmtree(parts_path)
-                shutil.rmtree(train_reviews_path)
-                shutil.rmtree(val_reviews_path)
+            shutil.rmtree(train_reviews_path)
+            shutil.rmtree(val_reviews_path)
         except Exception as e:
             tb = traceback.format_exc()
             print("Exception", state, e, tb)
