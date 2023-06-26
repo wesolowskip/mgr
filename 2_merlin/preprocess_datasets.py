@@ -46,19 +46,19 @@ def join_to_json(output_dir, columns_subset=None, train_frac=0.8, client=None):
 
             user_id_counts = state_reviews["user_id"].value_counts().compute()
             print(user_id_counts.head())
-            which_da = sorted_state_reviews.groupby("user_id").cumcount().values.compute()
-            print("Done which_da")
-            train_offset_da = (
-                        sorted_state_reviews.reset_index()["user_id"].map(user_id_counts) * train_frac).values.compute()
+            enumerate_groups = sorted_state_reviews.groupby("user_id").cumcount().compute()
+            print("Done enumerate_groups")
+            train_offset = (
+                    sorted_state_reviews.reset_index()["user_id"].map(user_id_counts) * train_frac).compute()
             print("Done train_offset_da")
-            flags = (which_da > train_offset_da)
+            flags = (enumerate_groups > train_offset)
             print("Done flags")
-            del train_offset_da
-            del which_da
+            del train_offset
+            del enumerate_groups
             del user_id_counts
 
-            train_reviews = sorted_state_reviews.loc[~flags]
-            val_reviews = sorted_state_reviews.loc[flags]
+            train_reviews = sorted_state_reviews.loc[flags[~flags].index, :]
+            val_reviews = sorted_state_reviews.loc[flags[flags].index, :]
             print(f"{train_reviews.head()=}")
             print("Done split")
             state_meta = pd.read_json(DATA_DIR / f"meta-{state}.json", lines=True).drop_duplicates(
