@@ -1,3 +1,4 @@
+import ast
 import json
 import os
 import re
@@ -29,7 +30,11 @@ def split_to_files(entries, train_f, val_f, train_frac=0.7):
 def join_to_json(output_dir, columns_subset=None, client=None, blocksize="1 GiB"):
     (DATA_DIR / output_dir).mkdir(parents=True, exist_ok=True)
 
-    states = [re.findall(r"review-(.*?).json", str(x))[0] for x in DATA_DIR.glob("review-*.json")]
+
+    if "STATES" in os.environ:
+        states = ast.literal_eval(os.environ["STATES"])
+    else:
+        states = [re.findall(r"review-(.*?).json", str(x))[0] for x in DATA_DIR.glob("review-*.json")]
 
     def read_json_user_id_str(*args, **kwargs):
         df = pd.read_json(*args, **kwargs, dtype={"user_id": str})
@@ -101,33 +106,31 @@ def join_to_json(output_dir, columns_subset=None, client=None, blocksize="1 GiB"
                 state_meta["category"].apply(lambda x: list(map(unidecode, x)))
             )
 
-            for reviews, which in zip([train_reviews, val_reviews], ["train", "val"]):
-
-                joined = reviews.join(state_meta.set_index("gmap_id"), on=["gmap_id"], lsuffix="_review",
-                                      rsuffix="_meta", how="inner")
-                joined["category"] = joined["category"].str.join('|')
-
-                if columns_subset:
-                    joined = joined[columns_subset]
-                print("Done join")
-
-                parts_path = DATA_DIR / output_dir / f"{state}_{which}.json.parts"
-                dd.to_json(joined, parts_path)
-                with open(DATA_DIR / output_dir / f"{state}_{which}.json", "w") as f:
-                    for fname in parts_path.glob("*.part"):
-                        with open(fname) as src:
-                            for line in src:
-                                # for line in islice(src, 0, 5000):
-                                f.write(line)
-                shutil.rmtree(parts_path)
+            # for reviews, which in zip([train_reviews, val_reviews], ["train", "val"]):
+            #
+            #     joined = reviews.join(state_meta.set_index("gmap_id"), on=["gmap_id"], lsuffix="_review",
+            #                           rsuffix="_meta", how="inner")
+            #     joined["category"] = joined["category"].str.join('|')
+            #
+            #     if columns_subset:
+            #         joined = joined[columns_subset]
+            #     print("Done join")
+            #
+            #     parts_path = DATA_DIR / output_dir / f"{state}_{which}.json.parts"
+            #     dd.to_json(joined, parts_path)
+            #     with open(DATA_DIR / output_dir / f"{state}_{which}.json", "w") as f:
+            #         for fname in parts_path.glob("*.part"):
+            #             with open(fname) as src:
+            #                 for line in src:
+            #                     # for line in islice(src, 0, 5000):
+            #                     f.write(line)
+            #     shutil.rmtree(parts_path)
         except Exception as e:
             tb = traceback.format_exc()
             print("Exception", state, e, tb)
             if client is not None:
                 print(f"{client.get_worker_logs()=}")
             print("Going to the next state...")
-        finally:
-            shutil.rmtree(DATA_DIR / output_dir / "tmp" / state)
 
 
 if __name__ == "__main__":
