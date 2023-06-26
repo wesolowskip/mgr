@@ -40,7 +40,7 @@ def join_to_json(output_dir, columns_subset=None, train_frac=0.8, client=None):
             sorted_state_reviews_path = DATA_DIR / output_dir / "tmp" / state / "sorted-state-reviews"
             sorted_state_reviews_path.mkdir(parents=True, exist_ok=True)
             sorted_state_reviews.to_parquet(sorted_state_reviews_path)
-            sorted_state_reviews = dd.read_parquet(sorted_state_reviews_path)
+            sorted_state_reviews = dd.read_parquet(sorted_state_reviews_path).set_index("user_id", sorted=True)
 
             user_id_counts = state_reviews["user_id"].value_counts().compute()
             print(user_id_counts.head())
