@@ -49,8 +49,8 @@ def join_to_json(output_dir, columns_subset=None, train_frac=0.8, client=None):
             enumerate_groups = sorted_state_reviews.groupby("user_id").cumcount().compute()
             print("Done enumerate_groups")
             train_offset = (
-                    sorted_state_reviews.reset_index()["user_id"].map(user_id_counts) * train_frac).compute()
-            print("Done train_offset_da")
+                    sorted_state_reviews.index.to_series().map(user_id_counts) * train_frac).compute()
+            print("Done train_offset")
             flags = (enumerate_groups > train_offset)
             print("Done flags")
             del train_offset
