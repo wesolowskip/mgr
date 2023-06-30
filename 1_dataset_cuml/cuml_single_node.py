@@ -16,6 +16,7 @@ def get_parser():
     parser = argparse.ArgumentParser()
     parser.add_argument("--data-dir", default="/scratch/shared/pwesolowski/mgr-pipeline/joined-cuml")
     parser.add_argument("--files", nargs="+", default=["*.json"])
+    parser.add_argument("--reps", default=1, type=int)
     parser.add_argument("--protocol", choices=["tcp", "ucx"])
     parser.add_argument("--enable-infiniband", action="store_true")
     parser.add_argument("--enable-nvlink", action="store_true", help='requires protocol="ucx"')
@@ -67,19 +68,19 @@ def read_ddf(path):
     return input_ddf
 
 
-for _ in range(5):
+for _ in range(args.reps):
     with CodeTimer("ddf-preprocessing"):
         ddf = read_ddf(args.data_dir / args.files)
 
 scaler = MinMaxScaler()
 
-for _ in range(5):
+for _ in range(args.reps):
     with performance_report(filename=results_dir / "dask-scaler-report.html"):
         with CodeTimer("ddf-scaler-fit"):
             ddf = scaler.fit_transform(ddf)
 
 cluster_counts = list(range(1, 11))
-for _ in range(5):
+for _ in range(args.reps):
     scores = []
     for k in cluster_counts:
         print(f"Fitting kmeans with {k} clusters")
