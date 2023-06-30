@@ -12,7 +12,7 @@ from dask_cuda import LocalCUDACluster
 from dask_ml.preprocessing import MinMaxScaler
 from linetimer import CodeTimer
 
-if __name__ = "__main__":
+if __name__ == "__main__":
 
     print(numba.cuda.gpus)
 
