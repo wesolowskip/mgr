@@ -103,7 +103,7 @@ if __name__ == "__main__":
                         scores.append(score)
 
         print(f"{scores=}")
-        ax = sns.lineplot(x=cluster_counts, y=[s[0] for s in scores])
+        ax = sns.lineplot(x=cluster_counts, y=[float(s) for s in scores])
         ax.set_xlabel("cluster count")
         ax.set_ylabel("interia score")
         plt.savefig(results_dir / "kmeans-scores.jpg")
