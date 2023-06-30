@@ -63,7 +63,8 @@ if __name__ == "__main__":
         )
         if len(input_ddf.columns) > 3:
             input_ddf = input_ddf.rename(
-                columns=dict(zip(input_ddf.columns, ["user_id", "gmap_id", "rating", "category", "latitude", "longitude"]))
+                columns=dict(
+                    zip(input_ddf.columns, ["user_id", "gmap_id", "rating", "category", "latitude", "longitude"]))
             )
             input_ddf = input_ddf[["rating", "latitude", "longitude"]]
         else:
@@ -73,39 +74,42 @@ if __name__ == "__main__":
         return input_ddf
 
 
-    for _ in range(args.reps):
-        with CodeTimer("ddf-preprocessing"):
-            ddf = read_ddf([Path(args.data_dir) / f for f in args.files])
+    try:
+        for _ in range(args.reps):
+            with CodeTimer("ddf-preprocessing"):
+                ddf = read_ddf([Path(args.data_dir) / f for f in args.files])
 
-    scaler = MinMaxScaler()
+        scaler = MinMaxScaler()
 
-    for _ in range(args.reps):
-        with performance_report(filename=results_dir / "dask-scaler-report.html"):
-            with CodeTimer("ddf-scaler-fit"):
-                ddf = scaler.fit_transform(ddf)
+        for _ in range(args.reps):
+            with performance_report(filename=results_dir / "dask-scaler-report.html"):
+                with CodeTimer("ddf-scaler-fit"):
+                    ddf = scaler.fit_transform(ddf)
 
-    cluster_counts = list(range(1, 11))
-    for _ in range(args.reps):
-        scores = []
-        for k in cluster_counts:
-            print(f"Fitting kmeans with {k} clusters")
-            kmeans = KMeans(n_clusters=k, client=client, random_state=1)
+        cluster_counts = list(range(1, 11))
+        for _ in range(args.reps):
+            scores = []
+            for k in cluster_counts:
+                print(f"Fitting kmeans with {k} clusters")
+                kmeans = KMeans(n_clusters=k, client=client, random_state=1)
 
-            with performance_report(filename=results_dir / f"dask-kmeans-fit-{k}-report.html"):
-                with CodeTimer("ddf-kmeans-fit"):
-                    kmeans.fit(ddf)
+                with performance_report(filename=results_dir / f"dask-kmeans-fit-{k}-report.html"):
+                    with CodeTimer("ddf-kmeans-fit"):
+                        kmeans.fit(ddf)
 
-            with performance_report(filename=results_dir / f"dask-kmeans-score-{k}-report.html"):
-                with CodeTimer("ddf-kmeans-score"):
-                    score = kmeans.score(ddf)
-                    scores.append(score.get())
+                with performance_report(filename=results_dir / f"dask-kmeans-score-{k}-report.html"):
+                    with CodeTimer("ddf-kmeans-score"):
+                        score = kmeans.score(ddf)
+                        print(type(score))
+                        scores.append(score)
 
-    print(f"{client.get_worker_logs()=}")
-
-    print(f"{scores=}")
-    ax = sns.lineplot(x=cluster_counts, y=scores)
-    ax.set_xlabel("cluster count")
-    ax.set_ylabel("interia score")
-    plt.savefig(results_dir / "kmeans-scores.jpg")
-
-    client.shutdown()
+        print(f"{scores=}")
+        ax = sns.lineplot(x=cluster_counts, y=scores)
+        ax.set_xlabel("cluster count")
+        ax.set_ylabel("interia score")
+        plt.savefig(results_dir / "kmeans-scores.jpg")
+    except Exception as e:
+        raise e
+    finally:
+        print(f"{client.get_worker_logs()=}")
+        client.shutdown()
