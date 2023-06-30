@@ -100,11 +100,10 @@ if __name__ == "__main__":
                 with performance_report(filename=results_dir / f"dask-kmeans-score-{k}-report.html"):
                     with CodeTimer("ddf-kmeans-score"):
                         score = kmeans.score(ddf)
-                        print(type(score))
                         scores.append(score)
 
         print(f"{scores=}")
-        ax = sns.lineplot(x=cluster_counts, y=scores)
+        ax = sns.lineplot(x=cluster_counts, y=[s[0] for s in scores])
         ax.set_xlabel("cluster count")
         ax.set_ylabel("interia score")
         plt.savefig(results_dir / "kmeans-scores.jpg")
