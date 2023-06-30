@@ -98,7 +98,7 @@ if __name__ == "__main__":
             with performance_report(filename=results_dir / f"dask-kmeans-score-{k}-report.html"):
                 with CodeTimer("ddf-kmeans-score"):
                     score = kmeans.score(ddf)
-                    scores.append(score)
+                    scores.append(score.get())
 
     print(f"{client.get_worker_logs()=}")
 
