@@ -70,7 +70,7 @@ if __name__ == "__main__":
                 if args.files:
                     paths = [str(Path(args.data_dir) / f) for f in args.files]
                 else:
-                    paths = [p.name for p in Path(args.data_dir).glob("*.json")]
+                    paths = [str(p) for p in Path(args.data_dir).glob("*.json")]
                 ddf = read_ddf(paths)
 
         scaler = MinMaxScaler()
