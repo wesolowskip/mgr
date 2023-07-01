@@ -21,7 +21,7 @@ if __name__ == "__main__":
         parser = argparse.ArgumentParser()
         default_data_dir = "/scratch/shared/pwesolowski/mgr-pipeline/joined-cuml"
         parser.add_argument("--data-dir", default=default_data_dir)
-        parser.add_argument("--files", nargs="+", default=[p.name for p in Path(default_data_dir).glob("*.json")])
+        parser.add_argument("--files", nargs="+")
         parser.add_argument("--reps", default=1, type=int)
         parser.add_argument("--protocol", choices=["tcp", "ucx"])
         parser.add_argument("--enable-infiniband", action="store_true")
@@ -44,41 +44,34 @@ if __name__ == "__main__":
     results_dir = Path(f"results-{slurm_job_id}")
     results_dir.mkdir()
 
-    cluster = LocalCUDACluster(
-        local_directory=Path(args.data_dir) / "tmp",
-        shared_filesystem=True,
-        protocol=args.protocol,
-        enable_infiniband=args.enable_infiniband,
-        enable_nvlink=args.enable_nvlink,
-        rmm_pool_size=args.rmm_pool_size,
-        pre_import=["cudf", "metajsonparser"],
-        jit_unspill=args.jit_unspill  # Test czy nie bedzie OOM
+    cluster = LocalCUDACluster(local_directory=Path(args.data_dir) / "tmp", shared_filesystem=True,
+        protocol=args.protocol, enable_infiniband=args.enable_infiniband, enable_nvlink=args.enable_nvlink,
+        rmm_pool_size=args.rmm_pool_size, pre_import=["cudf", "metajsonparser"], jit_unspill=args.jit_unspill
+        # Test czy nie bedzie OOM
     )
     client = Client(cluster)
 
 
     def read_ddf(path):
-        input_ddf = mp.read_json_ddf(
-            path, blocksize=args.mp_blocksize, force_host_read=args.mp_force_host_read, pinned_read=args.mp_pinned_read,
-            force_gpu_preprocess=args.mp_force_gpu_preprocess
-        )
+        input_ddf = mp.read_json_ddf(path, blocksize=args.mp_blocksize, force_host_read=args.mp_force_host_read,
+            pinned_read=args.mp_pinned_read, force_gpu_preprocess=args.mp_force_gpu_preprocess)
         if len(input_ddf.columns) > 3:
-            input_ddf = input_ddf.rename(
-                columns=dict(
-                    zip(input_ddf.columns, ["user_id", "gmap_id", "rating", "category", "latitude", "longitude"]))
-            )
+            input_ddf = input_ddf.rename(columns=dict(
+                zip(input_ddf.columns, ["user_id", "gmap_id", "rating", "category", "latitude", "longitude"])))
             input_ddf = input_ddf[["rating", "latitude", "longitude"]]
         else:
-            input_ddf = input_ddf.rename(
-                columns=dict(zip(input_ddf.columns, ["rating", "latitude", "longitude"]))
-            )
+            input_ddf = input_ddf.rename(columns=dict(zip(input_ddf.columns, ["rating", "latitude", "longitude"])))
         return input_ddf
 
 
     try:
         for _ in range(args.reps):
             with CodeTimer("ddf-preprocessing"):
-                ddf = read_ddf([Path(args.data_dir) / f for f in args.files])
+                if args.files:
+                    paths = [str(Path(args.data_dir) / f) for f in args.files]
+                else:
+                    paths = [p.name for p in Path(args.data_dir).glob("*.json")]
+                ddf = read_ddf(paths)
 
         scaler = MinMaxScaler()
 
