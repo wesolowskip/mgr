@@ -14,7 +14,7 @@ if __name__ == "__main__":
     from dask_ml.preprocessing import MinMaxScaler
     from linetimer import CodeTimer
 
-    print(f"{numba.cuda.gpus=}")
+    print(numba.cuda.gpus)
 
 
     def get_parser():
