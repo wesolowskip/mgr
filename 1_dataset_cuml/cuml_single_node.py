@@ -21,7 +21,7 @@ if __name__ == "__main__":
         parser = argparse.ArgumentParser()
         default_data_dir = "/scratch/shared/pwesolowski/mgr-pipeline/joined-cuml"
         parser.add_argument("--data-dir", default=default_data_dir)
-        parser.add_argument("--files", nargs="+", default=Path(default_data_dir).glob("*.json"))
+        parser.add_argument("--files", nargs="+", default=[p.name for p in Path(default_data_dir).glob("*.json")])
         parser.add_argument("--reps", default=1, type=int)
         parser.add_argument("--protocol", choices=["tcp", "ucx"])
         parser.add_argument("--enable-infiniband", action="store_true")
