@@ -1,7 +1,6 @@
 if __name__ == "__main__":
 
     import argparse
-    import os
     from pathlib import Path
 
     import matplotlib.pyplot as plt
@@ -40,8 +39,10 @@ if __name__ == "__main__":
 
     print(f"{args=}")
 
-    slurm_job_id = os.environ["SLURM_JOB_ID"]
-    results_dir = Path(f"results-{slurm_job_id}")
+    results_dir = Path(
+        f"res-{args.protocol}-{args.enable_infiniband}-{args.enable_nvlink}-{args.rmm_pool_size}"
+        f"-{args.jit_unspill}-{args.mp_blocksize}-{args.mp_force_host_read}-{args.mp_pinned_read}"
+        f"-{args.force_gpu_preprocess}-{'-'.join(args.files)}")
     results_dir.mkdir()
 
     cluster = CPUAgnosticCUDACluster(local_directory=Path(args.data_dir) / "tmp", shared_filesystem=True,
