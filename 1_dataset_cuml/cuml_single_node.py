@@ -10,7 +10,7 @@ if __name__ == "__main__":
     import seaborn as sns
     from cuml.dask.cluster import KMeans
     from dask.distributed import Client, performance_report
-    from dask_cuda import LocalCUDACluster
+    from cuda_cluster import CPUAgnosticCUDACluster
     from dask_ml.preprocessing import MinMaxScaler
     from linetimer import CodeTimer
 
@@ -44,17 +44,18 @@ if __name__ == "__main__":
     results_dir = Path(f"results-{slurm_job_id}")
     results_dir.mkdir()
 
-    cluster = LocalCUDACluster(local_directory=Path(args.data_dir) / "tmp", shared_filesystem=True,
-        protocol=args.protocol, enable_infiniband=args.enable_infiniband, enable_nvlink=args.enable_nvlink,
-        rmm_pool_size=args.rmm_pool_size, pre_import=["cudf", "metajsonparser"], jit_unspill=args.jit_unspill
-        # Test czy nie bedzie OOM
-    )
+    cluster = CPUAgnosticCUDACluster(local_directory=Path(args.data_dir) / "tmp", shared_filesystem=True,
+                                     protocol=args.protocol, enable_infiniband=args.enable_infiniband,
+                                     enable_nvlink=args.enable_nvlink, rmm_pool_size=args.rmm_pool_size,
+                                     pre_import=["cudf", "metajsonparser"], jit_unspill=args.jit_unspill
+                                     # Test czy nie bedzie OOM
+                                     )
     client = Client(cluster)
 
 
     def read_ddf(path):
         input_ddf = mp.read_json_ddf(path, blocksize=args.mp_blocksize, force_host_read=args.mp_force_host_read,
-            pinned_read=args.mp_pinned_read, force_gpu_preprocess=args.mp_force_gpu_preprocess)
+                                     pinned_read=args.mp_pinned_read, force_gpu_preprocess=args.mp_force_gpu_preprocess)
         if len(input_ddf.columns) > 3:
             input_ddf = input_ddf.rename(columns=dict(
                 zip(input_ddf.columns, ["user_id", "gmap_id", "rating", "category", "latitude", "longitude"])))
