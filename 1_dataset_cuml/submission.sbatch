@@ -2,6 +2,7 @@
 #SBATCH -C dgx
 #SBATCH --mem 32G
 #SBATCH --cpus-per-gpu 2
+#SBATCH --time 1-0:0:0
 
 CONTAINER="${HOME}/containers/cuml-prod.sif"
 CONTAINER_RC_FILE="${HOME}/containers/singularity_rc"
