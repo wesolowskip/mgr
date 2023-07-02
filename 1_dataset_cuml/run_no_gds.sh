@@ -6,7 +6,14 @@ MP_FORCE_HOST_READ="--mp-force-host-read"
 
 # This script is intended to be run inside singularity container with GPUs already allocated
 # It is assumend that 2 CPUs are allocated per single GPU
-/build.sh
+#/build.sh
+
+cd ${METAJSONPARSER_PATH}/build
+cmake -DCMAKE_BUILD_TYPE=Release -DUSE_LIBCUDF=1 -DLOCAL_LIB=1 ..
+make -j meta-cudf-parser-1
+cd ${METAJSONPARSER_PATH}/python_binding
+make
+
 cd ~/praca-mgr/pipelines-repo/1_dataset_cuml/
 for FILES in "Illinois.json" "California.json" "California.json Texas.json" "California.json Texas.json Florida.json" ""; do
   for PROTOCOL in tcp ucx; do
