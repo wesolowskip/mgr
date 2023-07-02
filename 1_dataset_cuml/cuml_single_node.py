@@ -39,10 +39,10 @@ if __name__ == "__main__":
 
     print(f"{args=}")
 
-    results_dir = Path(f"res-{len(numba.cuda.gpus)}-{args.protocol}-{args.enable_infiniband}-{args.enable_nvlink}-"
+    results_dir = Path(f"results/{len(numba.cuda.gpus)}-{args.protocol}-{args.enable_infiniband}-{args.enable_nvlink}-"
                        f"{args.rmm_pool_size}-{args.jit_unspill}-{args.mp_blocksize}-{args.mp_force_host_read}"
                        f"-{args.mp_pinned_read}-{args.mp_force_gpu_preprocess}-{'-'.join(args.files)}")
-    results_dir.mkdir()
+    results_dir.mkdir(parents=True)
 
     cluster = CPUAgnosticCUDACluster(local_directory=Path(args.data_dir) / "tmp", shared_filesystem=True,
                                      threads_per_worker=2, protocol=args.protocol,
