@@ -20,7 +20,7 @@ if __name__ == "__main__":
         parser = argparse.ArgumentParser()
         default_data_dir = "/scratch/shared/pwesolowski/mgr-pipeline/joined-cuml"
         parser.add_argument("--data-dir", default=default_data_dir)
-        parser.add_argument("--files", nargs="+")
+        parser.add_argument("--files", nargs="*")
         parser.add_argument("--reps", default=1, type=int)
         parser.add_argument("--protocol", choices=["tcp", "ucx"])
         parser.add_argument("--enable-infiniband", action="store_true")
@@ -39,17 +39,16 @@ if __name__ == "__main__":
 
     print(f"{args=}")
 
-    results_dir = Path(
-        f"res-{args.protocol}-{args.enable_infiniband}-{args.enable_nvlink}-{args.rmm_pool_size}"
-        f"-{args.jit_unspill}-{args.mp_blocksize}-{args.mp_force_host_read}-{args.mp_pinned_read}"
-        f"-{args.force_gpu_preprocess}-{'-'.join(args.files)}")
+    results_dir = Path(f"res-{len(numba.cuda.gpus)}-{args.protocol}-{args.enable_infiniband}-{args.enable_nvlink}-"
+                       f"{args.rmm_pool_size}-{args.jit_unspill}-{args.mp_blocksize}-{args.mp_force_host_read}"
+                       f"-{args.mp_pinned_read}-{args.mp_force_gpu_preprocess}-{'-'.join(args.files)}")
     results_dir.mkdir()
 
     cluster = CPUAgnosticCUDACluster(local_directory=Path(args.data_dir) / "tmp", shared_filesystem=True,
-                                     protocol=args.protocol, enable_infiniband=args.enable_infiniband,
-                                     enable_nvlink=args.enable_nvlink, rmm_pool_size=args.rmm_pool_size,
-                                     pre_import=["cudf", "metajsonparser"], jit_unspill=args.jit_unspill
-                                     # Test czy nie bedzie OOM
+                                     threads_per_worker=2, protocol=args.protocol,
+                                     enable_infiniband=args.enable_infiniband, enable_nvlink=args.enable_nvlink,
+                                     rmm_pool_size=args.rmm_pool_size, pre_import=["cudf", "metajsonparser"],
+                                     jit_unspill=args.jit_unspill  # Test czy nie bedzie OOM
                                      )
     client = Client(cluster)
 
