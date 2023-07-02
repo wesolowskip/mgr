@@ -23,7 +23,7 @@ for FILES in "Illinois.json" "California.json" "California.json Texas.json" "Cal
           for MP_BLOCKSIZE in "256MiB" "1GiB" "4GiB"; do
             for MP_PINNED_READ in "" "--mp-pinned-read"; do
               if [[ $PROTOCOL == ucx || ($ENABLE_IB == "" && $ENABLE_NVLINK == "") ]]; then
-                python cuml_single_node.py --files $FILES --reps 5 --protocol $PROTOCOL $ENABLE_IB $ENABLE_NVLINK $RMM_POOL_SIZE --jit-unspill --mp-blocksize $MP_BLOCKSIZE $MP_FORCE_HOST_READ $MP_PINNED_READ
+                python -u cuml_single_node.py --files $FILES --reps 5 --protocol $PROTOCOL $ENABLE_IB $ENABLE_NVLINK $RMM_POOL_SIZE --jit-unspill --mp-blocksize $MP_BLOCKSIZE $MP_FORCE_HOST_READ $MP_PINNED_READ
               fi
             done
           done
