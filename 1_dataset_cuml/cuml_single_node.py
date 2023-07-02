@@ -86,7 +86,7 @@ if __name__ == "__main__":
             scores = []
             for k in cluster_counts:
                 print(f"Fitting kmeans with {k} clusters")
-                kmeans = KMeans(max_iter=100, n_clusters=k, client=client, random_state=1)
+                kmeans = KMeans(max_iter=100, tol=1e-10, n_clusters=k, client=client, random_state=1)
 
                 with performance_report(filename=results_dir / f"dask-kmeans-fit-{k}-report.html"):
                     with CodeTimer("ddf-kmeans-fit"):
