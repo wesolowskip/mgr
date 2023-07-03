@@ -13,4 +13,4 @@ set -xu
 #make
 
 cd ~/praca-mgr/pipelines-repo/1_dataset_cuml/
-python -u cuml_single_node.py --files $FILES --reps 5 --protocol $PROTOCOL $ENABLE_IB $ENABLE_NVLINK $RMM_POOL_SIZE --mp-blocksize $MP_BLOCKSIZE $MP_FORCE_HOST_READ $MP_PINNED_READ
+python -u cuml_single_node.py --files $FILES --reps 5 --protocol $PROTOCOL $ENABLE_IB $ENABLE_NVLINK $RMM_POOL_SIZE --jit-unspill --mp-blocksize $MP_BLOCKSIZE $MP_FORCE_HOST_READ $MP_PINNED_READ
