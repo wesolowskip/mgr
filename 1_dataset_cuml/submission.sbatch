@@ -13,7 +13,7 @@ SCRIPT="${HOME}/praca-mgr/pipelines-repo/1_dataset_cuml/run_no_gds.sh"
 
 MP_FORCE_HOST_READ="--mp-force-host-read"
 
-for FILES in "Illinois.json" "California.json" "California.json Texas.json" "California.json Texas.json Florida.json" ""; do
+for FILES in "Illinois.json" "California.json" "California.json Texas.json" ""; do
   for PROTOCOL in tcp ucx; do
     for ENABLE_IB in "--enable-infiniband" ""; do
       for ENABLE_NVLINK in "--enable-nvlink" ""; do
