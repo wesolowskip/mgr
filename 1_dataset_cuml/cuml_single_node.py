@@ -3,15 +3,8 @@ if __name__ == "__main__":
     import argparse
     from pathlib import Path
 
-    import matplotlib.pyplot as plt
-    import metajsonparser as mp
-    import numba.cuda
-    import seaborn as sns
-    from cuml.dask.cluster import KMeans
     from dask.distributed import Client, performance_report
     from cuda_cluster import CPUAgnosticCUDACluster
-    from dask_ml.preprocessing import MinMaxScaler
-    from linetimer import CodeTimer
 
     print(numba.cuda.gpus)
 
@@ -51,6 +44,14 @@ if __name__ == "__main__":
                                      jit_unspill=args.jit_unspill  # Test czy nie bedzie OOM
                                      )
     client = Client(cluster)
+
+    import matplotlib.pyplot as plt
+    import metajsonparser as mp
+    import numba.cuda
+    import seaborn as sns
+    from cuml.dask.cluster import KMeans
+    from dask_ml.preprocessing import MinMaxScaler
+    from linetimer import CodeTimer
 
 
     def read_ddf(path):
