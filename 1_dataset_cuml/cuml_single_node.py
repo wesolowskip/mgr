@@ -3,6 +3,7 @@ if __name__ == "__main__":
     import argparse
     from pathlib import Path
 
+    import numba.cuda
     from dask.distributed import Client, performance_report
     from cuda_cluster import CPUAgnosticCUDACluster
 
@@ -47,7 +48,6 @@ if __name__ == "__main__":
 
     import matplotlib.pyplot as plt
     import metajsonparser as mp
-    import numba.cuda
     import seaborn as sns
     from cuml.dask.cluster import KMeans
     from dask_ml.preprocessing import MinMaxScaler
