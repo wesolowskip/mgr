@@ -81,7 +81,7 @@ if __name__ == "__main__":
                 with CodeTimer("ddf-scaler-fit"):
                     ddf = scaler.fit_transform(ddf)
 
-        cluster_counts = list(range(1, 11))
+        cluster_counts = [8]
         for _ in range(args.reps):
             scores = []
             for k in cluster_counts:
