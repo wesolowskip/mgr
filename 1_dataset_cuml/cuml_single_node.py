@@ -2,6 +2,7 @@ if __name__ == "__main__":
 
     import argparse
     from pathlib import Path
+    import shutil
 
     import numba.cuda
     from dask.distributed import Client, performance_report
@@ -36,6 +37,7 @@ if __name__ == "__main__":
     results_dir = Path(f"results/{len(numba.cuda.gpus)}-{args.protocol}-{args.enable_infiniband}-{args.enable_nvlink}-"
                        f"{args.rmm_pool_size}-{args.jit_unspill}-{args.mp_blocksize}-{args.mp_force_host_read}"
                        f"-{args.mp_pinned_read}-{args.mp_force_gpu_preprocess}-{'-'.join(args.files)}")
+    shutil.rmtree(results_dir, ignore_errors=True)
     results_dir.mkdir(parents=True)
 
     cluster = CPUAgnosticCUDACluster(local_directory=Path(args.data_dir) / "tmp", shared_filesystem=True,

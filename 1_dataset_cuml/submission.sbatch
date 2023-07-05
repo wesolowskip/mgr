@@ -16,10 +16,12 @@ MP_FORCE_HOST_READ="--mp-force-host-read"
 for FILES in "California.json" ""; do
   for PROTOCOL in tcp ucx; do
     for ENABLE_IB in "--enable-infiniband" ""; do
+      # Dla wszystkich plikow i 2 GPU RMM POOL SIZE wywalalo OOM
       for ENABLE_NVLINK in "--enable-nvlink" ""; do
 #        for RMM_POOL_SIZE in "" "--rmm-pool-size 0.7"; do
         for RMM_POOL_SIZE in ""; do
-          for MP_BLOCKSIZE in "256MiB" "1GiB" "4GiB"; do
+          # 4 GiB TODO Later
+          for MP_BLOCKSIZE in "256MiB" "1GiB"; do
             for MP_PINNED_READ in "" "--mp-pinned-read"; do
               if [[ $PROTOCOL == ucx || ($ENABLE_IB == "" && $ENABLE_NVLINK == "") ]]; then
                 FILES="$FILES" PROTOCOL="$PROTOCOL" ENABLE_IB="$ENABLE_IB" ENABLE_NVLINK="$ENABLE_NVLINK" RMM_POOL_SIZE="$RMM_POOL_SIZE" MP_BLOCKSIZE="$MP_BLOCKSIZE" MP_PINNED_READ="$MP_PINNED_READ" MP_FORCE_HOST_READ="$MP_FORCE_HOST_READ" singularity run --nv -B /scratch/shared/pwesolowski "$CONTAINER" /bin/bash --rcfile "$CONTAINER_RC_FILE" -ci "$SCRIPT"
