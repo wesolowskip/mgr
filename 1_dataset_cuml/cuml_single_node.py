@@ -34,7 +34,7 @@ if __name__ == "__main__":
 
     print(f"{args=}")
 
-    results_dir = Path(f"results/{len(numba.cuda.gpus)}-{args.protocol}-{args.enable_infiniband}-{args.enable_nvlink}-"
+    results_dir = Path(f"results-8-cpu/{len(numba.cuda.gpus)}-{args.protocol}-{args.enable_infiniband}-{args.enable_nvlink}-"
                        f"{args.rmm_pool_size}-{args.jit_unspill}-{args.mp_blocksize}-{args.mp_force_host_read}"
                        f"-{args.mp_pinned_read}-{args.mp_force_gpu_preprocess}-{'-'.join(args.files)}")
     shutil.rmtree(results_dir, ignore_errors=True)
