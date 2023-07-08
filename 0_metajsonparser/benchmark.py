@@ -1,5 +1,6 @@
 import gc
 import os
+import time
 import traceback
 from pathlib import Path
 
@@ -53,3 +54,4 @@ for file, lines in files_lines.items():
             except Exception:
                 traceback.print_exc()
             gc.collect()
+            time.sleep(1)
