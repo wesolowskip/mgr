@@ -1,14 +1,10 @@
 import os
 from pathlib import Path
-from string import Template
+
+os.environ["CUFILE_ENV_PATH_JSON"] = str(Path(__file__).parent.resolve() / "cufile.json")
+os.environ["LIBCUDF_CUFILE_POLICY"] = "GDS"
 
 from linetimer import CodeTimer
-
-this_dir = Path(__file__).parent.resolve()
-cufile_template_path = this_dir / "cufile_template.json"
-cufile_path = this_dir / "cufile.json"
-
-os.environ["CUFILE_ENV_PATH_JSON"] = str(cufile_path)
 
 import cudf
 import metajsonparser as mp
@@ -29,9 +25,9 @@ files_lines = {"/scratch/shared/pwesolowski/mgr-pipeline/joined-cuml/West Virgin
                "/scratch/shared/pwesolowski/mgr-pipeline/joined-cuml/California.json": 70064610, }
 
 
-def benchmark_read_json(fname, count, force_host_read, pinned_read=None, cufile_json_params=None):
+def benchmark_read_json(fname, count, force_host_read, pinned_read=None, cufile_params=None):
     for i in range(11):
-        with CodeTimer(f"{i=}, {fname=}, {count=}, {force_host_read=}, {pinned_read=}, {cufile_json_params=}"):
+        with CodeTimer(f"{i=}, {fname=}, {count=}, {force_host_read=}, {pinned_read=}, {cufile_params=}"):
             df = mp.read_json(fname, count, eol="unix", force_host_read=force_host_read, pinned_read=bool(pinned_read))
             shape = df.shape
         print(f"{shape=}")
@@ -43,15 +39,12 @@ for file, lines in files_lines.items():
     benchmark_read_json(file, lines, force_host_read=True, pinned_read=False)
     benchmark_read_json(file, lines, force_host_read=True, pinned_read=True)
 
-    with open(cufile_template_path) as f:
-        cufile_template = Template(f.read())
-
-    for parallel_io in ["false", "true"]:
-        for max_io_threads in [0] if parallel_io == "false" else [4, 8, 16, 32, 64]:
-            for use_poll_mode in ["false", "true"]:
-                for poll_mode_max_size_kb in [4] if use_poll_mode == "false" else [4, 512, 1024, 2048]:
-                    cufile_params = {"parallel_io": parallel_io, "max_io_threads": max_io_threads,
-                                     "use_poll_mode": use_poll_mode, "poll_mode_max_size_kb": poll_mode_max_size_kb}
-                    with open(cufile_path, "w") as f:
-                        f.write(cufile_template.substitute(**cufile_params))
-                    benchmark_read_json(file, lines, force_host_read=False, cufile_json_params=cufile_params)
+    for cufile_thread_count in [4, 8, 16, 32, 64]:
+        for cufile_slice_size_mb in [1, 2, 4, 8, 16]:
+            try:
+                os.environ["LIBCUDF_CUFILE_THREAD_COUNT"] = cufile_thread_count
+                os.environ["LIBCUDF_CUFILE_SLICE_SIZE"] = cufile_slice_size_mb * 1024 * 1024
+                benchmark_read_json(file, lines, force_host_read=False,
+                                    cufile_params=f"{cufile_thread_count=}, {cufile_slice_size_mb=}")
+            except Exception as e:
+                print(e)

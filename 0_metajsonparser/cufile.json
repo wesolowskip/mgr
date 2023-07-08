@@ -14,20 +14,7 @@
                             // nvtx profiling on/off
                             "nvtx": false,
                             // cufile stats level(0-3)
-                            "cufile_stats": 0
-            },
-
-            "execution" : {
-                    // max number of workitems in the queue;
-                    "max_io_queue_depth": 128,
-                    // max number of threads per numa node to spawn for parallel IO
-                    "max_io_threads" : ${max_io_threads},
-                    // enable support for parallel IO
-                    "parallel_io" : ${parallel_io},
-                    // minimum IO threshold before splitting the IO
-                    "min_io_threshold_size_kb" : 8192,
-		    // maximum parallelism for a single request
-		    "max_request_parallelism" : 0
+                            "cufile_stats": 3
             },
 
             "properties": {
@@ -39,18 +26,13 @@
                             "max_device_pinned_mem_size_kb" : 33554432,
                             // true or false (true will enable asynchronous io submission to nvidia-fs driver)
                             // Note : currently the overall IO will still be synchronous
-                            "use_poll_mode" : ${use_poll_mode},
+                            "use_poll_mode" : false,
                             // maximum IO request size (parameter should be 4K aligned) within or equal to which library will use polling for IO completion
-                            "poll_mode_max_size_kb": ${poll_mode_max_size_kb},
+                            "poll_mode_max_size_kb": 4,
                             // allow compat mode, this will enable use of cuFile posix read/writes
                             "allow_compat_mode": false,
                             // enable GDS write support for RDMA based storage
                             "gds_rdma_write_support": true,
-                            // GDS batch size
-                            "io_batchsize": 128,
-                            // enable io priority w.r.t compute streams
-                            // valid options are "default", "low", "med", "high"
-                            "io_priority": "default",
                             // client-side rdma addr list for user-space file-systems(e.g ["10.0.1.0", "10.0.2.0"])
                             "rdma_dev_addr_list": [ ],
                             // load balancing policy for RDMA memory registration(MR), (RoundRobin, RoundRobinMaxMin)
@@ -89,32 +71,11 @@
                             "posix_unaligned_writes" : false
                     },
 
-		    "beegfs" : {
-                            // IO threshold for read/write (param should be 4K aligned)) equal to or below which cuFile will use posix read/write
-                            "posix_gds_min_kb" : 0
-
-                            // To restrict the IO to selected IP list, when dynamic routing is enabled
-                            // if using a single BeeGFS mount, provide the ip addresses here
-                            //"rdma_dev_addr_list" : []
-
-                            // if using multiple lustre mounts, provide ip addresses used by respective mount here
-                            //"mount_table" : {
-                            //                    "/beegfs/client1" : {
-                            //                                    "rdma_dev_addr_list" : ["172.172.1.40", "172.172.1.42"]
-                            //                    },
-
-                            //                    "/beegfs/client2" : {
-                            //                                    "rdma_dev_addr_list" : ["172.172.2.40", "172.172.2.42"]
-                            //                    }
-                            //}
-
-		    },
                     "lustre": {
 
                             // IO threshold for read/write (param should be 4K aligned)) equal to or below which cuFile will use posix read/write
                             "posix_gds_min_kb" : 0
 
-                            // To restrict the IO to selected IP list, when dynamic routing is enabled
                             // if using a single lustre mount, provide the ip addresses here (use : sudo lnetctl net show)
                             //"rdma_dev_addr_list" : []
 
@@ -132,7 +93,6 @@
 
                     "nfs": {
 
-                           // To restrict the IO to selected IP list, when dynamic routing is enabled
                            //"rdma_dev_addr_list" : []
 
                            //"mount_table" : {
@@ -147,8 +107,6 @@
                     },
 
 		    "gpfs": {
-                           //allow GDS writes with GPFS
-                           "gds_write_support": false
 
                            //"rdma_dev_addr_list" : []
 
