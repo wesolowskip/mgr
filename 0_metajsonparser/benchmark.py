@@ -20,10 +20,10 @@ import metajsonparser as mp
 
 
 files_lines = {
-    "/scratch/shared/pwesolowski/mgr-pipeline/joined-cuml/West Virginia.json": 2187197,
-    "/scratch/shared/pwesolowski/mgr-pipeline/joined-cuml/Iowa.json": 4799312,
-    "/scratch/shared/pwesolowski/mgr-pipeline/joined-cuml/Alabama.json": 8900582,
-    "/scratch/shared/pwesolowski/mgr-pipeline/joined-cuml/Arizona.json": 18264679,
+    # "/scratch/shared/pwesolowski/mgr-pipeline/joined-cuml/West Virginia.json": 2187197,
+    # "/scratch/shared/pwesolowski/mgr-pipeline/joined-cuml/Iowa.json": 4799312,
+    # "/scratch/shared/pwesolowski/mgr-pipeline/joined-cuml/Alabama.json": 8900582,
+    # "/scratch/shared/pwesolowski/mgr-pipeline/joined-cuml/Arizona.json": 18264679,
     "/scratch/shared/pwesolowski/mgr-pipeline/joined-cuml/New York.json": 33271516,
     "/scratch/shared/pwesolowski/mgr-pipeline/joined-cuml/California.json": 70064610,
 }
@@ -36,7 +36,6 @@ def benchmark_read_json(fname, count, force_host_read, pinned_read=None, cufile_
             shape = df.shape
         print(f"{shape=}")
         print(f"{df.memory_usage()=}")
-        print(df.head())
         del df
 
 
