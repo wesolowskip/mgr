@@ -1,4 +1,5 @@
 import os
+import traceback
 from pathlib import Path
 
 os.environ["CUFILE_ENV_PATH_JSON"] = str(Path(__file__).parent.resolve() / "cufile.json")
@@ -42,9 +43,9 @@ for file, lines in files_lines.items():
     for cufile_thread_count in [4, 8, 16, 32, 64]:
         for cufile_slice_size_mb in [1, 2, 4, 8, 16]:
             try:
-                os.environ["LIBCUDF_CUFILE_THREAD_COUNT"] = cufile_thread_count
-                os.environ["LIBCUDF_CUFILE_SLICE_SIZE"] = cufile_slice_size_mb * 1024 * 1024
+                os.environ["LIBCUDF_CUFILE_THREAD_COUNT"] = str(cufile_thread_count)
+                os.environ["LIBCUDF_CUFILE_SLICE_SIZE"] = str(cufile_slice_size_mb * 1024 * 1024)
                 benchmark_read_json(file, lines, force_host_read=False,
                                     cufile_params=f"{cufile_thread_count=}, {cufile_slice_size_mb=}")
-            except Exception as e:
-                print(e)
+            except Exception:
+                traceback.print_exc()
