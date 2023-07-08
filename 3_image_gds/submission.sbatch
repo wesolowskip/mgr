@@ -15,6 +15,6 @@ set -x
 
 for MODE in "inference" "io"; do
   for ENABLE_GDS in 0 1; do
-    MODE=$MODE ENABLE_GDS=$ENABLE_GDS singularity run --nv --no-mount proc -B /scratch/shared/pwesolowski,/run/udev:/run/udev:ro,/proc/driver:/proc/driver:ro "$CONTAINER" /bin/bash --rcfile "$CONTAINER_RC_FILE" -ci "$SCRIPT"
+    MODE=$MODE ENABLE_GDS=$ENABLE_GDS singularity run --nv --no-mount proc/sys -B /scratch/shared/pwesolowski,/run/udev:/run/udev:ro "$CONTAINER" /bin/bash --rcfile "$CONTAINER_RC_FILE" -ci "$SCRIPT"
   done
 done
