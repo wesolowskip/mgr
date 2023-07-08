@@ -18,12 +18,14 @@ import metajsonparser as mp
 # 15G	/scratch/shared/pwesolowski/mgr-pipeline/joined-cuml/California.json
 
 
-files_lines = {"/scratch/shared/pwesolowski/mgr-pipeline/joined-cuml/West Virginia.json": 2187197,
-               "/scratch/shared/pwesolowski/mgr-pipeline/joined-cuml/Iowa.json": 4799312,
-               "/scratch/shared/pwesolowski/mgr-pipeline/joined-cuml/Alabama.json": 8900582,
-               "/scratch/shared/pwesolowski/mgr-pipeline/joined-cuml/Arizona.json": 18264679,
-               "/scratch/shared/pwesolowski/mgr-pipeline/joined-cuml/New York.json": 33271516,
-               "/scratch/shared/pwesolowski/mgr-pipeline/joined-cuml/California.json": 70064610, }
+files_lines = {
+    "/scratch/shared/pwesolowski/mgr-pipeline/joined-cuml/West Virginia.json": 2187197,
+    "/scratch/shared/pwesolowski/mgr-pipeline/joined-cuml/Iowa.json": 4799312,
+    "/scratch/shared/pwesolowski/mgr-pipeline/joined-cuml/Alabama.json": 8900582,
+    "/scratch/shared/pwesolowski/mgr-pipeline/joined-cuml/Arizona.json": 18264679,
+    "/scratch/shared/pwesolowski/mgr-pipeline/joined-cuml/New York.json": 33271516,
+    "/scratch/shared/pwesolowski/mgr-pipeline/joined-cuml/California.json": 70064610,
+}
 
 
 def benchmark_read_json(fname, count, force_host_read, pinned_read=None, cufile_params=None):
@@ -33,6 +35,7 @@ def benchmark_read_json(fname, count, force_host_read, pinned_read=None, cufile_
             shape = df.shape
         print(f"{shape=}")
         print(f"{df.memory_usage()=}")
+        print(df.head())
         del df
 
 
@@ -40,7 +43,7 @@ for file, lines in files_lines.items():
     benchmark_read_json(file, lines, force_host_read=True, pinned_read=False)
     benchmark_read_json(file, lines, force_host_read=True, pinned_read=True)
 
-    for cufile_thread_count in [4, 8, 16, 32, 64]:
+    for cufile_thread_count in [4, 8, 16, 32, 64]: # 64 for NY resulted in OOM
         for cufile_slice_size_mb in [1, 2, 4, 8, 16]:
             try:
                 os.environ["LIBCUDF_CUFILE_THREAD_COUNT"] = str(cufile_thread_count)
