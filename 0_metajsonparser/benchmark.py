@@ -1,3 +1,4 @@
+import gc
 import os
 import traceback
 from pathlib import Path
@@ -43,7 +44,7 @@ for file, lines in files_lines.items():
     benchmark_read_json(file, lines, force_host_read=True, pinned_read=False)
     benchmark_read_json(file, lines, force_host_read=True, pinned_read=True)
 
-    for cufile_thread_count in [4, 8, 16, 32, 64]: # 64 for NY resulted in OOM
+    for cufile_thread_count in [4, 8, 16, 32, 64]:  # 64 for NY resulted in OOM
         for cufile_slice_size_mb in [1, 2, 4, 8, 16]:
             try:
                 os.environ["LIBCUDF_CUFILE_THREAD_COUNT"] = str(cufile_thread_count)
@@ -52,3 +53,4 @@ for file, lines in files_lines.items():
                                     cufile_params=f"{cufile_thread_count=}, {cufile_slice_size_mb=}")
             except Exception:
                 traceback.print_exc()
+            gc.collect()
