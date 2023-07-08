@@ -7,7 +7,7 @@
 # Dockerfile @ https://github.com/NVIDIA/MagnumIO/tree/main/gds/benchmarks/pytorch/docker
 CONTAINER="${HOME}/containers/pytorch-gds-benchmarks.sif"
 CONTAINER_RC_FILE="${HOME}/containers/singularity_torch_benchmark_rc"
-SCRIPT="run_benchmark.sh"
+SCRIPT="./run_benchmark.sh"
 
 cd "${HOME}/praca-mgr/deepCam-inference/scripts/"
 
