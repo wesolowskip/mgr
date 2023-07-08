@@ -35,6 +35,8 @@ def benchmark_read_json(fname, count, force_host_read, pinned_read=None, cufile_
             df = mp.read_json(fname, count, eol="unix", force_host_read=force_host_read, pinned_read=bool(pinned_read))
             shape = df.shape
         print(f"{shape=}")
+        print(f"{df.memory_usage()=}")
+        del df
 
 
 for file, lines in files_lines.items():
