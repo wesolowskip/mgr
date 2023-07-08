@@ -4,6 +4,7 @@
 #SBATCH --cpus-per-gpu 8
 #SBATCH --time 1:0:0
 
+# The container Dockerfile is located in 1_dataset_cuml
 CONTAINER="${HOME}/containers/cuml-prod.sif"
 CONTAINER_RC_FILE="${HOME}/containers/singularity_rc"
 SCRIPT="python -u benchmark.py"
