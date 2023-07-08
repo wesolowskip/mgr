@@ -21,12 +21,13 @@ import metajsonparser as mp
 
 
 files_lines = {
-    # "/scratch/shared/pwesolowski/mgr-pipeline/joined-cuml/West Virginia.json": 2187197,
-    # "/scratch/shared/pwesolowski/mgr-pipeline/joined-cuml/Iowa.json": 4799312,
-    # "/scratch/shared/pwesolowski/mgr-pipeline/joined-cuml/Alabama.json": 8900582,
-    # "/scratch/shared/pwesolowski/mgr-pipeline/joined-cuml/Arizona.json": 18264679,
+    "/scratch/shared/pwesolowski/mgr-pipeline/joined-cuml/West Virginia.json": 2187197,
+    "/scratch/shared/pwesolowski/mgr-pipeline/joined-cuml/Iowa.json": 4799312,
+    "/scratch/shared/pwesolowski/mgr-pipeline/joined-cuml/Alabama.json": 8900582,
+    "/scratch/shared/pwesolowski/mgr-pipeline/joined-cuml/Arizona.json": 18264679,
     "/scratch/shared/pwesolowski/mgr-pipeline/joined-cuml/New York.json": 33271516,
-    "/scratch/shared/pwesolowski/mgr-pipeline/joined-cuml/California.json": 70064610,
+    # Caifornia resulted in OOM
+    # "/scratch/shared/pwesolowski/mgr-pipeline/joined-cuml/California.json": 70064610,
 }
 
 
