@@ -17,3 +17,5 @@ RUN pip install tensorflow==2.12.*
 RUN conda install -y -c conda-forge -c nvidia merlin-core merlin-models merlin-systems nvtabular transformers4rec
 RUN pip install graphviz
 
+RUN pip install horovod
+
