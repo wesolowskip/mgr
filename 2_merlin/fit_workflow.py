@@ -42,7 +42,7 @@ def get_nvt_workflow() -> nvt.Workflow:
     # ) >> FillMedian()  # necessary
     #                             >> AddTags(["continuous"]))
 
-    output = (id_features + cont_features + category_feature + id_count_encode_features + label_binary_feature)
+    output = (id_features + cont_features + category_feature + label_binary_feature)
 
     workflow = nvt.Workflow(output)
     return workflow
