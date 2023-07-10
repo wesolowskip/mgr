@@ -4,7 +4,7 @@ from pathlib import Path
 from timeit import default_timer as timer
 from typing import Union
 
-os.environ["TF_MEMORY_ALLOCATION"] = "0.2"
+os.environ["TF_MEMORY_ALLOCATION"] = "0.3"
 
 import dask_cudf
 import merlin.models.tf as mm
@@ -16,7 +16,9 @@ from dask_cuda import LocalCUDACluster
 from nvtabular.loader.tensorflow import KerasSequenceLoader, KerasSequenceValidater
 from nvtabular.ops import Categorify, JoinGroupby, Rename, AddTags, LambdaOp, FillMedian
 
+import rmm
 import merlin
+from merlin.core.utils import device_mem_size
 
 
 def get_dask_client(args: argparse.Namespace):
@@ -33,11 +35,28 @@ def get_dask_client(args: argparse.Namespace):
             pass
         return text
 
-    cluster = LocalCUDACluster(protocol=args.protocol, threads_per_worker=args.threads_per_worker,
-                               enable_infiniband=args.enable_infiniband, enable_nvlink=args.enable_nvlink,
-                               rmm_pool_size=parse_memory(args.rmm_pool_size), )
+    device_spill_frac = 0.5  # Spill GPU-Worker memory to host at this limit.
+    capacity = device_mem_size(kind="total")
+    # Reduce if spilling fails to prevent
+    # device memory errors.
+    cluster = LocalCUDACluster(
+        protocol=args.protocol,
+        threads_per_worker=args.threads_per_worker,
+        enable_infiniband=args.enable_infiniband,
+        enable_nvlink=args.enable_nvlink,
+        rmm_pool_size=parse_memory(args.rmm_pool_size),
+        device_memory_limit=capacity * device_spill_frac,
+    )
 
     client = Client(cluster)
+
+    def _rmm_pool():
+        rmm.reinitialize(
+            pool_allocator=True,
+            initial_pool_size=None,  # Use default size
+        )
+
+    client.run(_rmm_pool)
     return client
 
 
