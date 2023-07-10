@@ -37,10 +37,10 @@ def get_nvt_workflow() -> nvt.Workflow:
         ["binary_classification", "target"]
     ) >> Rename(name="rating_binary"))
 
-    id_count_encode_features = (id_features >> Rename(postfix="_c") >> JoinGroupby(
-        cont_cols=["rating"], stats=["count"], on_host=False
-    ) >> FillMedian()  # necessary
-                                >> AddTags(["continuous"]))
+    # id_count_encode_features = (id_features >> Rename(postfix="_c") >> JoinGroupby(
+    #     cont_cols=["rating"], stats=["count"], on_host=False
+    # ) >> FillMedian()  # necessary
+    #                             >> AddTags(["continuous"]))
 
     output = (id_features + cont_features + category_feature + id_count_encode_features + label_binary_feature)
 
