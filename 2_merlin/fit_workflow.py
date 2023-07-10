@@ -54,7 +54,7 @@ def get_merlin_dataset(suffix: str, args: argparse.Namespace) -> merlin.io.Datas
             )}
         )
 
-    ddf = _read_ddf(Path(args.data_path) / f"*_{suffix}.json")
+    ddf = _read_ddf(Path(args.data_dir) / f"*_{suffix}.json")
 
     return merlin.io.Dataset(ddf)
 
