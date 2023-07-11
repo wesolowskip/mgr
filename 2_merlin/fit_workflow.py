@@ -1,3 +1,4 @@
+# This workflow fitting was not possible in cudf due to max character limit reached
 import argparse
 from pathlib import Path
 
@@ -31,6 +32,7 @@ def get_nvt_workflow() -> nvt.Workflow:
     ) >> Rename(name="rating_binary"))
 
     # DIDNT WORK
+    # DUE TO non numeric values
     # id_count_encode_features = (id_features >> Rename(postfix="_c") >> JoinGroupby(
     #     cont_cols=["rating"], stats=["count"], on_host=True
     # ) >> FillMedian() >> AddTags(["continuous"]))
