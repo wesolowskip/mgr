@@ -1,25 +1,17 @@
 import argparse
 from pathlib import Path
 
+import dask.dataframe as dd
 import merlin
-import metajsonparser as mp
 import nvtabular as nvt
-from nvtabular.ops import AddTags, Categorify, FillMedian, JoinGroupby, LambdaOp, Rename
+from nvtabular.ops import AddTags, Categorify, LambdaOp, Rename
 
 
 def get_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser()
-    # Where to store the workflow
-    parser.add_argument("--workflow-dir", required=True, type=str)
-    # JSON reader settings
-    parser.add_argument(
-        "--blocksize", default=None, type=str,
-        help="ATTENTION! Due to cudf limitationshttps://github.com/rapidsai/cudf/issues/8748 blocksize 1GiB results "
-             "in error"
-    )
-    parser.add_argument("--force-host-read", action="store_true")
-    parser.add_argument("--pinned-read", action="store_true")
+    parser.add_argument("--workflow-dir", type=str, required=True)
     parser.add_argument("--data-dir", type=str, required=True)
+    parser.add_argument("--blocksize", type=str, default=None)
 
     return parser
 
@@ -49,19 +41,17 @@ def get_nvt_workflow() -> nvt.Workflow:
 
 
 def get_merlin_dataset(suffix: str, args: argparse.Namespace) -> merlin.io.Dataset:
-    def _read_ddf(files):
-        return mp.read_json_ddf(
-            files, blocksize=args.blocksize, force_host_read=args.force_host_read, pinned_read=False
-        ).rename(
-            columns={f"Column {i}": x for i, x in enumerate(
-                ["user_id", "gmap_id", "rating", "category", 'latitude', 'longitude'], start=1
-            )}
-        )
-
-    ddf = _read_ddf(Path(args.data_dir) / f"*_{suffix}.json")
+    ddf = dd.read_json(
+        Path(args.data_dir) / f"*_{suffix}.json",
+        dtype={
+            "user_id": str, "gmap_id": str, "rating": int, "category": str, "latitude": float, "longitude": float,
+            "time": int
+        },
+        blocksize=args.blocksize
+    )
     ddf["category"] = ddf["category"].str.split("|")
 
-    return merlin.io.Dataset(ddf)
+    return merlin.io.Dataset(ddf, cpu=True)
 
 
 if __name__ == "__main__":
