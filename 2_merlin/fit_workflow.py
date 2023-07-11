@@ -4,7 +4,7 @@ from pathlib import Path
 import dask.dataframe as dd
 import merlin
 import nvtabular as nvt
-from nvtabular.ops import AddTags, Categorify, LambdaOp, Rename
+from nvtabular.ops import AddTags, Categorify, LambdaOp, Rename, JoinGroupby, FillMedian
 
 
 def get_parser() -> argparse.ArgumentParser:
@@ -29,12 +29,12 @@ def get_nvt_workflow() -> nvt.Workflow:
         ["binary_classification", "target"]
     ) >> Rename(name="rating_binary"))
 
-    # id_count_encode_features = (id_features >> Rename(postfix="_c") >> JoinGroupby(
-    #     cont_cols=["rating"], stats=["count"], on_host=False
-    # ) >> FillMedian()  # necessary
-    #                             >> AddTags(["continuous"]))
+    id_count_encode_features = (id_features >> Rename(postfix="_c") >> JoinGroupby(
+        cont_cols=["rating"], stats=["count"], on_host=False
+    ) >> FillMedian()  # necessary
+                                >> AddTags(["continuous"]))
 
-    output = (id_features + cont_features + category_feature + label_binary_feature)
+    output = (id_features + cont_features + category_feature + id_count_encode_features + label_binary_feature)
 
     workflow = nvt.Workflow(output)
     return workflow
