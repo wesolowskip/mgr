@@ -9,7 +9,7 @@ parser.add_argument("--workflow-dir", type=str, required=True)
 parser.add_argument("--blocksize", default=None, type=str)
 parser.add_argument("--force-host-read", action="store_true")
 parser.add_argument("--data-path", type=str, required=True)
-parser.add_argument("--cufile-thread-count", type=str, required=True)
+parser.add_argument("--cufile-thread-count", type=str, required=False)
 # TF pipeline settings
 parser.add_argument("--parts-per-chunk", type=int, required=True)
 parser.add_argument("--batch-size", type=int, default=32)
@@ -17,7 +17,8 @@ parser.add_argument("--epochs", type=int, required=True)
 args = parser.parse_args()
 
 os.environ["TF_MEMORY_ALLOCATION"] = "0.3"
-os.environ["LIBCUDF_CUFILE_THREAD_COUNT"] = args.cufile_thread_count
+if args.cufile_thread_count:
+    os.environ["LIBCUDF_CUFILE_THREAD_COUNT"] = args.cufile_thread_count
 
 import cupy
 from linetimer import CodeTimer
@@ -65,6 +66,7 @@ def get_merlin_dataset(suffix: str, args: argparse.Namespace) -> merlin.io.Datas
 
     ddf = _read_ddf(Path(args.data_path) / f"*_{suffix}.json")
     ddf["category"] = ddf["category"].str.split("|")
+    ddf = ddf.explode("category")
 
     return merlin.io.Dataset(ddf)
 
@@ -77,9 +79,11 @@ val_merlin_ds = workflow.transform(val_merlin_ds)
 
 
 def get_tf_dataset(ds: merlin.io.Dataset, shuffle: bool, args: argparse.Namespace):
-    categorical_columns = ["user_id", "gmap_id"]  # Single-hot
-    categorical_mh_columns = ["category"]  # Multi-hot
-    numeric_columns = ["latitude", "longitude", "user_id_c_count", "gmap_id_c_count"]
+    categorical_columns = ["user_id", "gmap_id", "category"]  # Single-hot
+    # categorical_mh_columns = ["category"]  # Multi-hot
+    categorical_mh_columns = []
+    # numeric_columns = ["latitude", "longitude", "user_id_c_count", "gmap_id_c_count"]
+    numeric_columns = ["latitude", "longitude"]
 
     return KerasSequenceLoader(
         ds, batch_size=args.batch_size, label_names=["rating_binary"],
@@ -89,6 +93,11 @@ def get_tf_dataset(ds: merlin.io.Dataset, shuffle: bool, args: argparse.Namespac
 
 train_tf_ds = get_tf_dataset(train_merlin_ds, True, args)
 val_tf_ds = get_tf_dataset(val_merlin_ds, False, args)
+
+num_train_batches = len(train_tf_ds)
+num_val_batches = len(val_tf_ds)
+print(f"{num_train_batches=}")
+print(f"{num_val_batches=}")
 
 schema = train_tf_ds.output_schema
 model = mm.DLRMModel(
@@ -143,7 +152,7 @@ for epoch in range(args.epochs):
             loss_value = training_step(examples, labels, batch == 0)
             loss_sum += loss_value
             batch_count += 1
-            if batch % 100 == 0 and hvd.local_rank() == 0:
+            if batch % (num_train_batches // 5) == 0 and hvd.local_rank() == 0:
                 print("Step #%d\tLoss: %.6f" % (batch, loss_value))
     print_average_loss(loss_sum, batch_count, "train")
 
@@ -157,3 +166,4 @@ for epoch in range(args.epochs):
     print_average_loss(loss_sum, batch_count, "validation")
 
 hvd.join()
+print(model.summary())
