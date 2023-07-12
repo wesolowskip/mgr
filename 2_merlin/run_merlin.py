@@ -12,11 +12,11 @@ parser.add_argument("--data-path", type=str, required=True)
 parser.add_argument("--cufile-thread-count", type=str, required=False)
 # TF pipeline settings
 parser.add_argument("--parts-per-chunk", type=int, required=True)
-parser.add_argument("--batch-size", type=int, default=32)
+parser.add_argument("--batch-size", type=int, default=16384)
 parser.add_argument("--epochs", type=int, required=True)
 args = parser.parse_args()
 
-os.environ["TF_MEMORY_ALLOCATION"] = "0.5"
+os.environ["TF_MEMORY_ALLOCATION"] = "0.3"
 if args.cufile_thread_count:
     os.environ["LIBCUDF_CUFILE_THREAD_COUNT"] = args.cufile_thread_count
 
