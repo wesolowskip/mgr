@@ -104,7 +104,7 @@ model = mm.DLRMModel(
     schema, embedding_dim=64, bottom_block=mm.MLPBlock([128, 64]), top_block=mm.MLPBlock([128, 64, 32]),
     prediction_tasks=mm.OutputBlock(schema), )
 loss = tf.losses.BinaryCrossentropy()
-opt = tf.keras.optimizers.SGD(0.01 * hvd.size())
+opt = tf.keras.optimizers.Adam(5e-3 * hvd.size())
 opt = hvd.DistributedOptimizer(opt)
 
 
