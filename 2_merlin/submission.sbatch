@@ -1,5 +1,5 @@
 #!/bin/bash
-#SBATCH --cpus-per-task-8
+#SBATCH --cpus-per-task 8
 #SBATCH --mem 32G
 #SBATCH --time 6:0:0
 #SBATCH --gpus 1
