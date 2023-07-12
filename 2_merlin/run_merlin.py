@@ -16,7 +16,7 @@ parser.add_argument("--batch-size", type=int, default=32)
 parser.add_argument("--epochs", type=int, required=True)
 args = parser.parse_args()
 
-os.environ["TF_MEMORY_ALLOCATION"] = "0.3"
+os.environ["TF_MEMORY_ALLOCATION"] = "0.5"
 if args.cufile_thread_count:
     os.environ["LIBCUDF_CUFILE_THREAD_COUNT"] = args.cufile_thread_count
 
