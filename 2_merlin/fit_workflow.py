@@ -5,7 +5,7 @@
 import argparse
 from pathlib import Path
 
-import dask.dataframe as dd
+import metajsonparser as mp
 import merlin
 import nvtabular as nvt
 from nvtabular.ops import AddTags, Categorify, LambdaOp, Rename, JoinGroupby, FillMedian
@@ -16,6 +16,7 @@ def get_parser() -> argparse.ArgumentParser:
     parser.add_argument("--workflow-dir", type=str, required=True)
     parser.add_argument("--data-dir", type=str, required=True)
     parser.add_argument("--blocksize", type=str, default=None)
+    parser.add_argument("--force-host-read", action="store_true")
 
     return parser
 
@@ -47,14 +48,13 @@ def get_nvt_workflow() -> nvt.Workflow:
 
 
 def get_merlin_dataset(suffix: str, args: argparse.Namespace) -> merlin.io.Dataset:
-    ddf = dd.read_json(
-        Path(args.data_dir) / f"*_{suffix}.json",
-        dtype={
-            "user_id": str, "gmap_id": str, "rating": int, "category": str, "latitude": float, "longitude": float,
-            "time": int
-        },
-        blocksize=args.blocksize,
-        lines=True
+    ddf = mp.read_json_ddf(
+        Path(args.data_dir) / f"*_{suffix}.json", blocksize=args.blocksize, force_host_read=args.force_host_read,
+        pinned_read=False
+    ).rename(
+        columns={f"Column {i}": x for i, x in enumerate(
+            ["user_id", "gmap_id", "rating", "category", 'latitude', 'longitude'], start=1
+        )}
     )
     ddf["category"] = ddf["category"].str.split("|")
     ddf = ddf.explode("category")
