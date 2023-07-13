@@ -23,9 +23,9 @@ def get_parser() -> argparse.ArgumentParser:
 
 def get_nvt_workflow() -> nvt.Workflow:
     id_features = ["user_id",
-                   "gmap_id", ] >> Categorify()  # Categorify by default has na_sentinel=0. It works for user_id, gmap_id, category but not work count encoding
+                   "gmap_id", ] >> Categorify(max_size=2000000)  # Categorify by default has na_sentinel=0. It works for user_id, gmap_id, category but not work count encoding
     # multi hot are not currently supported https://nvidia-merlin.github.io/NVTabular/main/api/tensorflow_dataloader.html
-    category_feature = ["category"] >> Categorify(max_size=10000000)
+    category_feature = ["category"] >> Categorify()
 
     cont_features = ["latitude", "longitude"] >> AddTags("continuous")
 

@@ -35,6 +35,8 @@ import horovod.tensorflow as hvd
 hvd.init()
 cupy.random.seed(None)
 
+print(f"{hvd.local_rank()=}")
+
 
 def seed_fn():
     min_int, max_int = tf.int32.limits
