@@ -36,6 +36,8 @@ hvd.init()
 cupy.random.seed(None)
 
 print(f"{hvd.local_rank()=}")
+print(f"{hvd.rank()=}")
+print(f"{hvd.size()=}")
 
 
 def seed_fn():
