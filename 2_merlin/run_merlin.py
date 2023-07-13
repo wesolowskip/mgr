@@ -142,7 +142,7 @@ def print_average_loss(loss_sum, batch_count, which):
     loss_tensor = tf.convert_to_tensor([loss_sum, batch_count], dtype=tf.float32)
     reduced_loss = hvd.allreduce(loss_tensor, name="total train loss", op=hvd.mpi_ops.Sum)
     if hvd.local_rank() == 0:
-        print(f"{which} validation loss {(reduced_loss[0] / reduced_loss[1]).numpy()}")
+        print(f"{which} loss {(reduced_loss[0] / reduced_loss[1]).numpy()}")
 
 
 # Horovod: adjust number of steps based on number of GPUs.
