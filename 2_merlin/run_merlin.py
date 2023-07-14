@@ -143,7 +143,7 @@ def validation_step(examples, labels):
 def print_average_loss(loss_sum, batch_count, which):
     loss_tensor = tf.convert_to_tensor([loss_sum, batch_count], dtype=tf.float32)
     reduced_loss = hvd.allreduce(loss_tensor, name="total train loss", op=hvd.mpi_ops.Sum)
-    if hvd.local_rank() == 0:
+    if hvd.rank() == 0:
         print(f"{which} loss {(reduced_loss[0] / reduced_loss[1]).numpy()}")
 
 
@@ -156,7 +156,7 @@ for epoch in range(args.epochs):
             loss_value = training_step(examples, labels, batch == 0)
             loss_sum += loss_value
             batch_count += 1
-            if batch % (num_train_batches // 5) == 0 and hvd.local_rank() == 0:
+            if batch % (num_train_batches // 5) == 0 and hvd.rank() == 0:
                 print("Step #%d\tLoss: %.6f" % (batch, loss_value))
     print_average_loss(loss_sum, batch_count, "train")
 
