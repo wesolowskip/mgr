@@ -35,7 +35,7 @@ if __name__ == "__main__":
 
     print(f"{args=}")
 
-    cluster = LocalCUDACluster(
+    cluster = CPUAgnosticCUDACluster(
         local_directory=Path(args.data_dir) / "tmp", shared_filesystem=True,
         threads_per_worker=int(os.environ.get("SLURM_CPUS_PER_TASK", 1)) // len(numba.cuda.gpus),
         protocol=args.protocol, enable_infiniband=args.enable_infiniband, enable_nvlink=args.enable_nvlink,
