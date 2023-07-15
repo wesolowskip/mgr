@@ -1,14 +1,16 @@
+import argparse
+import os
+from pathlib import Path
+
+import numba.cuda
+from dask.distributed import Client
+from cuda_cluster import CPUAgnosticCUDACluster
+from dask_cuda import LocalCUDACluster
+
+import metajsonparser as mp
+from linetimer import CodeTimer
+
 if __name__ == "__main__":
-
-    import argparse
-    import os
-    from pathlib import Path
-
-    import numba.cuda
-    from dask.distributed import Client
-    from cuda_cluster import CPUAgnosticCUDACluster
-    from dask_cuda import LocalCUDACluster
-
     print(numba.cuda.gpus)
 
 
@@ -37,15 +39,12 @@ if __name__ == "__main__":
 
     cluster = CPUAgnosticCUDACluster(
         local_directory=Path(args.data_dir) / "tmp", shared_filesystem=True,
-        threads_per_worker=int(os.environ.get("SLURM_CPUS_PER_GPU", 1)) // len(numba.cuda.gpus),
-        protocol=args.protocol, enable_infiniband=args.enable_infiniband, enable_nvlink=args.enable_nvlink,
-        rmm_pool_size=args.rmm_pool_size, pre_import=["cudf", "metajsonparser"], jit_unspill=args.jit_unspill
+        threads_per_worker=int(os.environ.get("SLURM_CPUS_PER_GPU", 1)) // len(numba.cuda.gpus), protocol=args.protocol,
+        enable_infiniband=args.enable_infiniband, enable_nvlink=args.enable_nvlink, rmm_pool_size=args.rmm_pool_size,
+        pre_import=["cudf", "metajsonparser"], jit_unspill=args.jit_unspill
         # Test czy nie bedzie OOM
     )
     client = Client(cluster)
-
-    import metajsonparser as mp
-    from linetimer import CodeTimer
 
 
     def read_ddf(path):
