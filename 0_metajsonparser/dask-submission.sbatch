@@ -1,6 +1,6 @@
 #!/bin/bash
 #SBATCH --gpus 1
-#SBATCH --mem 16G
+#SBATCH --mem 32G
 #SBATCH --cpus-per-gpu 8
 #SBATCH --time 1-0:0:0
 
