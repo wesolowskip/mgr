@@ -18,7 +18,7 @@ def benchmark_read_json(force_host_read, blocksize, cufile_params=None):
         "/scratch/shared/pwesolowski/mgr-pipeline/joined-cuml/*.json", meta=None, blocksize=blocksize,
         force_gpu_preprocess=False, force_host_read=force_host_read, pinned_read=False
     )
-    for i in range(11):
+    for i in range(6):
         with CodeTimer(f"{i=}, {force_host_read=}, {blocksize=}, {cufile_params=}"):
             rows = ddf.shape[0].compute()
         print(f"{rows=}")
