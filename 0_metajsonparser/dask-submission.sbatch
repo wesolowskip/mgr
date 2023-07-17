@@ -2,7 +2,7 @@
 #SBATCH --gpus 1
 #SBATCH --mem 16G
 #SBATCH --cpus-per-gpu 8
-#SBATCH --time 1:0:0
+#SBATCH --time 1-0:0:0
 
 # The container Dockerfile is located in 1_dataset_cuml
 CONTAINER="${HOME}/containers/cuml-prod.sif"
