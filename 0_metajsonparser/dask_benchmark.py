@@ -27,6 +27,7 @@ def benchmark_read_json(force_host_read, blocksize, cufile_params=None):
 if __name__ == "__main__":
 
     for blocksize in ["512MiB", "1GiB", "2GiB", "4GiB", "8GiB"]:
+        print("Working...")
         benchmark_read_json(
             force_host_read=True, blocksize=blocksize
         )
@@ -37,6 +38,7 @@ if __name__ == "__main__":
                 try:
                     os.environ["LIBCUDF_CUFILE_THREAD_COUNT"] = str(cufile_thread_count)
                     os.environ["LIBCUDF_CUFILE_SLICE_SIZE"] = str(cufile_slice_size_mb * 1024 * 1024)
+                    print("Working...")
                     benchmark_read_json(
                         force_host_read=False, blocksize=blocksize,
                         cufile_params=f"{cufile_thread_count=}, {cufile_slice_size_mb=}"
