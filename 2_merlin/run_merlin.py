@@ -98,10 +98,10 @@ def get_tf_dataset(ds: merlin.io.Dataset, shuffle: bool, args: argparse.Namespac
 train_tf_ds = get_tf_dataset(train_merlin_ds, True, args)
 val_tf_ds = get_tf_dataset(val_merlin_ds, False, args)
 
-num_train_batches = len(train_tf_ds)
-num_val_batches = len(val_tf_ds)
-print(f"{num_train_batches=}")
-print(f"{num_val_batches=}")
+# num_train_batches = len(train_tf_ds)
+# num_val_batches = len(val_tf_ds)
+# print(f"{num_train_batches=}")
+# print(f"{num_val_batches=}")
 
 schema = train_tf_ds.output_schema
 model = mm.DLRMModel(
@@ -156,7 +156,7 @@ for epoch in range(args.epochs):
             loss_value = training_step(examples, labels, batch == 0)
             loss_sum += loss_value
             batch_count += 1
-            if batch % (num_train_batches // 5) == 0 and hvd.rank() == 0:
+            if batch % 4000 == 0 and hvd.rank() == 0:
                 print("Step #%d\tLoss: %.6f" % (batch, loss_value))
     print_average_loss(loss_sum, batch_count, "train")
 
