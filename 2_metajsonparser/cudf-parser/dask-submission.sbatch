@@ -2,10 +2,10 @@
 #SBATCH --gpus 1
 #SBATCH --mem 32G
 #SBATCH --cpus-per-gpu 8
-#SBATCH --time 1-0:0:0
-#SBATCH --partition short
+#SBATCH --time 5-0:0:0
+#SBATCH --partition long
 
-# The container Dockerfile is located in 1_dataset_cuml
+
 CONTAINER="${HOME}/containers/rapids-prod.sif"
 CONTAINER_RC_FILE="${HOME}/containers/singularity_rc"
 SCRIPT="python -u cudf_benchmark.py"
