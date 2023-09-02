@@ -1,0 +1,649 @@
+cuFile STATS VERSION : 7
+GLOBAL STATS:
+Read: ok = 12016 err = 0
+Write: ok = 0 err = 0
+HandleRegister: ok = 16 err = 0
+HandleDeregister: ok = 0 err = 0
+BufRegister: ok = 16 err = 0
+BufDeregister: ok = 0 err = 0
+BatchSubmit: ok = 0 err = 0
+BatchComplete: ok = 0 err = 0
+BatchSetup: ok = 0 err = 0
+BatchCancel: ok = 0 err = 0
+BatchDestroy: ok = 0 err = 0
+BatchEnqueued: ok = 0 err = 0
+PosixBatchEnqueued: ok = 0 err = 0
+BatchProcessed: ok = 0 err = 0
+PosixBatchProcessed: ok = 0 err = 0
+Total Read Size (MiB): 6008
+Read BandWidth (GiB/s): 0
+Avg Read Latency (us): 0
+Total Write Size (MiB): 0
+Write BandWidth (GiB/s): 0
+Avg Write Latency (us): 0
+Total Batch Read Size (MiB): 0
+Total Batch Write Size (MiB): 0
+Batch Read BandWidth (GiB/s): 0
+Batch Write BandWidth (GiB/s): 0
+Avg Batch Submit Latency (us): 0
+Avg Batch Completion Latency (us): 0
+READ-WRITE SIZE HISTOGRAM : 
+0-4(KiB): 0  0
+4-8(KiB): 0  0
+8-16(KiB): 0  0
+16-32(KiB): 0  0
+32-64(KiB): 0  0
+64-128(KiB): 0  0
+128-256(KiB): 0  0
+256-512(KiB): 0  0
+512-1024(KiB): 0  0
+1024-2048(KiB): 6008  0
+2048-4096(KiB): 0  0
+4096-8192(KiB): 0  0
+8192-16384(KiB): 0  0
+16384-32768(KiB): 0  0
+32768-65536(KiB): 0  0
+65536-...(KiB): 0  0
+PER_GPU STATS:
+GPU 0(UUID: 6ac8c492e4bba92ca7c4bacb5127bf4) Read: bw=0 util(%)=0 n=6008 posix=0 unalign=0 dr=0 r_sparse=0 r_inline=0 err=0 MiB=6008 Write: bw=0 util(%)=0 n=0 posix=0 unalign=0 dr=0 err=0 MiB=0 BufRegister: n=16 err=0 free=0 MiB=16
+PER_GPU POOL BUFFER STATS:
+PER_GPU POSIX POOL BUFFER STATS:
+
+PER_GPU RDMA STATS:
+GPU 0000:07:00.0(UUID: 6ac8c492e4bba92ca7c4bacb5127bf4) : 
+
+RDMA MRSTATS:
+peer name   nr_mrs      mr_size(MiB)
+PER NUMA NODE THREAD POOL STATS:
+numa node: 0 enqueues:0 completes:0 pending suspends:0 pending yields:0 active:0 suspends:0 
+
+cuFile STATS VERSION : 7
+GLOBAL STATS:
+Read: ok = 119916 err = 0
+Write: ok = 0 err = 0
+HandleRegister: ok = 16 err = 0
+HandleDeregister: ok = 0 err = 0
+BufRegister: ok = 16 err = 0
+BufDeregister: ok = 0 err = 0
+BatchSubmit: ok = 0 err = 0
+BatchComplete: ok = 0 err = 0
+BatchSetup: ok = 0 err = 0
+BatchCancel: ok = 0 err = 0
+BatchDestroy: ok = 0 err = 0
+BatchEnqueued: ok = 0 err = 0
+PosixBatchEnqueued: ok = 0 err = 0
+BatchProcessed: ok = 0 err = 0
+PosixBatchProcessed: ok = 0 err = 0
+Total Read Size (MiB): 59958
+Read BandWidth (GiB/s): 8.71199
+Avg Read Latency (us): 1859
+Total Write Size (MiB): 0
+Write BandWidth (GiB/s): 0
+Avg Write Latency (us): 0
+Total Batch Read Size (MiB): 0
+Total Batch Write Size (MiB): 0
+Batch Read BandWidth (GiB/s): 0
+Batch Write BandWidth (GiB/s): 0
+Avg Batch Submit Latency (us): 0
+Avg Batch Completion Latency (us): 0
+READ-WRITE SIZE HISTOGRAM : 
+0-4(KiB): 0  0
+4-8(KiB): 0  0
+8-16(KiB): 0  0
+16-32(KiB): 0  0
+32-64(KiB): 0  0
+64-128(KiB): 0  0
+128-256(KiB): 0  0
+256-512(KiB): 0  0
+512-1024(KiB): 0  0
+1024-2048(KiB): 59958  0
+2048-4096(KiB): 0  0
+4096-8192(KiB): 0  0
+8192-16384(KiB): 0  0
+16384-32768(KiB): 0  0
+32768-65536(KiB): 0  0
+65536-...(KiB): 0  0
+PER_GPU STATS:
+GPU 0(UUID: 6ac8c492e4bba92ca7c4bacb5127bf4) Read: bw=8.7041 util(%)=1597 n=59958 posix=0 unalign=0 dr=0 r_sparse=0 r_inline=0 err=0 MiB=59958 Write: bw=0 util(%)=0 n=0 posix=0 unalign=0 dr=0 err=0 MiB=0 BufRegister: n=16 err=0 free=0 MiB=16
+PER_GPU POOL BUFFER STATS:
+PER_GPU POSIX POOL BUFFER STATS:
+
+PER_GPU RDMA STATS:
+GPU 0000:07:00.0(UUID: 6ac8c492e4bba92ca7c4bacb5127bf4) : 
+
+RDMA MRSTATS:
+peer name   nr_mrs      mr_size(MiB)
+PER NUMA NODE THREAD POOL STATS:
+numa node: 0 enqueues:0 completes:0 pending suspends:0 pending yields:0 active:0 suspends:0 
+
+cuFile STATS VERSION : 7
+GLOBAL STATS:
+Read: ok = 228066 err = 0
+Write: ok = 0 err = 0
+HandleRegister: ok = 16 err = 0
+HandleDeregister: ok = 0 err = 0
+BufRegister: ok = 16 err = 0
+BufDeregister: ok = 0 err = 0
+BatchSubmit: ok = 0 err = 0
+BatchComplete: ok = 0 err = 0
+BatchSetup: ok = 0 err = 0
+BatchCancel: ok = 0 err = 0
+BatchDestroy: ok = 0 err = 0
+BatchEnqueued: ok = 0 err = 0
+PosixBatchEnqueued: ok = 0 err = 0
+BatchProcessed: ok = 0 err = 0
+PosixBatchProcessed: ok = 0 err = 0
+Total Read Size (MiB): 114033
+Read BandWidth (GiB/s): 8.78223
+Avg Read Latency (us): 1621
+Total Write Size (MiB): 0
+Write BandWidth (GiB/s): 0
+Avg Write Latency (us): 0
+Total Batch Read Size (MiB): 0
+Total Batch Write Size (MiB): 0
+Batch Read BandWidth (GiB/s): 0
+Batch Write BandWidth (GiB/s): 0
+Avg Batch Submit Latency (us): 0
+Avg Batch Completion Latency (us): 0
+READ-WRITE SIZE HISTOGRAM : 
+0-4(KiB): 0  0
+4-8(KiB): 0  0
+8-16(KiB): 0  0
+16-32(KiB): 0  0
+32-64(KiB): 0  0
+64-128(KiB): 0  0
+128-256(KiB): 0  0
+256-512(KiB): 0  0
+512-1024(KiB): 0  0
+1024-2048(KiB): 114033  0
+2048-4096(KiB): 0  0
+4096-8192(KiB): 0  0
+8192-16384(KiB): 0  0
+16384-32768(KiB): 0  0
+32768-65536(KiB): 0  0
+65536-...(KiB): 0  0
+PER_GPU STATS:
+GPU 0(UUID: 6ac8c492e4bba92ca7c4bacb5127bf4) Read: bw=8.77637 util(%)=1597 n=114033 posix=0 unalign=0 dr=0 r_sparse=0 r_inline=0 err=0 MiB=114033 Write: bw=0 util(%)=0 n=0 posix=0 unalign=0 dr=0 err=0 MiB=0 BufRegister: n=16 err=0 free=0 MiB=16
+PER_GPU POOL BUFFER STATS:
+PER_GPU POSIX POOL BUFFER STATS:
+
+PER_GPU RDMA STATS:
+GPU 0000:07:00.0(UUID: 6ac8c492e4bba92ca7c4bacb5127bf4) : 
+
+RDMA MRSTATS:
+peer name   nr_mrs      mr_size(MiB)
+PER NUMA NODE THREAD POOL STATS:
+numa node: 0 enqueues:0 completes:0 pending suspends:0 pending yields:0 active:0 suspends:0 
+
+cuFile STATS VERSION : 7
+GLOBAL STATS:
+Read: ok = 336508 err = 0
+Write: ok = 0 err = 0
+HandleRegister: ok = 16 err = 0
+HandleDeregister: ok = 0 err = 0
+BufRegister: ok = 16 err = 0
+BufDeregister: ok = 0 err = 0
+BatchSubmit: ok = 0 err = 0
+BatchComplete: ok = 0 err = 0
+BatchSetup: ok = 0 err = 0
+BatchCancel: ok = 0 err = 0
+BatchDestroy: ok = 0 err = 0
+BatchEnqueued: ok = 0 err = 0
+PosixBatchEnqueued: ok = 0 err = 0
+BatchProcessed: ok = 0 err = 0
+PosixBatchProcessed: ok = 0 err = 0
+Total Read Size (MiB): 168254
+Read BandWidth (GiB/s): 8.92272
+Avg Read Latency (us): 1756
+Total Write Size (MiB): 0
+Write BandWidth (GiB/s): 0
+Avg Write Latency (us): 0
+Total Batch Read Size (MiB): 0
+Total Batch Write Size (MiB): 0
+Batch Read BandWidth (GiB/s): 0
+Batch Write BandWidth (GiB/s): 0
+Avg Batch Submit Latency (us): 0
+Avg Batch Completion Latency (us): 0
+READ-WRITE SIZE HISTOGRAM : 
+0-4(KiB): 0  0
+4-8(KiB): 0  0
+8-16(KiB): 0  0
+16-32(KiB): 0  0
+32-64(KiB): 0  0
+64-128(KiB): 0  0
+128-256(KiB): 0  0
+256-512(KiB): 0  0
+512-1024(KiB): 0  0
+1024-2048(KiB): 168254  0
+2048-4096(KiB): 0  0
+4096-8192(KiB): 0  0
+8192-16384(KiB): 0  0
+16384-32768(KiB): 0  0
+32768-65536(KiB): 0  0
+65536-...(KiB): 0  0
+PER_GPU STATS:
+GPU 0(UUID: 6ac8c492e4bba92ca7c4bacb5127bf4) Read: bw=8.92676 util(%)=1597 n=168254 posix=0 unalign=0 dr=0 r_sparse=0 r_inline=0 err=0 MiB=168254 Write: bw=0 util(%)=0 n=0 posix=0 unalign=0 dr=0 err=0 MiB=0 BufRegister: n=16 err=0 free=0 MiB=16
+PER_GPU POOL BUFFER STATS:
+PER_GPU POSIX POOL BUFFER STATS:
+
+PER_GPU RDMA STATS:
+GPU 0000:07:00.0(UUID: 6ac8c492e4bba92ca7c4bacb5127bf4) : 
+
+RDMA MRSTATS:
+peer name   nr_mrs      mr_size(MiB)
+PER NUMA NODE THREAD POOL STATS:
+numa node: 0 enqueues:0 completes:0 pending suspends:0 pending yields:0 active:0 suspends:0 
+
+cuFile STATS VERSION : 7
+GLOBAL STATS:
+Read: ok = 444496 err = 0
+Write: ok = 0 err = 0
+HandleRegister: ok = 16 err = 0
+HandleDeregister: ok = 0 err = 0
+BufRegister: ok = 16 err = 0
+BufDeregister: ok = 0 err = 0
+BatchSubmit: ok = 0 err = 0
+BatchComplete: ok = 0 err = 0
+BatchSetup: ok = 0 err = 0
+BatchCancel: ok = 0 err = 0
+BatchDestroy: ok = 0 err = 0
+BatchEnqueued: ok = 0 err = 0
+PosixBatchEnqueued: ok = 0 err = 0
+BatchProcessed: ok = 0 err = 0
+PosixBatchProcessed: ok = 0 err = 0
+Total Read Size (MiB): 222248
+Read BandWidth (GiB/s): 8.90332
+Avg Read Latency (us): 1956
+Total Write Size (MiB): 0
+Write BandWidth (GiB/s): 0
+Avg Write Latency (us): 0
+Total Batch Read Size (MiB): 0
+Total Batch Write Size (MiB): 0
+Batch Read BandWidth (GiB/s): 0
+Batch Write BandWidth (GiB/s): 0
+Avg Batch Submit Latency (us): 0
+Avg Batch Completion Latency (us): 0
+READ-WRITE SIZE HISTOGRAM : 
+0-4(KiB): 0  0
+4-8(KiB): 0  0
+8-16(KiB): 0  0
+16-32(KiB): 0  0
+32-64(KiB): 0  0
+64-128(KiB): 0  0
+128-256(KiB): 0  0
+256-512(KiB): 0  0
+512-1024(KiB): 0  0
+1024-2048(KiB): 222248  0
+2048-4096(KiB): 0  0
+4096-8192(KiB): 0  0
+8192-16384(KiB): 0  0
+16384-32768(KiB): 0  0
+32768-65536(KiB): 0  0
+65536-...(KiB): 0  0
+PER_GPU STATS:
+GPU 0(UUID: 6ac8c492e4bba92ca7c4bacb5127bf4) Read: bw=8.91016 util(%)=1596 n=222248 posix=0 unalign=0 dr=0 r_sparse=0 r_inline=0 err=0 MiB=222248 Write: bw=0 util(%)=0 n=0 posix=0 unalign=0 dr=0 err=0 MiB=0 BufRegister: n=16 err=0 free=0 MiB=16
+PER_GPU POOL BUFFER STATS:
+PER_GPU POSIX POOL BUFFER STATS:
+
+PER_GPU RDMA STATS:
+GPU 0000:07:00.0(UUID: 6ac8c492e4bba92ca7c4bacb5127bf4) : 
+
+RDMA MRSTATS:
+peer name   nr_mrs      mr_size(MiB)
+PER NUMA NODE THREAD POOL STATS:
+numa node: 0 enqueues:0 completes:0 pending suspends:0 pending yields:0 active:0 suspends:0 
+
+cuFile STATS VERSION : 7
+GLOBAL STATS:
+Read: ok = 553094 err = 0
+Write: ok = 0 err = 0
+HandleRegister: ok = 16 err = 0
+HandleDeregister: ok = 0 err = 0
+BufRegister: ok = 16 err = 0
+BufDeregister: ok = 0 err = 0
+BatchSubmit: ok = 0 err = 0
+BatchComplete: ok = 0 err = 0
+BatchSetup: ok = 0 err = 0
+BatchCancel: ok = 0 err = 0
+BatchDestroy: ok = 0 err = 0
+BatchEnqueued: ok = 0 err = 0
+PosixBatchEnqueued: ok = 0 err = 0
+BatchProcessed: ok = 0 err = 0
+PosixBatchProcessed: ok = 0 err = 0
+Total Read Size (MiB): 276547
+Read BandWidth (GiB/s): 8.95898
+Avg Read Latency (us): 2069
+Total Write Size (MiB): 0
+Write BandWidth (GiB/s): 0
+Avg Write Latency (us): 0
+Total Batch Read Size (MiB): 0
+Total Batch Write Size (MiB): 0
+Batch Read BandWidth (GiB/s): 0
+Batch Write BandWidth (GiB/s): 0
+Avg Batch Submit Latency (us): 0
+Avg Batch Completion Latency (us): 0
+READ-WRITE SIZE HISTOGRAM : 
+0-4(KiB): 0  0
+4-8(KiB): 0  0
+8-16(KiB): 0  0
+16-32(KiB): 0  0
+32-64(KiB): 0  0
+64-128(KiB): 0  0
+128-256(KiB): 0  0
+256-512(KiB): 0  0
+512-1024(KiB): 0  0
+1024-2048(KiB): 276547  0
+2048-4096(KiB): 0  0
+4096-8192(KiB): 0  0
+8192-16384(KiB): 0  0
+16384-32768(KiB): 0  0
+32768-65536(KiB): 0  0
+65536-...(KiB): 0  0
+PER_GPU STATS:
+GPU 0(UUID: 6ac8c492e4bba92ca7c4bacb5127bf4) Read: bw=8.9502 util(%)=1598 n=276547 posix=0 unalign=0 dr=0 r_sparse=0 r_inline=0 err=0 MiB=276547 Write: bw=0 util(%)=0 n=0 posix=0 unalign=0 dr=0 err=0 MiB=0 BufRegister: n=16 err=0 free=0 MiB=16
+PER_GPU POOL BUFFER STATS:
+PER_GPU POSIX POOL BUFFER STATS:
+
+PER_GPU RDMA STATS:
+GPU 0000:07:00.0(UUID: 6ac8c492e4bba92ca7c4bacb5127bf4) : 
+
+RDMA MRSTATS:
+peer name   nr_mrs      mr_size(MiB)
+PER NUMA NODE THREAD POOL STATS:
+numa node: 0 enqueues:0 completes:0 pending suspends:0 pending yields:0 active:0 suspends:0 
+
+cuFile STATS VERSION : 7
+GLOBAL STATS:
+Read: ok = 670458 err = 0
+Write: ok = 0 err = 0
+HandleRegister: ok = 16 err = 0
+HandleDeregister: ok = 0 err = 0
+BufRegister: ok = 16 err = 0
+BufDeregister: ok = 0 err = 0
+BatchSubmit: ok = 0 err = 0
+BatchComplete: ok = 0 err = 0
+BatchSetup: ok = 0 err = 0
+BatchCancel: ok = 0 err = 0
+BatchDestroy: ok = 0 err = 0
+BatchEnqueued: ok = 0 err = 0
+PosixBatchEnqueued: ok = 0 err = 0
+BatchProcessed: ok = 0 err = 0
+PosixBatchProcessed: ok = 0 err = 0
+Total Read Size (MiB): 335229
+Read BandWidth (GiB/s): 9.01562
+Avg Read Latency (us): 1500
+Total Write Size (MiB): 0
+Write BandWidth (GiB/s): 0
+Avg Write Latency (us): 0
+Total Batch Read Size (MiB): 0
+Total Batch Write Size (MiB): 0
+Batch Read BandWidth (GiB/s): 0
+Batch Write BandWidth (GiB/s): 0
+Avg Batch Submit Latency (us): 0
+Avg Batch Completion Latency (us): 0
+READ-WRITE SIZE HISTOGRAM : 
+0-4(KiB): 0  0
+4-8(KiB): 0  0
+8-16(KiB): 0  0
+16-32(KiB): 0  0
+32-64(KiB): 0  0
+64-128(KiB): 0  0
+128-256(KiB): 0  0
+256-512(KiB): 0  0
+512-1024(KiB): 0  0
+1024-2048(KiB): 335229  0
+2048-4096(KiB): 0  0
+4096-8192(KiB): 0  0
+8192-16384(KiB): 0  0
+16384-32768(KiB): 0  0
+32768-65536(KiB): 0  0
+65536-...(KiB): 0  0
+PER_GPU STATS:
+GPU 0(UUID: 6ac8c492e4bba92ca7c4bacb5127bf4) Read: bw=9.02051 util(%)=1595 n=335229 posix=0 unalign=0 dr=0 r_sparse=0 r_inline=0 err=0 MiB=335229 Write: bw=0 util(%)=0 n=0 posix=0 unalign=0 dr=0 err=0 MiB=0 BufRegister: n=16 err=0 free=0 MiB=16
+PER_GPU POOL BUFFER STATS:
+PER_GPU POSIX POOL BUFFER STATS:
+
+PER_GPU RDMA STATS:
+GPU 0000:07:00.0(UUID: 6ac8c492e4bba92ca7c4bacb5127bf4) : 
+
+RDMA MRSTATS:
+peer name   nr_mrs      mr_size(MiB)
+PER NUMA NODE THREAD POOL STATS:
+numa node: 0 enqueues:0 completes:0 pending suspends:0 pending yields:0 active:0 suspends:0 
+
+cuFile STATS VERSION : 7
+GLOBAL STATS:
+Read: ok = 792600 err = 0
+Write: ok = 0 err = 0
+HandleRegister: ok = 16 err = 0
+HandleDeregister: ok = 0 err = 0
+BufRegister: ok = 16 err = 0
+BufDeregister: ok = 0 err = 0
+BatchSubmit: ok = 0 err = 0
+BatchComplete: ok = 0 err = 0
+BatchSetup: ok = 0 err = 0
+BatchCancel: ok = 0 err = 0
+BatchDestroy: ok = 0 err = 0
+BatchEnqueued: ok = 0 err = 0
+PosixBatchEnqueued: ok = 0 err = 0
+BatchProcessed: ok = 0 err = 0
+PosixBatchProcessed: ok = 0 err = 0
+Total Read Size (MiB): 396300
+Read BandWidth (GiB/s): 9.95684
+Avg Read Latency (us): 1800
+Total Write Size (MiB): 0
+Write BandWidth (GiB/s): 0
+Avg Write Latency (us): 0
+Total Batch Read Size (MiB): 0
+Total Batch Write Size (MiB): 0
+Batch Read BandWidth (GiB/s): 0
+Batch Write BandWidth (GiB/s): 0
+Avg Batch Submit Latency (us): 0
+Avg Batch Completion Latency (us): 0
+READ-WRITE SIZE HISTOGRAM : 
+0-4(KiB): 0  0
+4-8(KiB): 0  0
+8-16(KiB): 0  0
+16-32(KiB): 0  0
+32-64(KiB): 0  0
+64-128(KiB): 0  0
+128-256(KiB): 0  0
+256-512(KiB): 0  0
+512-1024(KiB): 0  0
+1024-2048(KiB): 396300  0
+2048-4096(KiB): 0  0
+4096-8192(KiB): 0  0
+8192-16384(KiB): 0  0
+16384-32768(KiB): 0  0
+32768-65536(KiB): 0  0
+65536-...(KiB): 0  0
+PER_GPU STATS:
+GPU 0(UUID: 6ac8c492e4bba92ca7c4bacb5127bf4) Read: bw=9.95898 util(%)=1596 n=396300 posix=0 unalign=0 dr=0 r_sparse=0 r_inline=0 err=0 MiB=396300 Write: bw=0 util(%)=0 n=0 posix=0 unalign=0 dr=0 err=0 MiB=0 BufRegister: n=16 err=0 free=0 MiB=16
+PER_GPU POOL BUFFER STATS:
+PER_GPU POSIX POOL BUFFER STATS:
+
+PER_GPU RDMA STATS:
+GPU 0000:07:00.0(UUID: 6ac8c492e4bba92ca7c4bacb5127bf4) : 
+
+RDMA MRSTATS:
+peer name   nr_mrs      mr_size(MiB)
+PER NUMA NODE THREAD POOL STATS:
+numa node: 0 enqueues:0 completes:0 pending suspends:0 pending yields:0 active:0 suspends:0 
+
+cuFile STATS VERSION : 7
+GLOBAL STATS:
+Read: ok = 914524 err = 0
+Write: ok = 0 err = 0
+HandleRegister: ok = 16 err = 0
+HandleDeregister: ok = 0 err = 0
+BufRegister: ok = 16 err = 0
+BufDeregister: ok = 0 err = 0
+BatchSubmit: ok = 0 err = 0
+BatchComplete: ok = 0 err = 0
+BatchSetup: ok = 0 err = 0
+BatchCancel: ok = 0 err = 0
+BatchDestroy: ok = 0 err = 0
+BatchEnqueued: ok = 0 err = 0
+PosixBatchEnqueued: ok = 0 err = 0
+BatchProcessed: ok = 0 err = 0
+PosixBatchProcessed: ok = 0 err = 0
+Total Read Size (MiB): 457262
+Read BandWidth (GiB/s): 9.89928
+Avg Read Latency (us): 1450
+Total Write Size (MiB): 0
+Write BandWidth (GiB/s): 0
+Avg Write Latency (us): 0
+Total Batch Read Size (MiB): 0
+Total Batch Write Size (MiB): 0
+Batch Read BandWidth (GiB/s): 0
+Batch Write BandWidth (GiB/s): 0
+Avg Batch Submit Latency (us): 0
+Avg Batch Completion Latency (us): 0
+READ-WRITE SIZE HISTOGRAM : 
+0-4(KiB): 0  0
+4-8(KiB): 0  0
+8-16(KiB): 0  0
+16-32(KiB): 0  0
+32-64(KiB): 0  0
+64-128(KiB): 0  0
+128-256(KiB): 0  0
+256-512(KiB): 0  0
+512-1024(KiB): 0  0
+1024-2048(KiB): 457262  0
+2048-4096(KiB): 0  0
+4096-8192(KiB): 0  0
+8192-16384(KiB): 0  0
+16384-32768(KiB): 0  0
+32768-65536(KiB): 0  0
+65536-...(KiB): 0  0
+PER_GPU STATS:
+GPU 0(UUID: 6ac8c492e4bba92ca7c4bacb5127bf4) Read: bw=9.90527 util(%)=1596 n=457262 posix=0 unalign=0 dr=0 r_sparse=0 r_inline=0 err=0 MiB=457262 Write: bw=0 util(%)=0 n=0 posix=0 unalign=0 dr=0 err=0 MiB=0 BufRegister: n=16 err=0 free=0 MiB=16
+PER_GPU POOL BUFFER STATS:
+PER_GPU POSIX POOL BUFFER STATS:
+
+PER_GPU RDMA STATS:
+GPU 0000:07:00.0(UUID: 6ac8c492e4bba92ca7c4bacb5127bf4) : 
+
+RDMA MRSTATS:
+peer name   nr_mrs      mr_size(MiB)
+PER NUMA NODE THREAD POOL STATS:
+numa node: 0 enqueues:0 completes:0 pending suspends:0 pending yields:0 active:0 suspends:0 
+
+cuFile STATS VERSION : 7
+GLOBAL STATS:
+Read: ok = 1030842 err = 0
+Write: ok = 0 err = 0
+HandleRegister: ok = 16 err = 0
+HandleDeregister: ok = 0 err = 0
+BufRegister: ok = 16 err = 0
+BufDeregister: ok = 0 err = 0
+BatchSubmit: ok = 0 err = 0
+BatchComplete: ok = 0 err = 0
+BatchSetup: ok = 0 err = 0
+BatchCancel: ok = 0 err = 0
+BatchDestroy: ok = 0 err = 0
+BatchEnqueued: ok = 0 err = 0
+PosixBatchEnqueued: ok = 0 err = 0
+BatchProcessed: ok = 0 err = 0
+PosixBatchProcessed: ok = 0 err = 0
+Total Read Size (MiB): 515421
+Read BandWidth (GiB/s): 8.71882
+Avg Read Latency (us): 1650
+Total Write Size (MiB): 0
+Write BandWidth (GiB/s): 0
+Avg Write Latency (us): 0
+Total Batch Read Size (MiB): 0
+Total Batch Write Size (MiB): 0
+Batch Read BandWidth (GiB/s): 0
+Batch Write BandWidth (GiB/s): 0
+Avg Batch Submit Latency (us): 0
+Avg Batch Completion Latency (us): 0
+READ-WRITE SIZE HISTOGRAM : 
+0-4(KiB): 0  0
+4-8(KiB): 0  0
+8-16(KiB): 0  0
+16-32(KiB): 0  0
+32-64(KiB): 0  0
+64-128(KiB): 0  0
+128-256(KiB): 0  0
+256-512(KiB): 0  0
+512-1024(KiB): 0  0
+1024-2048(KiB): 515421  0
+2048-4096(KiB): 0  0
+4096-8192(KiB): 0  0
+8192-16384(KiB): 0  0
+16384-32768(KiB): 0  0
+32768-65536(KiB): 0  0
+65536-...(KiB): 0  0
+PER_GPU STATS:
+GPU 0(UUID: 6ac8c492e4bba92ca7c4bacb5127bf4) Read: bw=8.76855 util(%)=1596 n=515421 posix=0 unalign=0 dr=0 r_sparse=0 r_inline=0 err=0 MiB=515421 Write: bw=0 util(%)=0 n=0 posix=0 unalign=0 dr=0 err=0 MiB=0 BufRegister: n=16 err=0 free=0 MiB=16
+PER_GPU POOL BUFFER STATS:
+PER_GPU POSIX POOL BUFFER STATS:
+
+PER_GPU RDMA STATS:
+GPU 0000:07:00.0(UUID: 6ac8c492e4bba92ca7c4bacb5127bf4) : 
+
+RDMA MRSTATS:
+peer name   nr_mrs      mr_size(MiB)
+PER NUMA NODE THREAD POOL STATS:
+numa node: 0 enqueues:0 completes:0 pending suspends:0 pending yields:0 active:0 suspends:0 
+
+cuFile STATS VERSION : 7
+GLOBAL STATS:
+Read: ok = 1128404 err = 0
+Write: ok = 0 err = 0
+HandleRegister: ok = 16 err = 0
+HandleDeregister: ok = 0 err = 0
+BufRegister: ok = 16 err = 0
+BufDeregister: ok = 0 err = 0
+BatchSubmit: ok = 0 err = 0
+BatchComplete: ok = 0 err = 0
+BatchSetup: ok = 0 err = 0
+BatchCancel: ok = 0 err = 0
+BatchDestroy: ok = 0 err = 0
+BatchEnqueued: ok = 0 err = 0
+PosixBatchEnqueued: ok = 0 err = 0
+BatchProcessed: ok = 0 err = 0
+PosixBatchProcessed: ok = 0 err = 0
+Total Read Size (MiB): 564202
+Read BandWidth (GiB/s): 7.05642
+Avg Read Latency (us): 1694
+Total Write Size (MiB): 0
+Write BandWidth (GiB/s): 0
+Avg Write Latency (us): 0
+Total Batch Read Size (MiB): 0
+Total Batch Write Size (MiB): 0
+Batch Read BandWidth (GiB/s): 0
+Batch Write BandWidth (GiB/s): 0
+Avg Batch Submit Latency (us): 0
+Avg Batch Completion Latency (us): 0
+READ-WRITE SIZE HISTOGRAM : 
+0-4(KiB): 0  0
+4-8(KiB): 0  0
+8-16(KiB): 0  0
+16-32(KiB): 0  0
+32-64(KiB): 0  0
+64-128(KiB): 0  0
+128-256(KiB): 0  0
+256-512(KiB): 0  0
+512-1024(KiB): 0  0
+1024-2048(KiB): 564202  0
+2048-4096(KiB): 0  0
+4096-8192(KiB): 0  0
+8192-16384(KiB): 0  0
+16384-32768(KiB): 0  0
+32768-65536(KiB): 0  0
+65536-...(KiB): 0  0
+PER_GPU STATS:
+GPU 0(UUID: 6ac8c492e4bba92ca7c4bacb5127bf4) Read: bw=7.18359 util(%)=1258 n=564202 posix=0 unalign=0 dr=0 r_sparse=0 r_inline=0 err=0 MiB=564202 Write: bw=0 util(%)=0 n=0 posix=0 unalign=0 dr=0 err=0 MiB=0 BufRegister: n=16 err=0 free=0 MiB=16
+PER_GPU POOL BUFFER STATS:
+PER_GPU POSIX POOL BUFFER STATS:
+
+PER_GPU RDMA STATS:
+GPU 0000:07:00.0(UUID: 6ac8c492e4bba92ca7c4bacb5127bf4) : 
+
+RDMA MRSTATS:
+peer name   nr_mrs      mr_size(MiB)
+PER NUMA NODE THREAD POOL STATS:
+numa node: 0 enqueues:0 completes:0 pending suspends:0 pending yields:0 active:0 suspends:0 
+

@@ -1,0 +1,76 @@
++ INTERVAL=5
++ export CUFILE_ENV_PATH_JSON=/home2/faculty/pwesolowski/mgr/benchmark-many-gpus-scratch/cufile.json
++ CUFILE_ENV_PATH_JSON=/home2/faculty/pwesolowski/mgr/benchmark-many-gpus-scratch/cufile.json
++ RESULTS_DIR=benchmark-4-read-16-0-642678
++ mkdir -p benchmark-4-read-16-0-642678
++ envsubst
++ PID=3756170
++ sleep 1
++ /usr/local/cuda/gds/tools/gdsio benchmark-4-read-16-0-642678/job_config.gdsio
++ wait 3756170
++ iostat -cxzm 5
++ nvidia-smi dmon -d 5 -s putcm
++ dcgmi dmon -e 1009,1010 -d 5000
++ true
++ /usr/local/cuda/gds/tools/gds_stats -p 3756170 -l3
++ sleep 5
++ true
++ /usr/local/cuda/gds/tools/gds_stats -p 3756170 -l3
++ sleep 5
++ true
++ /usr/local/cuda/gds/tools/gds_stats -p 3756170 -l3
++ sleep 5
++ true
++ /usr/local/cuda/gds/tools/gds_stats -p 3756170 -l3
++ sleep 5
++ true
++ /usr/local/cuda/gds/tools/gds_stats -p 3756170 -l3
++ sleep 5
++ true
++ /usr/local/cuda/gds/tools/gds_stats -p 3756170 -l3
++ sleep 5
++ true
++ /usr/local/cuda/gds/tools/gds_stats -p 3756170 -l3
++ sleep 5
++ true
++ /usr/local/cuda/gds/tools/gds_stats -p 3756170 -l3
++ sleep 5
++ true
++ /usr/local/cuda/gds/tools/gds_stats -p 3756170 -l3
++ sleep 5
++ true
++ /usr/local/cuda/gds/tools/gds_stats -p 3756170 -l3
++ sleep 5
++ true
++ /usr/local/cuda/gds/tools/gds_stats -p 3756170 -l3
++ sleep 5
++ true
++ /usr/local/cuda/gds/tools/gds_stats -p 3756170 -l3
++ sleep 5
++ true
++ /usr/local/cuda/gds/tools/gds_stats -p 3756170 -l3
++ sleep 5
++ true
++ /usr/local/cuda/gds/tools/gds_stats -p 3756170 -l3
++ sleep 5
++ true
++ /usr/local/cuda/gds/tools/gds_stats -p 3756170 -l3
++ sleep 5
++ true
++ /usr/local/cuda/gds/tools/gds_stats -p 3756170 -l3
++ sleep 5
++ true
++ /usr/local/cuda/gds/tools/gds_stats -p 3756170 -l3
++ sleep 5
++ true
++ /usr/local/cuda/gds/tools/gds_stats -p 3756170 -l3
++ sleep 5
++ true
++ /usr/local/cuda/gds/tools/gds_stats -p 3756170 -l3
++ sleep 5
++ true
++ /usr/local/cuda/gds/tools/gds_stats -p 3756170 -l3
++ sleep 5
+IoType: READ XferType: CPU_CACHED_GPU Threads: 128 DataSetSize: 81072128/268435456(KiB) IOSize: 1024(KiB) Throughput: 1.014245 GiB/sec, Avg_Latency: 130285.058630 usecs ops: 79172 total_time 76.230510 secs
+++ jobs -p
++ kill 3756310 3756311 3756312 3756313

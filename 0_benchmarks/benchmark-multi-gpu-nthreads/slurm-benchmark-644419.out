@@ -1,0 +1,16 @@
++ INTERVAL=5
++ RESULTS_DIR=benchmark-2-2-read-16-0-644419
++ mkdir -p benchmark-2-2-read-16-0-644419
++ let 'NUM_LINES=11+4*2'
++ head -n 19 job_config.template
++ envsubst
++ rm benchmark-2-2-read-16-0-644419/job_config.tmp
++ PID=2852328
++ sleep 1
++ /usr/local/cuda/gds/tools/gdsio benchmark-2-2-read-16-0-644419/job_config.gdsio
++ wait 2852328
++ nvidia-smi dmon -d 5 -s putcm
++ dcgmi dmon -e 1009,1010 -d 5000
+IoType: READ XferType: CPU_GPU Threads: 32 DataSetSize: 298636288/67108864(KiB) IOSize: 1024(KiB) Throughput: 9.190682 GiB/sec, Avg_Latency: 3398.063022 usecs ops: 291637 total_time 30.988098 secs
+++ jobs -p
++ kill 2852369 2852370

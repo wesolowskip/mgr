@@ -1,0 +1,15 @@
++ INTERVAL=10
++ export CUFILE_ENV_PATH_JSON=/home2/faculty/pwesolowski/mgr/benchmark-hyperparams/cufile.json
++ CUFILE_ENV_PATH_JSON=/home2/faculty/pwesolowski/mgr/benchmark-hyperparams/cufile.json
++ RESULTS_DIR=benchmark-5-0-8-2G-638550
++ mkdir -p benchmark-5-0-8-2G-638550
++ PID=1033021
++ sleep 1
++ /usr/local/cuda/gds/tools/gdsio -D /raid/shared/pwesolowski -d 0 -w 8 -s 2G -i 1M -x 5 -I 0 -T 60
++ wait 1033021
++ nvidia-smi dmon -d 10 -s putcm
++ iostat -cxzm 10
++ dcgmi dmon -e 1009,1010 -d 10000
+IoType: READ XferType: GPUD_ASYNC Threads: 8 DataSetSize: 796378112/16777216(KiB) IOSize: 1024(KiB) Throughput: 12.705621 GiB/sec, Avg_Latency: 614.879672 usecs ops: 777713 total_time 59.775540 secs
+++ jobs -p
++ kill 1033055 1033056 1033057

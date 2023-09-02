@@ -1,0 +1,45 @@
++ echo 0
+0
++ echo 2
+2
++ echo 1
+1
++ INTERVAL=3
++ export CUFILE_ENV_PATH_JSON=/home2/faculty/pwesolowski/mgr/cufile.json
++ CUFILE_ENV_PATH_JSON=/home2/faculty/pwesolowski/mgr/cufile.json
++ RESULTS_DIR=benchmark-0-2-1-636579
++ mkdir -p benchmark-0-2-1-636579
++ PID=1712746
++ sleep 1
++ /usr/local/cuda/gds/tools/gdsio -D /raid/shared/pwesolowski -d 1 -w 8 -s 500M -i 1M -x 0 -I 2 -T 20
++ wait 1712746
++ iostat -cxzm 3
++ nvidia-smi dmon -d 3 -s putcm
++ dcgmi dmon -e 1009,1010 -d 3000
++ true
++ /usr/local/cuda/gds/tools/gds_stats -p 1712746 -l3
++ sleep 3
++ true
++ /usr/local/cuda/gds/tools/gds_stats -p 1712746 -l3
++ sleep 3
++ true
++ /usr/local/cuda/gds/tools/gds_stats -p 1712746 -l3
++ sleep 3
++ true
++ /usr/local/cuda/gds/tools/gds_stats -p 1712746 -l3
++ sleep 3
++ true
++ /usr/local/cuda/gds/tools/gds_stats -p 1712746 -l3
++ sleep 3
++ true
++ /usr/local/cuda/gds/tools/gds_stats -p 1712746 -l3
++ sleep 3
++ true
++ /usr/local/cuda/gds/tools/gds_stats -p 1712746 -l3
++ sleep 3
++ true
++ /usr/local/cuda/gds/tools/gds_stats -p 1712746 -l3
++ sleep 3
+IoType: RANDREAD XferType: GPUD Threads: 8 DataSetSize: 298302464/4096000(KiB) IOSize: 1024(KiB) Throughput: 14.557595 GiB/sec, Avg_Latency: 536.642388 usecs ops: 291311 total_time 19.541923 secs
+++ jobs -p
++ kill 1712771 1712772 1712773 1712774

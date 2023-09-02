@@ -1,0 +1,13 @@
++ INTERVAL=10
++ export CUFILE_ENV_PATH_JSON=/home2/faculty/pwesolowski/mgr/benchmark-hyperparams/cufile.json
++ CUFILE_ENV_PATH_JSON=/home2/faculty/pwesolowski/mgr/benchmark-hyperparams/cufile.json
++ RESULTS_DIR=benchmark-3-2-128-32G-638288
++ mkdir -p benchmark-3-2-128-32G-638288
++ PID=3981265
++ sleep 1
++ /usr/local/cuda/gds/tools/gdsio -D /raid/shared/pwesolowski -d 0 -w 128 -s 32G -i 1M -x 3 -I 2 -T 60
++ wait 3981265
++ dcgmi dmon -e 1009,1010 -d 10000
++ nvidia-smi dmon -d 10 -s putcm
++ iostat -cxzm 10
+slurmstepd: error: *** JOB 638288 ON dgx-4 CANCELLED AT 2023-04-03T17:44:47 DUE TO TIME LIMIT ***

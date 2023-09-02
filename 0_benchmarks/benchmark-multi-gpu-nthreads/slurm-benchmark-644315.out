@@ -1,0 +1,16 @@
++ INTERVAL=5
++ RESULTS_DIR=benchmark-2-1-randwrite-4-0-644315
++ mkdir -p benchmark-2-1-randwrite-4-0-644315
++ let 'NUM_LINES=11+4*1'
++ head -n 15 job_config.template
++ envsubst
++ rm benchmark-2-1-randwrite-4-0-644315/job_config.tmp
++ PID=2751917
++ sleep 1
++ /usr/local/cuda/gds/tools/gdsio benchmark-2-1-randwrite-4-0-644315/job_config.gdsio
++ wait 2751917
++ nvidia-smi dmon -d 5 -s putcm
++ dcgmi dmon -e 1009,1010 -d 5000
+IoType: RANDWRITE XferType: CPU_GPU Threads: 4 DataSetSize: 297148416/8388608(KiB) IOSize: 1024(KiB) Throughput: 9.553626 GiB/sec, Avg_Latency: 408.851575 usecs ops: 290184 total_time 29.662331 secs
+++ jobs -p
++ kill 2751927 2751928

@@ -1,0 +1,686 @@
+error opening gds stats, pid: 3154642 error: No such file or directory
+cuFile STATS VERSION : 7
+GLOBAL STATS:
+Read: ok = 0 err = 0
+Write: ok = 26052 err = 0
+HandleRegister: ok = 128 err = 0
+HandleDeregister: ok = 0 err = 0
+BufRegister: ok = 128 err = 0
+BufDeregister: ok = 0 err = 0
+BatchSubmit: ok = 0 err = 0
+BatchComplete: ok = 0 err = 0
+BatchSetup: ok = 0 err = 0
+BatchCancel: ok = 0 err = 0
+BatchDestroy: ok = 0 err = 0
+BatchEnqueued: ok = 0 err = 0
+PosixBatchEnqueued: ok = 0 err = 0
+BatchProcessed: ok = 0 err = 0
+PosixBatchProcessed: ok = 0 err = 0
+Total Read Size (MiB): 0
+Read BandWidth (GiB/s): 0
+Avg Read Latency (us): 0
+Total Write Size (MiB): 13026
+Write BandWidth (GiB/s): 7.24513
+Avg Write Latency (us): 21181
+Total Batch Read Size (MiB): 0
+Total Batch Write Size (MiB): 0
+Batch Read BandWidth (GiB/s): 0
+Batch Write BandWidth (GiB/s): 0
+Avg Batch Submit Latency (us): 0
+Avg Batch Completion Latency (us): 0
+READ-WRITE SIZE HISTOGRAM : 
+0-4(KiB): 0  0
+4-8(KiB): 0  0
+8-16(KiB): 0  0
+16-32(KiB): 0  0
+32-64(KiB): 0  0
+64-128(KiB): 0  0
+128-256(KiB): 0  0
+256-512(KiB): 0  0
+512-1024(KiB): 0  0
+1024-2048(KiB): 0  13026
+2048-4096(KiB): 0  0
+4096-8192(KiB): 0  0
+8192-16384(KiB): 0  0
+16384-32768(KiB): 0  0
+32768-65536(KiB): 0  0
+65536-...(KiB): 0  0
+PER_GPU STATS:
+GPU 0(UUID: 6ac8c492e4bba92ca7c4bacb5127bf4) Read: bw=0 util(%)=0 n=0 posix=0 unalign=0 dr=0 r_sparse=0 r_inline=0 err=0 MiB=0 Write: bw=0.896484 util(%)=1592 n=1624 posix=0 unalign=0 dr=0 err=0 MiB=1624 BufRegister: n=16 err=0 free=0 MiB=16
+GPU 1(UUID: dd3b3d71746a93aa34d66c8147e6d02b) Read: bw=0 util(%)=0 n=0 posix=0 unalign=0 dr=0 r_sparse=0 r_inline=0 err=0 MiB=0 Write: bw=0.879883 util(%)=1589 n=1625 posix=0 unalign=0 dr=0 err=0 MiB=1625 BufRegister: n=16 err=0 free=0 MiB=16
+GPU 2(UUID: 306473dd7151bc442725c35e35ab6db) Read: bw=0 util(%)=0 n=0 posix=0 unalign=0 dr=0 r_sparse=0 r_inline=0 err=0 MiB=0 Write: bw=0.89575 util(%)=1591 n=1615 posix=0 unalign=0 dr=0 err=0 MiB=1615 BufRegister: n=16 err=0 free=0 MiB=16
+GPU 3(UUID: a4f268d71a27f8ae8497298cf20ab11) Read: bw=0 util(%)=0 n=0 posix=0 unalign=0 dr=0 r_sparse=0 r_inline=0 err=0 MiB=0 Write: bw=0.893638 util(%)=1587 n=1625 posix=0 unalign=0 dr=0 err=0 MiB=1625 BufRegister: n=16 err=0 free=0 MiB=16
+GPU 4(UUID: c86ff5cef1d0259e7722c6f7ecbbb66a) Read: bw=0 util(%)=0 n=0 posix=0 unalign=0 dr=0 r_sparse=0 r_inline=0 err=0 MiB=0 Write: bw=0.907227 util(%)=1591 n=1641 posix=0 unalign=0 dr=0 err=0 MiB=1641 BufRegister: n=16 err=0 free=0 MiB=16
+GPU 5(UUID: 7763c5a3cc71457fa7d35fe27ef563) Read: bw=0 util(%)=0 n=0 posix=0 unalign=0 dr=0 r_sparse=0 r_inline=0 err=0 MiB=0 Write: bw=0.907296 util(%)=1591 n=1636 posix=0 unalign=0 dr=0 err=0 MiB=1636 BufRegister: n=16 err=0 free=0 MiB=16
+GPU 6(UUID: 3cdc966ba412f271eb2eface21d73abb) Read: bw=0 util(%)=0 n=0 posix=0 unalign=0 dr=0 r_sparse=0 r_inline=0 err=0 MiB=0 Write: bw=0.898516 util(%)=1594 n=1622 posix=0 unalign=0 dr=0 err=0 MiB=1622 BufRegister: n=16 err=0 free=0 MiB=16
+GPU 7(UUID: af8a1bdd4687b66756542e232c457814) Read: bw=0 util(%)=0 n=0 posix=0 unalign=0 dr=0 r_sparse=0 r_inline=0 err=0 MiB=0 Write: bw=0.897461 util(%)=1586 n=1638 posix=0 unalign=0 dr=0 err=0 MiB=1638 BufRegister: n=16 err=0 free=0 MiB=16
+PER_GPU POOL BUFFER STATS:
+PER_GPU POSIX POOL BUFFER STATS:
+
+PER_GPU RDMA STATS:
+GPU 0000:07:00.0(UUID: 6ac8c492e4bba92ca7c4bacb5127bf4) : 
+GPU 0000:0f:00.0(UUID: dd3b3d71746a93aa34d66c8147e6d02b) : 
+GPU 0000:47:00.0(UUID: 306473dd7151bc442725c35e35ab6db) : 
+GPU 0000:4e:00.0(UUID: a4f268d71a27f8ae8497298cf20ab11) : 
+GPU 0000:87:00.0(UUID: c86ff5cef1d0259e7722c6f7ecbbb66a) : 
+GPU 0000:90:00.0(UUID: 7763c5a3cc71457fa7d35fe27ef563) : 
+GPU 0000:b7:00.0(UUID: 3cdc966ba412f271eb2eface21d73abb) : 
+GPU 0000:bd:00.0(UUID: af8a1bdd4687b66756542e232c457814) : 
+
+RDMA MRSTATS:
+peer name   nr_mrs      mr_size(MiB)
+PER NUMA NODE THREAD POOL STATS:
+numa node: 0 enqueues:0 completes:0 pending suspends:0 pending yields:0 active:0 suspends:0 
+numa node: 1 enqueues:0 completes:0 pending suspends:0 pending yields:0 active:0 suspends:0 
+numa node: 2 enqueues:0 completes:0 pending suspends:0 pending yields:0 active:0 suspends:0 
+numa node: 3 enqueues:0 completes:0 pending suspends:0 pending yields:0 active:0 suspends:0 
+
+cuFile STATS VERSION : 7
+GLOBAL STATS:
+Read: ok = 0 err = 0
+Write: ok = 81110 err = 0
+HandleRegister: ok = 128 err = 0
+HandleDeregister: ok = 0 err = 0
+BufRegister: ok = 128 err = 0
+BufDeregister: ok = 0 err = 0
+BatchSubmit: ok = 0 err = 0
+BatchComplete: ok = 0 err = 0
+BatchSetup: ok = 0 err = 0
+BatchCancel: ok = 0 err = 0
+BatchDestroy: ok = 0 err = 0
+BatchEnqueued: ok = 0 err = 0
+PosixBatchEnqueued: ok = 0 err = 0
+BatchProcessed: ok = 0 err = 0
+PosixBatchProcessed: ok = 0 err = 0
+Total Read Size (MiB): 0
+Read BandWidth (GiB/s): 0
+Avg Read Latency (us): 0
+Total Write Size (MiB): 40555
+Write BandWidth (GiB/s): 5.1893
+Avg Write Latency (us): 20069
+Total Batch Read Size (MiB): 0
+Total Batch Write Size (MiB): 0
+Batch Read BandWidth (GiB/s): 0
+Batch Write BandWidth (GiB/s): 0
+Avg Batch Submit Latency (us): 0
+Avg Batch Completion Latency (us): 0
+READ-WRITE SIZE HISTOGRAM : 
+0-4(KiB): 0  0
+4-8(KiB): 0  0
+8-16(KiB): 0  0
+16-32(KiB): 0  0
+32-64(KiB): 0  0
+64-128(KiB): 0  0
+128-256(KiB): 0  0
+256-512(KiB): 0  0
+512-1024(KiB): 0  0
+1024-2048(KiB): 0  40555
+2048-4096(KiB): 0  0
+4096-8192(KiB): 0  0
+8192-16384(KiB): 0  0
+16384-32768(KiB): 0  0
+32768-65536(KiB): 0  0
+65536-...(KiB): 0  0
+PER_GPU STATS:
+GPU 0(UUID: 6ac8c492e4bba92ca7c4bacb5127bf4) Read: bw=0 util(%)=0 n=0 posix=0 unalign=0 dr=0 r_sparse=0 r_inline=0 err=0 MiB=0 Write: bw=0.663399 util(%)=1584 n=5084 posix=0 unalign=0 dr=0 err=0 MiB=5084 BufRegister: n=16 err=0 free=0 MiB=16
+GPU 1(UUID: dd3b3d71746a93aa34d66c8147e6d02b) Read: bw=0 util(%)=0 n=0 posix=0 unalign=0 dr=0 r_sparse=0 r_inline=0 err=0 MiB=0 Write: bw=0.647461 util(%)=1580 n=5055 posix=0 unalign=0 dr=0 err=0 MiB=5055 BufRegister: n=16 err=0 free=0 MiB=16
+GPU 2(UUID: 306473dd7151bc442725c35e35ab6db) Read: bw=0 util(%)=0 n=0 posix=0 unalign=0 dr=0 r_sparse=0 r_inline=0 err=0 MiB=0 Write: bw=0.648765 util(%)=1580 n=5051 posix=0 unalign=0 dr=0 err=0 MiB=5051 BufRegister: n=16 err=0 free=0 MiB=16
+GPU 3(UUID: a4f268d71a27f8ae8497298cf20ab11) Read: bw=0 util(%)=0 n=0 posix=0 unalign=0 dr=0 r_sparse=0 r_inline=0 err=0 MiB=0 Write: bw=0.664997 util(%)=1575 n=5074 posix=0 unalign=0 dr=0 err=0 MiB=5074 BufRegister: n=16 err=0 free=0 MiB=16
+GPU 4(UUID: c86ff5cef1d0259e7722c6f7ecbbb66a) Read: bw=0 util(%)=0 n=0 posix=0 unalign=0 dr=0 r_sparse=0 r_inline=0 err=0 MiB=0 Write: bw=0.658521 util(%)=1582 n=5086 posix=0 unalign=0 dr=0 err=0 MiB=5086 BufRegister: n=16 err=0 free=0 MiB=16
+GPU 5(UUID: 7763c5a3cc71457fa7d35fe27ef563) Read: bw=0 util(%)=0 n=0 posix=0 unalign=0 dr=0 r_sparse=0 r_inline=0 err=0 MiB=0 Write: bw=0.658839 util(%)=1587 n=5064 posix=0 unalign=0 dr=0 err=0 MiB=5064 BufRegister: n=16 err=0 free=0 MiB=16
+GPU 6(UUID: 3cdc966ba412f271eb2eface21d73abb) Read: bw=0 util(%)=0 n=0 posix=0 unalign=0 dr=0 r_sparse=0 r_inline=0 err=0 MiB=0 Write: bw=0.655915 util(%)=1587 n=5056 posix=0 unalign=0 dr=0 err=0 MiB=5056 BufRegister: n=16 err=0 free=0 MiB=16
+GPU 7(UUID: af8a1bdd4687b66756542e232c457814) Read: bw=0 util(%)=0 n=0 posix=0 unalign=0 dr=0 r_sparse=0 r_inline=0 err=0 MiB=0 Write: bw=0.65918 util(%)=1573 n=5085 posix=0 unalign=0 dr=0 err=0 MiB=5085 BufRegister: n=16 err=0 free=0 MiB=16
+PER_GPU POOL BUFFER STATS:
+PER_GPU POSIX POOL BUFFER STATS:
+
+PER_GPU RDMA STATS:
+GPU 0000:07:00.0(UUID: 6ac8c492e4bba92ca7c4bacb5127bf4) : 
+GPU 0000:0f:00.0(UUID: dd3b3d71746a93aa34d66c8147e6d02b) : 
+GPU 0000:47:00.0(UUID: 306473dd7151bc442725c35e35ab6db) : 
+GPU 0000:4e:00.0(UUID: a4f268d71a27f8ae8497298cf20ab11) : 
+GPU 0000:87:00.0(UUID: c86ff5cef1d0259e7722c6f7ecbbb66a) : 
+GPU 0000:90:00.0(UUID: 7763c5a3cc71457fa7d35fe27ef563) : 
+GPU 0000:b7:00.0(UUID: 3cdc966ba412f271eb2eface21d73abb) : 
+GPU 0000:bd:00.0(UUID: af8a1bdd4687b66756542e232c457814) : 
+
+RDMA MRSTATS:
+peer name   nr_mrs      mr_size(MiB)
+PER NUMA NODE THREAD POOL STATS:
+numa node: 0 enqueues:0 completes:0 pending suspends:0 pending yields:0 active:0 suspends:0 
+numa node: 1 enqueues:0 completes:0 pending suspends:0 pending yields:0 active:0 suspends:0 
+numa node: 2 enqueues:0 completes:0 pending suspends:0 pending yields:0 active:0 suspends:0 
+numa node: 3 enqueues:0 completes:0 pending suspends:0 pending yields:0 active:0 suspends:0 
+
+cuFile STATS VERSION : 7
+GLOBAL STATS:
+Read: ok = 0 err = 0
+Write: ok = 134814 err = 0
+HandleRegister: ok = 128 err = 0
+HandleDeregister: ok = 0 err = 0
+BufRegister: ok = 128 err = 0
+BufDeregister: ok = 0 err = 0
+BatchSubmit: ok = 0 err = 0
+BatchComplete: ok = 0 err = 0
+BatchSetup: ok = 0 err = 0
+BatchCancel: ok = 0 err = 0
+BatchDestroy: ok = 0 err = 0
+BatchEnqueued: ok = 0 err = 0
+PosixBatchEnqueued: ok = 0 err = 0
+BatchProcessed: ok = 0 err = 0
+PosixBatchProcessed: ok = 0 err = 0
+Total Read Size (MiB): 0
+Read BandWidth (GiB/s): 0
+Avg Read Latency (us): 0
+Total Write Size (MiB): 67407
+Write BandWidth (GiB/s): 5.43327
+Avg Write Latency (us): 27460
+Total Batch Read Size (MiB): 0
+Total Batch Write Size (MiB): 0
+Batch Read BandWidth (GiB/s): 0
+Batch Write BandWidth (GiB/s): 0
+Avg Batch Submit Latency (us): 0
+Avg Batch Completion Latency (us): 0
+READ-WRITE SIZE HISTOGRAM : 
+0-4(KiB): 0  0
+4-8(KiB): 0  0
+8-16(KiB): 0  0
+16-32(KiB): 0  0
+32-64(KiB): 0  0
+64-128(KiB): 0  0
+128-256(KiB): 0  0
+256-512(KiB): 0  0
+512-1024(KiB): 0  0
+1024-2048(KiB): 0  67407
+2048-4096(KiB): 0  0
+4096-8192(KiB): 0  0
+8192-16384(KiB): 0  0
+16384-32768(KiB): 0  0
+32768-65536(KiB): 0  0
+65536-...(KiB): 0  0
+PER_GPU STATS:
+GPU 0(UUID: 6ac8c492e4bba92ca7c4bacb5127bf4) Read: bw=0 util(%)=0 n=0 posix=0 unalign=0 dr=0 r_sparse=0 r_inline=0 err=0 MiB=0 Write: bw=0.669559 util(%)=1613 n=8421 posix=0 unalign=0 dr=0 err=0 MiB=8421 BufRegister: n=16 err=0 free=0 MiB=16
+GPU 1(UUID: dd3b3d71746a93aa34d66c8147e6d02b) Read: bw=0 util(%)=0 n=0 posix=0 unalign=0 dr=0 r_sparse=0 r_inline=0 err=0 MiB=0 Write: bw=0.668945 util(%)=1613 n=8429 posix=0 unalign=0 dr=0 err=0 MiB=8429 BufRegister: n=16 err=0 free=0 MiB=16
+GPU 2(UUID: 306473dd7151bc442725c35e35ab6db) Read: bw=0 util(%)=0 n=0 posix=0 unalign=0 dr=0 r_sparse=0 r_inline=0 err=0 MiB=0 Write: bw=0.664062 util(%)=1596 n=8419 posix=0 unalign=0 dr=0 err=0 MiB=8419 BufRegister: n=16 err=0 free=0 MiB=16
+GPU 3(UUID: a4f268d71a27f8ae8497298cf20ab11) Read: bw=0 util(%)=0 n=0 posix=0 unalign=0 dr=0 r_sparse=0 r_inline=0 err=0 MiB=0 Write: bw=0.663086 util(%)=1607 n=8442 posix=0 unalign=0 dr=0 err=0 MiB=8442 BufRegister: n=16 err=0 free=0 MiB=16
+GPU 4(UUID: c86ff5cef1d0259e7722c6f7ecbbb66a) Read: bw=0 util(%)=0 n=0 posix=0 unalign=0 dr=0 r_sparse=0 r_inline=0 err=0 MiB=0 Write: bw=0.673828 util(%)=1614 n=8458 posix=0 unalign=0 dr=0 err=0 MiB=8458 BufRegister: n=16 err=0 free=0 MiB=16
+GPU 5(UUID: 7763c5a3cc71457fa7d35fe27ef563) Read: bw=0 util(%)=0 n=0 posix=0 unalign=0 dr=0 r_sparse=0 r_inline=0 err=0 MiB=0 Write: bw=0.676758 util(%)=1615 n=8407 posix=0 unalign=0 dr=0 err=0 MiB=8407 BufRegister: n=16 err=0 free=0 MiB=16
+GPU 6(UUID: 3cdc966ba412f271eb2eface21d73abb) Read: bw=0 util(%)=0 n=0 posix=0 unalign=0 dr=0 r_sparse=0 r_inline=0 err=0 MiB=0 Write: bw=0.662109 util(%)=1608 n=8394 posix=0 unalign=0 dr=0 err=0 MiB=8394 BufRegister: n=16 err=0 free=0 MiB=16
+GPU 7(UUID: af8a1bdd4687b66756542e232c457814) Read: bw=0 util(%)=0 n=0 posix=0 unalign=0 dr=0 r_sparse=0 r_inline=0 err=0 MiB=0 Write: bw=0.675781 util(%)=1612 n=8437 posix=0 unalign=0 dr=0 err=0 MiB=8437 BufRegister: n=16 err=0 free=0 MiB=16
+PER_GPU POOL BUFFER STATS:
+PER_GPU POSIX POOL BUFFER STATS:
+
+PER_GPU RDMA STATS:
+GPU 0000:07:00.0(UUID: 6ac8c492e4bba92ca7c4bacb5127bf4) : 
+GPU 0000:0f:00.0(UUID: dd3b3d71746a93aa34d66c8147e6d02b) : 
+GPU 0000:47:00.0(UUID: 306473dd7151bc442725c35e35ab6db) : 
+GPU 0000:4e:00.0(UUID: a4f268d71a27f8ae8497298cf20ab11) : 
+GPU 0000:87:00.0(UUID: c86ff5cef1d0259e7722c6f7ecbbb66a) : 
+GPU 0000:90:00.0(UUID: 7763c5a3cc71457fa7d35fe27ef563) : 
+GPU 0000:b7:00.0(UUID: 3cdc966ba412f271eb2eface21d73abb) : 
+GPU 0000:bd:00.0(UUID: af8a1bdd4687b66756542e232c457814) : 
+
+RDMA MRSTATS:
+peer name   nr_mrs      mr_size(MiB)
+PER NUMA NODE THREAD POOL STATS:
+numa node: 0 enqueues:0 completes:0 pending suspends:0 pending yields:0 active:0 suspends:0 
+numa node: 1 enqueues:0 completes:0 pending suspends:0 pending yields:0 active:0 suspends:0 
+numa node: 2 enqueues:0 completes:0 pending suspends:0 pending yields:0 active:0 suspends:0 
+numa node: 3 enqueues:0 completes:0 pending suspends:0 pending yields:0 active:0 suspends:0 
+
+cuFile STATS VERSION : 7
+GLOBAL STATS:
+Read: ok = 0 err = 0
+Write: ok = 188578 err = 0
+HandleRegister: ok = 128 err = 0
+HandleDeregister: ok = 0 err = 0
+BufRegister: ok = 128 err = 0
+BufDeregister: ok = 0 err = 0
+BatchSubmit: ok = 0 err = 0
+BatchComplete: ok = 0 err = 0
+BatchSetup: ok = 0 err = 0
+BatchCancel: ok = 0 err = 0
+BatchDestroy: ok = 0 err = 0
+BatchEnqueued: ok = 0 err = 0
+PosixBatchEnqueued: ok = 0 err = 0
+BatchProcessed: ok = 0 err = 0
+PosixBatchProcessed: ok = 0 err = 0
+Total Read Size (MiB): 0
+Read BandWidth (GiB/s): 0
+Avg Read Latency (us): 0
+Total Write Size (MiB): 94289
+Write BandWidth (GiB/s): 5.13371
+Avg Write Latency (us): 19112
+Total Batch Read Size (MiB): 0
+Total Batch Write Size (MiB): 0
+Batch Read BandWidth (GiB/s): 0
+Batch Write BandWidth (GiB/s): 0
+Avg Batch Submit Latency (us): 0
+Avg Batch Completion Latency (us): 0
+READ-WRITE SIZE HISTOGRAM : 
+0-4(KiB): 0  0
+4-8(KiB): 0  0
+8-16(KiB): 0  0
+16-32(KiB): 0  0
+32-64(KiB): 0  0
+64-128(KiB): 0  0
+128-256(KiB): 0  0
+256-512(KiB): 0  0
+512-1024(KiB): 0  0
+1024-2048(KiB): 0  94289
+2048-4096(KiB): 0  0
+4096-8192(KiB): 0  0
+8192-16384(KiB): 0  0
+16384-32768(KiB): 0  0
+32768-65536(KiB): 0  0
+65536-...(KiB): 0  0
+PER_GPU STATS:
+GPU 0(UUID: 6ac8c492e4bba92ca7c4bacb5127bf4) Read: bw=0 util(%)=0 n=0 posix=0 unalign=0 dr=0 r_sparse=0 r_inline=0 err=0 MiB=0 Write: bw=0.655273 util(%)=1592 n=11776 posix=0 unalign=0 dr=0 err=0 MiB=11776 BufRegister: n=16 err=0 free=0 MiB=16
+GPU 1(UUID: dd3b3d71746a93aa34d66c8147e6d02b) Read: bw=0 util(%)=0 n=0 posix=0 unalign=0 dr=0 r_sparse=0 r_inline=0 err=0 MiB=0 Write: bw=0.665971 util(%)=1598 n=11824 posix=0 unalign=0 dr=0 err=0 MiB=11824 BufRegister: n=16 err=0 free=0 MiB=16
+GPU 2(UUID: 306473dd7151bc442725c35e35ab6db) Read: bw=0 util(%)=0 n=0 posix=0 unalign=0 dr=0 r_sparse=0 r_inline=0 err=0 MiB=0 Write: bw=0.661133 util(%)=1590 n=11784 posix=0 unalign=0 dr=0 err=0 MiB=11784 BufRegister: n=16 err=0 free=0 MiB=16
+GPU 3(UUID: a4f268d71a27f8ae8497298cf20ab11) Read: bw=0 util(%)=0 n=0 posix=0 unalign=0 dr=0 r_sparse=0 r_inline=0 err=0 MiB=0 Write: bw=0.663712 util(%)=1595 n=11815 posix=0 unalign=0 dr=0 err=0 MiB=11815 BufRegister: n=16 err=0 free=0 MiB=16
+GPU 4(UUID: c86ff5cef1d0259e7722c6f7ecbbb66a) Read: bw=0 util(%)=0 n=0 posix=0 unalign=0 dr=0 r_sparse=0 r_inline=0 err=0 MiB=0 Write: bw=0.660472 util(%)=1596 n=11824 posix=0 unalign=0 dr=0 err=0 MiB=11824 BufRegister: n=16 err=0 free=0 MiB=16
+GPU 5(UUID: 7763c5a3cc71457fa7d35fe27ef563) Read: bw=0 util(%)=0 n=0 posix=0 unalign=0 dr=0 r_sparse=0 r_inline=0 err=0 MiB=0 Write: bw=0.652663 util(%)=1591 n=11733 posix=0 unalign=0 dr=0 err=0 MiB=11733 BufRegister: n=16 err=0 free=0 MiB=16
+GPU 6(UUID: 3cdc966ba412f271eb2eface21d73abb) Read: bw=0 util(%)=0 n=0 posix=0 unalign=0 dr=0 r_sparse=0 r_inline=0 err=0 MiB=0 Write: bw=0.657546 util(%)=1598 n=11749 posix=0 unalign=0 dr=0 err=0 MiB=11749 BufRegister: n=16 err=0 free=0 MiB=16
+GPU 7(UUID: af8a1bdd4687b66756542e232c457814) Read: bw=0 util(%)=0 n=0 posix=0 unalign=0 dr=0 r_sparse=0 r_inline=0 err=0 MiB=0 Write: bw=0.673155 util(%)=1596 n=11784 posix=0 unalign=0 dr=0 err=0 MiB=11784 BufRegister: n=16 err=0 free=0 MiB=16
+PER_GPU POOL BUFFER STATS:
+PER_GPU POSIX POOL BUFFER STATS:
+
+PER_GPU RDMA STATS:
+GPU 0000:07:00.0(UUID: 6ac8c492e4bba92ca7c4bacb5127bf4) : 
+GPU 0000:0f:00.0(UUID: dd3b3d71746a93aa34d66c8147e6d02b) : 
+GPU 0000:47:00.0(UUID: 306473dd7151bc442725c35e35ab6db) : 
+GPU 0000:4e:00.0(UUID: a4f268d71a27f8ae8497298cf20ab11) : 
+GPU 0000:87:00.0(UUID: c86ff5cef1d0259e7722c6f7ecbbb66a) : 
+GPU 0000:90:00.0(UUID: 7763c5a3cc71457fa7d35fe27ef563) : 
+GPU 0000:b7:00.0(UUID: 3cdc966ba412f271eb2eface21d73abb) : 
+GPU 0000:bd:00.0(UUID: af8a1bdd4687b66756542e232c457814) : 
+
+RDMA MRSTATS:
+peer name   nr_mrs      mr_size(MiB)
+PER NUMA NODE THREAD POOL STATS:
+numa node: 0 enqueues:0 completes:0 pending suspends:0 pending yields:0 active:0 suspends:0 
+numa node: 1 enqueues:0 completes:0 pending suspends:0 pending yields:0 active:0 suspends:0 
+numa node: 2 enqueues:0 completes:0 pending suspends:0 pending yields:0 active:0 suspends:0 
+numa node: 3 enqueues:0 completes:0 pending suspends:0 pending yields:0 active:0 suspends:0 
+
+cuFile STATS VERSION : 7
+GLOBAL STATS:
+Read: ok = 0 err = 0
+Write: ok = 243706 err = 0
+HandleRegister: ok = 128 err = 0
+HandleDeregister: ok = 0 err = 0
+BufRegister: ok = 128 err = 0
+BufDeregister: ok = 0 err = 0
+BatchSubmit: ok = 0 err = 0
+BatchComplete: ok = 0 err = 0
+BatchSetup: ok = 0 err = 0
+BatchCancel: ok = 0 err = 0
+BatchDestroy: ok = 0 err = 0
+BatchEnqueued: ok = 0 err = 0
+PosixBatchEnqueued: ok = 0 err = 0
+BatchProcessed: ok = 0 err = 0
+PosixBatchProcessed: ok = 0 err = 0
+Total Read Size (MiB): 0
+Read BandWidth (GiB/s): 0
+Avg Read Latency (us): 0
+Total Write Size (MiB): 121853
+Write BandWidth (GiB/s): 5.47624
+Avg Write Latency (us): 23979
+Total Batch Read Size (MiB): 0
+Total Batch Write Size (MiB): 0
+Batch Read BandWidth (GiB/s): 0
+Batch Write BandWidth (GiB/s): 0
+Avg Batch Submit Latency (us): 0
+Avg Batch Completion Latency (us): 0
+READ-WRITE SIZE HISTOGRAM : 
+0-4(KiB): 0  0
+4-8(KiB): 0  0
+8-16(KiB): 0  0
+16-32(KiB): 0  0
+32-64(KiB): 0  0
+64-128(KiB): 0  0
+128-256(KiB): 0  0
+256-512(KiB): 0  0
+512-1024(KiB): 0  0
+1024-2048(KiB): 0  121853
+2048-4096(KiB): 0  0
+4096-8192(KiB): 0  0
+8192-16384(KiB): 0  0
+16384-32768(KiB): 0  0
+32768-65536(KiB): 0  0
+65536-...(KiB): 0  0
+PER_GPU STATS:
+GPU 0(UUID: 6ac8c492e4bba92ca7c4bacb5127bf4) Read: bw=0 util(%)=0 n=0 posix=0 unalign=0 dr=0 r_sparse=0 r_inline=0 err=0 MiB=0 Write: bw=0.700747 util(%)=1598 n=15244 posix=0 unalign=0 dr=0 err=0 MiB=15244 BufRegister: n=16 err=0 free=0 MiB=16
+GPU 1(UUID: dd3b3d71746a93aa34d66c8147e6d02b) Read: bw=0 util(%)=0 n=0 posix=0 unalign=0 dr=0 r_sparse=0 r_inline=0 err=0 MiB=0 Write: bw=0.693359 util(%)=1590 n=15278 posix=0 unalign=0 dr=0 err=0 MiB=15278 BufRegister: n=16 err=0 free=0 MiB=16
+GPU 2(UUID: 306473dd7151bc442725c35e35ab6db) Read: bw=0 util(%)=0 n=0 posix=0 unalign=0 dr=0 r_sparse=0 r_inline=0 err=0 MiB=0 Write: bw=0.711203 util(%)=1592 n=15229 posix=0 unalign=0 dr=0 err=0 MiB=15229 BufRegister: n=16 err=0 free=0 MiB=16
+GPU 3(UUID: a4f268d71a27f8ae8497298cf20ab11) Read: bw=0 util(%)=0 n=0 posix=0 unalign=0 dr=0 r_sparse=0 r_inline=0 err=0 MiB=0 Write: bw=0.707031 util(%)=1602 n=15257 posix=0 unalign=0 dr=0 err=0 MiB=15257 BufRegister: n=16 err=0 free=0 MiB=16
+GPU 4(UUID: c86ff5cef1d0259e7722c6f7ecbbb66a) Read: bw=0 util(%)=0 n=0 posix=0 unalign=0 dr=0 r_sparse=0 r_inline=0 err=0 MiB=0 Write: bw=0.703125 util(%)=1592 n=15275 posix=0 unalign=0 dr=0 err=0 MiB=15275 BufRegister: n=16 err=0 free=0 MiB=16
+GPU 5(UUID: 7763c5a3cc71457fa7d35fe27ef563) Read: bw=0 util(%)=0 n=0 posix=0 unalign=0 dr=0 r_sparse=0 r_inline=0 err=0 MiB=0 Write: bw=0.69852 util(%)=1596 n=15165 posix=0 unalign=0 dr=0 err=0 MiB=15165 BufRegister: n=16 err=0 free=0 MiB=16
+GPU 6(UUID: 3cdc966ba412f271eb2eface21d73abb) Read: bw=0 util(%)=0 n=0 posix=0 unalign=0 dr=0 r_sparse=0 r_inline=0 err=0 MiB=0 Write: bw=0.696289 util(%)=1595 n=15191 posix=0 unalign=0 dr=0 err=0 MiB=15191 BufRegister: n=16 err=0 free=0 MiB=16
+GPU 7(UUID: af8a1bdd4687b66756542e232c457814) Read: bw=0 util(%)=0 n=0 posix=0 unalign=0 dr=0 r_sparse=0 r_inline=0 err=0 MiB=0 Write: bw=0.687789 util(%)=1591 n=15214 posix=0 unalign=0 dr=0 err=0 MiB=15214 BufRegister: n=16 err=0 free=0 MiB=16
+PER_GPU POOL BUFFER STATS:
+PER_GPU POSIX POOL BUFFER STATS:
+
+PER_GPU RDMA STATS:
+GPU 0000:07:00.0(UUID: 6ac8c492e4bba92ca7c4bacb5127bf4) : 
+GPU 0000:0f:00.0(UUID: dd3b3d71746a93aa34d66c8147e6d02b) : 
+GPU 0000:47:00.0(UUID: 306473dd7151bc442725c35e35ab6db) : 
+GPU 0000:4e:00.0(UUID: a4f268d71a27f8ae8497298cf20ab11) : 
+GPU 0000:87:00.0(UUID: c86ff5cef1d0259e7722c6f7ecbbb66a) : 
+GPU 0000:90:00.0(UUID: 7763c5a3cc71457fa7d35fe27ef563) : 
+GPU 0000:b7:00.0(UUID: 3cdc966ba412f271eb2eface21d73abb) : 
+GPU 0000:bd:00.0(UUID: af8a1bdd4687b66756542e232c457814) : 
+
+RDMA MRSTATS:
+peer name   nr_mrs      mr_size(MiB)
+PER NUMA NODE THREAD POOL STATS:
+numa node: 0 enqueues:0 completes:0 pending suspends:0 pending yields:0 active:0 suspends:0 
+numa node: 1 enqueues:0 completes:0 pending suspends:0 pending yields:0 active:0 suspends:0 
+numa node: 2 enqueues:0 completes:0 pending suspends:0 pending yields:0 active:0 suspends:0 
+numa node: 3 enqueues:0 completes:0 pending suspends:0 pending yields:0 active:0 suspends:0 
+
+cuFile STATS VERSION : 7
+GLOBAL STATS:
+Read: ok = 0 err = 0
+Write: ok = 298470 err = 0
+HandleRegister: ok = 128 err = 0
+HandleDeregister: ok = 0 err = 0
+BufRegister: ok = 128 err = 0
+BufDeregister: ok = 0 err = 0
+BatchSubmit: ok = 0 err = 0
+BatchComplete: ok = 0 err = 0
+BatchSetup: ok = 0 err = 0
+BatchCancel: ok = 0 err = 0
+BatchDestroy: ok = 0 err = 0
+BatchEnqueued: ok = 0 err = 0
+PosixBatchEnqueued: ok = 0 err = 0
+BatchProcessed: ok = 0 err = 0
+PosixBatchProcessed: ok = 0 err = 0
+Total Read Size (MiB): 0
+Read BandWidth (GiB/s): 0
+Avg Read Latency (us): 0
+Total Write Size (MiB): 149235
+Write BandWidth (GiB/s): 5.26339
+Avg Write Latency (us): 26199
+Total Batch Read Size (MiB): 0
+Total Batch Write Size (MiB): 0
+Batch Read BandWidth (GiB/s): 0
+Batch Write BandWidth (GiB/s): 0
+Avg Batch Submit Latency (us): 0
+Avg Batch Completion Latency (us): 0
+READ-WRITE SIZE HISTOGRAM : 
+0-4(KiB): 0  0
+4-8(KiB): 0  0
+8-16(KiB): 0  0
+16-32(KiB): 0  0
+32-64(KiB): 0  0
+64-128(KiB): 0  0
+128-256(KiB): 0  0
+256-512(KiB): 0  0
+512-1024(KiB): 0  0
+1024-2048(KiB): 0  149235
+2048-4096(KiB): 0  0
+4096-8192(KiB): 0  0
+8192-16384(KiB): 0  0
+16384-32768(KiB): 0  0
+32768-65536(KiB): 0  0
+65536-...(KiB): 0  0
+PER_GPU STATS:
+GPU 0(UUID: 6ac8c492e4bba92ca7c4bacb5127bf4) Read: bw=0 util(%)=0 n=0 posix=0 unalign=0 dr=0 r_sparse=0 r_inline=0 err=0 MiB=0 Write: bw=0.661133 util(%)=1599 n=18640 posix=0 unalign=0 dr=0 err=0 MiB=18640 BufRegister: n=16 err=0 free=0 MiB=16
+GPU 1(UUID: dd3b3d71746a93aa34d66c8147e6d02b) Read: bw=0 util(%)=0 n=0 posix=0 unalign=0 dr=0 r_sparse=0 r_inline=0 err=0 MiB=0 Write: bw=0.653966 util(%)=1594 n=18713 posix=0 unalign=0 dr=0 err=0 MiB=18713 BufRegister: n=16 err=0 free=0 MiB=16
+GPU 2(UUID: 306473dd7151bc442725c35e35ab6db) Read: bw=0 util(%)=0 n=0 posix=0 unalign=0 dr=0 r_sparse=0 r_inline=0 err=0 MiB=0 Write: bw=0.65657 util(%)=1596 n=18655 posix=0 unalign=0 dr=0 err=0 MiB=18655 BufRegister: n=16 err=0 free=0 MiB=16
+GPU 3(UUID: a4f268d71a27f8ae8497298cf20ab11) Read: bw=0 util(%)=0 n=0 posix=0 unalign=0 dr=0 r_sparse=0 r_inline=0 err=0 MiB=0 Write: bw=0.656889 util(%)=1594 n=18689 posix=0 unalign=0 dr=0 err=0 MiB=18689 BufRegister: n=16 err=0 free=0 MiB=16
+GPU 4(UUID: c86ff5cef1d0259e7722c6f7ecbbb66a) Read: bw=0 util(%)=0 n=0 posix=0 unalign=0 dr=0 r_sparse=0 r_inline=0 err=0 MiB=0 Write: bw=0.652344 util(%)=1588 n=18668 posix=0 unalign=0 dr=0 err=0 MiB=18668 BufRegister: n=16 err=0 free=0 MiB=16
+GPU 5(UUID: 7763c5a3cc71457fa7d35fe27ef563) Read: bw=0 util(%)=0 n=0 posix=0 unalign=0 dr=0 r_sparse=0 r_inline=0 err=0 MiB=0 Write: bw=0.673155 util(%)=1612 n=18608 posix=0 unalign=0 dr=0 err=0 MiB=18608 BufRegister: n=16 err=0 free=0 MiB=16
+GPU 6(UUID: 3cdc966ba412f271eb2eface21d73abb) Read: bw=0 util(%)=0 n=0 posix=0 unalign=0 dr=0 r_sparse=0 r_inline=0 err=0 MiB=0 Write: bw=0.674805 util(%)=1599 n=18614 posix=0 unalign=0 dr=0 err=0 MiB=18614 BufRegister: n=16 err=0 free=0 MiB=16
+GPU 7(UUID: af8a1bdd4687b66756542e232c457814) Read: bw=0 util(%)=0 n=0 posix=0 unalign=0 dr=0 r_sparse=0 r_inline=0 err=0 MiB=0 Write: bw=0.675106 util(%)=1591 n=18648 posix=0 unalign=0 dr=0 err=0 MiB=18648 BufRegister: n=16 err=0 free=0 MiB=16
+PER_GPU POOL BUFFER STATS:
+PER_GPU POSIX POOL BUFFER STATS:
+
+PER_GPU RDMA STATS:
+GPU 0000:07:00.0(UUID: 6ac8c492e4bba92ca7c4bacb5127bf4) : 
+GPU 0000:0f:00.0(UUID: dd3b3d71746a93aa34d66c8147e6d02b) : 
+GPU 0000:47:00.0(UUID: 306473dd7151bc442725c35e35ab6db) : 
+GPU 0000:4e:00.0(UUID: a4f268d71a27f8ae8497298cf20ab11) : 
+GPU 0000:87:00.0(UUID: c86ff5cef1d0259e7722c6f7ecbbb66a) : 
+GPU 0000:90:00.0(UUID: 7763c5a3cc71457fa7d35fe27ef563) : 
+GPU 0000:b7:00.0(UUID: 3cdc966ba412f271eb2eface21d73abb) : 
+GPU 0000:bd:00.0(UUID: af8a1bdd4687b66756542e232c457814) : 
+
+RDMA MRSTATS:
+peer name   nr_mrs      mr_size(MiB)
+PER NUMA NODE THREAD POOL STATS:
+numa node: 0 enqueues:0 completes:0 pending suspends:0 pending yields:0 active:0 suspends:0 
+numa node: 1 enqueues:0 completes:0 pending suspends:0 pending yields:0 active:0 suspends:0 
+numa node: 2 enqueues:0 completes:0 pending suspends:0 pending yields:0 active:0 suspends:0 
+numa node: 3 enqueues:0 completes:0 pending suspends:0 pending yields:0 active:0 suspends:0 
+
+cuFile STATS VERSION : 7
+GLOBAL STATS:
+Read: ok = 0 err = 0
+Write: ok = 352570 err = 0
+HandleRegister: ok = 128 err = 0
+HandleDeregister: ok = 0 err = 0
+BufRegister: ok = 128 err = 0
+BufDeregister: ok = 0 err = 0
+BatchSubmit: ok = 0 err = 0
+BatchComplete: ok = 0 err = 0
+BatchSetup: ok = 0 err = 0
+BatchCancel: ok = 0 err = 0
+BatchDestroy: ok = 0 err = 0
+BatchEnqueued: ok = 0 err = 0
+PosixBatchEnqueued: ok = 0 err = 0
+BatchProcessed: ok = 0 err = 0
+PosixBatchProcessed: ok = 0 err = 0
+Total Read Size (MiB): 0
+Read BandWidth (GiB/s): 0
+Avg Read Latency (us): 0
+Total Write Size (MiB): 176285
+Write BandWidth (GiB/s): 5.36865
+Avg Write Latency (us): 20457
+Total Batch Read Size (MiB): 0
+Total Batch Write Size (MiB): 0
+Batch Read BandWidth (GiB/s): 0
+Batch Write BandWidth (GiB/s): 0
+Avg Batch Submit Latency (us): 0
+Avg Batch Completion Latency (us): 0
+READ-WRITE SIZE HISTOGRAM : 
+0-4(KiB): 0  0
+4-8(KiB): 0  0
+8-16(KiB): 0  0
+16-32(KiB): 0  0
+32-64(KiB): 0  0
+64-128(KiB): 0  0
+128-256(KiB): 0  0
+256-512(KiB): 0  0
+512-1024(KiB): 0  0
+1024-2048(KiB): 0  176285
+2048-4096(KiB): 0  0
+4096-8192(KiB): 0  0
+8192-16384(KiB): 0  0
+16384-32768(KiB): 0  0
+32768-65536(KiB): 0  0
+65536-...(KiB): 0  0
+PER_GPU STATS:
+GPU 0(UUID: 6ac8c492e4bba92ca7c4bacb5127bf4) Read: bw=0 util(%)=0 n=0 posix=0 unalign=0 dr=0 r_sparse=0 r_inline=0 err=0 MiB=0 Write: bw=0.648127 util(%)=1594 n=22005 posix=0 unalign=0 dr=0 err=0 MiB=22005 BufRegister: n=16 err=0 free=0 MiB=16
+GPU 1(UUID: dd3b3d71746a93aa34d66c8147e6d02b) Read: bw=0 util(%)=0 n=0 posix=0 unalign=0 dr=0 r_sparse=0 r_inline=0 err=0 MiB=0 Write: bw=0.653314 util(%)=1609 n=22100 posix=0 unalign=0 dr=0 err=0 MiB=22100 BufRegister: n=16 err=0 free=0 MiB=16
+GPU 2(UUID: 306473dd7151bc442725c35e35ab6db) Read: bw=0 util(%)=0 n=0 posix=0 unalign=0 dr=0 r_sparse=0 r_inline=0 err=0 MiB=0 Write: bw=0.65494 util(%)=1595 n=22034 posix=0 unalign=0 dr=0 err=0 MiB=22034 BufRegister: n=16 err=0 free=0 MiB=16
+GPU 3(UUID: a4f268d71a27f8ae8497298cf20ab11) Read: bw=0 util(%)=0 n=0 posix=0 unalign=0 dr=0 r_sparse=0 r_inline=0 err=0 MiB=0 Write: bw=0.651367 util(%)=1594 n=22078 posix=0 unalign=0 dr=0 err=0 MiB=22078 BufRegister: n=16 err=0 free=0 MiB=16
+GPU 4(UUID: c86ff5cef1d0259e7722c6f7ecbbb66a) Read: bw=0 util(%)=0 n=0 posix=0 unalign=0 dr=0 r_sparse=0 r_inline=0 err=0 MiB=0 Write: bw=0.660472 util(%)=1603 n=22053 posix=0 unalign=0 dr=0 err=0 MiB=22053 BufRegister: n=16 err=0 free=0 MiB=16
+GPU 5(UUID: 7763c5a3cc71457fa7d35fe27ef563) Read: bw=0 util(%)=0 n=0 posix=0 unalign=0 dr=0 r_sparse=0 r_inline=0 err=0 MiB=0 Write: bw=0.647472 util(%)=1596 n=21993 posix=0 unalign=0 dr=0 err=0 MiB=21993 BufRegister: n=16 err=0 free=0 MiB=16
+GPU 6(UUID: 3cdc966ba412f271eb2eface21d73abb) Read: bw=0 util(%)=0 n=0 posix=0 unalign=0 dr=0 r_sparse=0 r_inline=0 err=0 MiB=0 Write: bw=0.648438 util(%)=1595 n=21986 posix=0 unalign=0 dr=0 err=0 MiB=21986 BufRegister: n=16 err=0 free=0 MiB=16
+GPU 7(UUID: af8a1bdd4687b66756542e232c457814) Read: bw=0 util(%)=0 n=0 posix=0 unalign=0 dr=0 r_sparse=0 r_inline=0 err=0 MiB=0 Write: bw=0.660156 util(%)=1597 n=22036 posix=0 unalign=0 dr=0 err=0 MiB=22036 BufRegister: n=16 err=0 free=0 MiB=16
+PER_GPU POOL BUFFER STATS:
+PER_GPU POSIX POOL BUFFER STATS:
+
+PER_GPU RDMA STATS:
+GPU 0000:07:00.0(UUID: 6ac8c492e4bba92ca7c4bacb5127bf4) : 
+GPU 0000:0f:00.0(UUID: dd3b3d71746a93aa34d66c8147e6d02b) : 
+GPU 0000:47:00.0(UUID: 306473dd7151bc442725c35e35ab6db) : 
+GPU 0000:4e:00.0(UUID: a4f268d71a27f8ae8497298cf20ab11) : 
+GPU 0000:87:00.0(UUID: c86ff5cef1d0259e7722c6f7ecbbb66a) : 
+GPU 0000:90:00.0(UUID: 7763c5a3cc71457fa7d35fe27ef563) : 
+GPU 0000:b7:00.0(UUID: 3cdc966ba412f271eb2eface21d73abb) : 
+GPU 0000:bd:00.0(UUID: af8a1bdd4687b66756542e232c457814) : 
+
+RDMA MRSTATS:
+peer name   nr_mrs      mr_size(MiB)
+PER NUMA NODE THREAD POOL STATS:
+numa node: 0 enqueues:0 completes:0 pending suspends:0 pending yields:0 active:0 suspends:0 
+numa node: 1 enqueues:0 completes:0 pending suspends:0 pending yields:0 active:0 suspends:0 
+numa node: 2 enqueues:0 completes:0 pending suspends:0 pending yields:0 active:0 suspends:0 
+numa node: 3 enqueues:0 completes:0 pending suspends:0 pending yields:0 active:0 suspends:0 
+
+cuFile STATS VERSION : 7
+GLOBAL STATS:
+Read: ok = 0 err = 0
+Write: ok = 407372 err = 0
+HandleRegister: ok = 128 err = 0
+HandleDeregister: ok = 0 err = 0
+BufRegister: ok = 128 err = 0
+BufDeregister: ok = 0 err = 0
+BatchSubmit: ok = 0 err = 0
+BatchComplete: ok = 0 err = 0
+BatchSetup: ok = 0 err = 0
+BatchCancel: ok = 0 err = 0
+BatchDestroy: ok = 0 err = 0
+BatchEnqueued: ok = 0 err = 0
+PosixBatchEnqueued: ok = 0 err = 0
+BatchProcessed: ok = 0 err = 0
+PosixBatchProcessed: ok = 0 err = 0
+Total Read Size (MiB): 0
+Read BandWidth (GiB/s): 0
+Avg Read Latency (us): 0
+Total Write Size (MiB): 203686
+Write BandWidth (GiB/s): 5.2248
+Avg Write Latency (us): 23047
+Total Batch Read Size (MiB): 0
+Total Batch Write Size (MiB): 0
+Batch Read BandWidth (GiB/s): 0
+Batch Write BandWidth (GiB/s): 0
+Avg Batch Submit Latency (us): 0
+Avg Batch Completion Latency (us): 0
+READ-WRITE SIZE HISTOGRAM : 
+0-4(KiB): 0  0
+4-8(KiB): 0  0
+8-16(KiB): 0  0
+16-32(KiB): 0  0
+32-64(KiB): 0  0
+64-128(KiB): 0  0
+128-256(KiB): 0  0
+256-512(KiB): 0  0
+512-1024(KiB): 0  0
+1024-2048(KiB): 0  203686
+2048-4096(KiB): 0  0
+4096-8192(KiB): 0  0
+8192-16384(KiB): 0  0
+16384-32768(KiB): 0  0
+32768-65536(KiB): 0  0
+65536-...(KiB): 0  0
+PER_GPU STATS:
+GPU 0(UUID: 6ac8c492e4bba92ca7c4bacb5127bf4) Read: bw=0 util(%)=0 n=0 posix=0 unalign=0 dr=0 r_sparse=0 r_inline=0 err=0 MiB=0 Write: bw=0.669198 util(%)=1588 n=25426 posix=0 unalign=0 dr=0 err=0 MiB=25426 BufRegister: n=16 err=0 free=0 MiB=16
+GPU 1(UUID: dd3b3d71746a93aa34d66c8147e6d02b) Read: bw=0 util(%)=0 n=0 posix=0 unalign=0 dr=0 r_sparse=0 r_inline=0 err=0 MiB=0 Write: bw=0.679984 util(%)=1627 n=25522 posix=0 unalign=0 dr=0 err=0 MiB=25522 BufRegister: n=16 err=0 free=0 MiB=16
+GPU 2(UUID: 306473dd7151bc442725c35e35ab6db) Read: bw=0 util(%)=0 n=0 posix=0 unalign=0 dr=0 r_sparse=0 r_inline=0 err=0 MiB=0 Write: bw=0.675106 util(%)=1622 n=25470 posix=0 unalign=0 dr=0 err=0 MiB=25470 BufRegister: n=16 err=0 free=0 MiB=16
+GPU 3(UUID: a4f268d71a27f8ae8497298cf20ab11) Read: bw=0 util(%)=0 n=0 posix=0 unalign=0 dr=0 r_sparse=0 r_inline=0 err=0 MiB=0 Write: bw=0.65234 util(%)=1595 n=25512 posix=0 unalign=0 dr=0 err=0 MiB=25512 BufRegister: n=16 err=0 free=0 MiB=16
+GPU 4(UUID: c86ff5cef1d0259e7722c6f7ecbbb66a) Read: bw=0 util(%)=0 n=0 posix=0 unalign=0 dr=0 r_sparse=0 r_inline=0 err=0 MiB=0 Write: bw=0.655261 util(%)=1577 n=25475 posix=0 unalign=0 dr=0 err=0 MiB=25475 BufRegister: n=16 err=0 free=0 MiB=16
+GPU 5(UUID: 7763c5a3cc71457fa7d35fe27ef563) Read: bw=0 util(%)=0 n=0 posix=0 unalign=0 dr=0 r_sparse=0 r_inline=0 err=0 MiB=0 Write: bw=0.671875 util(%)=1592 n=25431 posix=0 unalign=0 dr=0 err=0 MiB=25431 BufRegister: n=16 err=0 free=0 MiB=16
+GPU 6(UUID: 3cdc966ba412f271eb2eface21d73abb) Read: bw=0 util(%)=0 n=0 posix=0 unalign=0 dr=0 r_sparse=0 r_inline=0 err=0 MiB=0 Write: bw=0.671875 util(%)=1624 n=25412 posix=0 unalign=0 dr=0 err=0 MiB=25412 BufRegister: n=16 err=0 free=0 MiB=16
+GPU 7(UUID: af8a1bdd4687b66756542e232c457814) Read: bw=0 util(%)=0 n=0 posix=0 unalign=0 dr=0 r_sparse=0 r_inline=0 err=0 MiB=0 Write: bw=0.650718 util(%)=1580 n=25438 posix=0 unalign=0 dr=0 err=0 MiB=25438 BufRegister: n=16 err=0 free=0 MiB=16
+PER_GPU POOL BUFFER STATS:
+PER_GPU POSIX POOL BUFFER STATS:
+
+PER_GPU RDMA STATS:
+GPU 0000:07:00.0(UUID: 6ac8c492e4bba92ca7c4bacb5127bf4) : 
+GPU 0000:0f:00.0(UUID: dd3b3d71746a93aa34d66c8147e6d02b) : 
+GPU 0000:47:00.0(UUID: 306473dd7151bc442725c35e35ab6db) : 
+GPU 0000:4e:00.0(UUID: a4f268d71a27f8ae8497298cf20ab11) : 
+GPU 0000:87:00.0(UUID: c86ff5cef1d0259e7722c6f7ecbbb66a) : 
+GPU 0000:90:00.0(UUID: 7763c5a3cc71457fa7d35fe27ef563) : 
+GPU 0000:b7:00.0(UUID: 3cdc966ba412f271eb2eface21d73abb) : 
+GPU 0000:bd:00.0(UUID: af8a1bdd4687b66756542e232c457814) : 
+
+RDMA MRSTATS:
+peer name   nr_mrs      mr_size(MiB)
+PER NUMA NODE THREAD POOL STATS:
+numa node: 0 enqueues:0 completes:0 pending suspends:0 pending yields:0 active:0 suspends:0 
+numa node: 1 enqueues:0 completes:0 pending suspends:0 pending yields:0 active:0 suspends:0 
+numa node: 2 enqueues:0 completes:0 pending suspends:0 pending yields:0 active:0 suspends:0 
+numa node: 3 enqueues:0 completes:0 pending suspends:0 pending yields:0 active:0 suspends:0 
+
+cuFile STATS VERSION : 7
+GLOBAL STATS:
+Read: ok = 0 err = 0
+Write: ok = 461258 err = 0
+HandleRegister: ok = 128 err = 0
+HandleDeregister: ok = 0 err = 0
+BufRegister: ok = 128 err = 0
+BufDeregister: ok = 0 err = 0
+BatchSubmit: ok = 0 err = 0
+BatchComplete: ok = 0 err = 0
+BatchSetup: ok = 0 err = 0
+BatchCancel: ok = 0 err = 0
+BatchDestroy: ok = 0 err = 0
+BatchEnqueued: ok = 0 err = 0
+PosixBatchEnqueued: ok = 0 err = 0
+BatchProcessed: ok = 0 err = 0
+PosixBatchProcessed: ok = 0 err = 0
+Total Read Size (MiB): 0
+Read BandWidth (GiB/s): 0
+Avg Read Latency (us): 0
+Total Write Size (MiB): 230629
+Write BandWidth (GiB/s): 5.15117
+Avg Write Latency (us): 29055
+Total Batch Read Size (MiB): 0
+Total Batch Write Size (MiB): 0
+Batch Read BandWidth (GiB/s): 0
+Batch Write BandWidth (GiB/s): 0
+Avg Batch Submit Latency (us): 0
+Avg Batch Completion Latency (us): 0
+READ-WRITE SIZE HISTOGRAM : 
+0-4(KiB): 0  0
+4-8(KiB): 0  0
+8-16(KiB): 0  0
+16-32(KiB): 0  0
+32-64(KiB): 0  0
+64-128(KiB): 0  0
+128-256(KiB): 0  0
+256-512(KiB): 0  0
+512-1024(KiB): 0  0
+1024-2048(KiB): 0  230629
+2048-4096(KiB): 0  0
+4096-8192(KiB): 0  0
+8192-16384(KiB): 0  0
+16384-32768(KiB): 0  0
+32768-65536(KiB): 0  0
+65536-...(KiB): 0  0
+PER_GPU STATS:
+GPU 0(UUID: 6ac8c492e4bba92ca7c4bacb5127bf4) Read: bw=0 util(%)=0 n=0 posix=0 unalign=0 dr=0 r_sparse=0 r_inline=0 err=0 MiB=0 Write: bw=0.692259 util(%)=1599 n=28823 posix=0 unalign=0 dr=0 err=0 MiB=28823 BufRegister: n=16 err=0 free=0 MiB=16
+GPU 1(UUID: dd3b3d71746a93aa34d66c8147e6d02b) Read: bw=0 util(%)=0 n=0 posix=0 unalign=0 dr=0 r_sparse=0 r_inline=0 err=0 MiB=0 Write: bw=0.679602 util(%)=1589 n=28908 posix=0 unalign=0 dr=0 err=0 MiB=28908 BufRegister: n=16 err=0 free=0 MiB=16
+GPU 2(UUID: 306473dd7151bc442725c35e35ab6db) Read: bw=0 util(%)=0 n=0 posix=0 unalign=0 dr=0 r_sparse=0 r_inline=0 err=0 MiB=0 Write: bw=0.683594 util(%)=1599 n=28848 posix=0 unalign=0 dr=0 err=0 MiB=28848 BufRegister: n=16 err=0 free=0 MiB=16
+GPU 3(UUID: a4f268d71a27f8ae8497298cf20ab11) Read: bw=0 util(%)=0 n=0 posix=0 unalign=0 dr=0 r_sparse=0 r_inline=0 err=0 MiB=0 Write: bw=0.665039 util(%)=1603 n=28866 posix=0 unalign=0 dr=0 err=0 MiB=28866 BufRegister: n=16 err=0 free=0 MiB=16
+GPU 4(UUID: c86ff5cef1d0259e7722c6f7ecbbb66a) Read: bw=0 util(%)=0 n=0 posix=0 unalign=0 dr=0 r_sparse=0 r_inline=0 err=0 MiB=0 Write: bw=0.675781 util(%)=1590 n=28852 posix=0 unalign=0 dr=0 err=0 MiB=28852 BufRegister: n=16 err=0 free=0 MiB=16
+GPU 5(UUID: 7763c5a3cc71457fa7d35fe27ef563) Read: bw=0 util(%)=0 n=0 posix=0 unalign=0 dr=0 r_sparse=0 r_inline=0 err=0 MiB=0 Write: bw=0.66761 util(%)=1597 n=28784 posix=0 unalign=0 dr=0 err=0 MiB=28784 BufRegister: n=16 err=0 free=0 MiB=16
+GPU 6(UUID: 3cdc966ba412f271eb2eface21d73abb) Read: bw=0 util(%)=0 n=0 posix=0 unalign=0 dr=0 r_sparse=0 r_inline=0 err=0 MiB=0 Write: bw=0.668277 util(%)=1601 n=28761 posix=0 unalign=0 dr=0 err=0 MiB=28761 BufRegister: n=16 err=0 free=0 MiB=16
+GPU 7(UUID: af8a1bdd4687b66756542e232c457814) Read: bw=0 util(%)=0 n=0 posix=0 unalign=0 dr=0 r_sparse=0 r_inline=0 err=0 MiB=0 Write: bw=0.661133 util(%)=1592 n=28787 posix=0 unalign=0 dr=0 err=0 MiB=28787 BufRegister: n=16 err=0 free=0 MiB=16
+PER_GPU POOL BUFFER STATS:
+PER_GPU POSIX POOL BUFFER STATS:
+
+PER_GPU RDMA STATS:
+GPU 0000:07:00.0(UUID: 6ac8c492e4bba92ca7c4bacb5127bf4) : 
+GPU 0000:0f:00.0(UUID: dd3b3d71746a93aa34d66c8147e6d02b) : 
+GPU 0000:47:00.0(UUID: 306473dd7151bc442725c35e35ab6db) : 
+GPU 0000:4e:00.0(UUID: a4f268d71a27f8ae8497298cf20ab11) : 
+GPU 0000:87:00.0(UUID: c86ff5cef1d0259e7722c6f7ecbbb66a) : 
+GPU 0000:90:00.0(UUID: 7763c5a3cc71457fa7d35fe27ef563) : 
+GPU 0000:b7:00.0(UUID: 3cdc966ba412f271eb2eface21d73abb) : 
+GPU 0000:bd:00.0(UUID: af8a1bdd4687b66756542e232c457814) : 
+
+RDMA MRSTATS:
+peer name   nr_mrs      mr_size(MiB)
+PER NUMA NODE THREAD POOL STATS:
+numa node: 0 enqueues:0 completes:0 pending suspends:0 pending yields:0 active:0 suspends:0 
+numa node: 1 enqueues:0 completes:0 pending suspends:0 pending yields:0 active:0 suspends:0 
+numa node: 2 enqueues:0 completes:0 pending suspends:0 pending yields:0 active:0 suspends:0 
+numa node: 3 enqueues:0 completes:0 pending suspends:0 pending yields:0 active:0 suspends:0 
+
+error opening gds stats, pid: 3154642 error: No such file or directory

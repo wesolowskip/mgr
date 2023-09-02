@@ -1,0 +1,89 @@
++ INTERVAL=5
++ export CUFILE_ENV_PATH_JSON=/home2/faculty/pwesolowski/mgr/benchmark-many-gpus-scratch/cufile.json
++ CUFILE_ENV_PATH_JSON=/home2/faculty/pwesolowski/mgr/benchmark-many-gpus-scratch/cufile.json
++ RESULTS_DIR=benchmark-4-randread-32-1-642685
++ mkdir -p benchmark-4-randread-32-1-642685
++ envsubst
++ PID=3775400
++ sleep 1
++ /usr/local/cuda/gds/tools/gdsio benchmark-4-randread-32-1-642685/job_config.gdsio
++ wait 3775400
++ iostat -cxzm 5
++ nvidia-smi dmon -d 5 -s putcm
++ dcgmi dmon -e 1009,1010 -d 5000
++ true
++ /usr/local/cuda/gds/tools/gds_stats -p 3775400 -l3
++ sleep 5
++ true
++ /usr/local/cuda/gds/tools/gds_stats -p 3775400 -l3
++ sleep 5
++ true
++ /usr/local/cuda/gds/tools/gds_stats -p 3775400 -l3
++ sleep 5
++ true
++ /usr/local/cuda/gds/tools/gds_stats -p 3775400 -l3
++ sleep 5
++ true
++ /usr/local/cuda/gds/tools/gds_stats -p 3775400 -l3
++ sleep 5
++ true
++ /usr/local/cuda/gds/tools/gds_stats -p 3775400 -l3
++ sleep 5
++ true
++ /usr/local/cuda/gds/tools/gds_stats -p 3775400 -l3
++ sleep 5
++ true
++ /usr/local/cuda/gds/tools/gds_stats -p 3775400 -l3
++ sleep 5
++ true
++ /usr/local/cuda/gds/tools/gds_stats -p 3775400 -l3
++ sleep 5
++ true
++ /usr/local/cuda/gds/tools/gds_stats -p 3775400 -l3
++ sleep 5
++ true
++ /usr/local/cuda/gds/tools/gds_stats -p 3775400 -l3
++ sleep 5
++ true
++ /usr/local/cuda/gds/tools/gds_stats -p 3775400 -l3
++ sleep 5
++ true
++ /usr/local/cuda/gds/tools/gds_stats -p 3775400 -l3
++ sleep 5
++ true
++ /usr/local/cuda/gds/tools/gds_stats -p 3775400 -l3
++ sleep 5
++ true
++ /usr/local/cuda/gds/tools/gds_stats -p 3775400 -l3
++ sleep 5
++ true
++ /usr/local/cuda/gds/tools/gds_stats -p 3775400 -l3
++ sleep 5
++ true
++ /usr/local/cuda/gds/tools/gds_stats -p 3775400 -l3
++ sleep 5
++ true
++ /usr/local/cuda/gds/tools/gds_stats -p 3775400 -l3
++ sleep 5
++ true
++ /usr/local/cuda/gds/tools/gds_stats -p 3775400 -l3
++ sleep 5
++ true
++ /usr/local/cuda/gds/tools/gds_stats -p 3775400 -l3
++ sleep 5
++ true
++ /usr/local/cuda/gds/tools/gds_stats -p 3775400 -l3
++ sleep 5
++ true
++ /usr/local/cuda/gds/tools/gds_stats -p 3775400 -l3
++ sleep 5
++ true
++ /usr/local/cuda/gds/tools/gds_stats -p 3775400 -l3
++ sleep 5
++ true
++ /usr/local/cuda/gds/tools/gds_stats -p 3775400 -l3
++ sleep 5
++ true
++ /usr/local/cuda/gds/tools/gds_stats -p 3775400 -l3
++ sleep 5
+slurmstepd: error: *** JOB 642685 ON dgx-4 CANCELLED AT 2023-04-10T01:21:39 DUE TO TIME LIMIT ***

@@ -1,0 +1,38 @@
++ [[ true = true ]]
++ NVLINK_OPTION=-p
++ INTERVAL=5
++ export CUFILE_ENV_PATH_JSON=/home2/faculty/pwesolowski/mgr/benchmark-nvlink/cufile.json
++ CUFILE_ENV_PATH_JSON=/home2/faculty/pwesolowski/mgr/benchmark-nvlink/cufile.json
++ RESULTS_DIR=benchmark-1-2-4-true-639243
++ mkdir -p benchmark-1-2-4-true-639243
++ PID=1541762
++ sleep 1
++ /usr/local/cuda/gds/tools/gdsio -D /raid/shared/pwesolowski -d 4 -w 16 -s 1G -i 1M -x 1 -I 2 -T 30 -p
++ wait 1541762
++ iostat -cxzm 5
++ nvidia-smi dmon -d 5 -s putcm
++ dcgmi dmon -e 1009,1010 -d 5000
++ true
++ /usr/local/cuda/gds/tools/gds_stats -p 1541762 -l3
++ sleep 5
++ true
++ /usr/local/cuda/gds/tools/gds_stats -p 1541762 -l3
++ sleep 5
++ true
++ /usr/local/cuda/gds/tools/gds_stats -p 1541762 -l3
++ sleep 5
++ true
++ /usr/local/cuda/gds/tools/gds_stats -p 1541762 -l3
++ sleep 5
++ true
++ /usr/local/cuda/gds/tools/gds_stats -p 1541762 -l3
++ sleep 5
++ true
++ /usr/local/cuda/gds/tools/gds_stats -p 1541762 -l3
++ sleep 5
++ true
++ /usr/local/cuda/gds/tools/gds_stats -p 1541762 -l3
++ sleep 5
+IoType: RANDREAD XferType: CPUONLY Threads: 16 DataSetSize: 603573248/16777216(KiB) IOSize: 1024(KiB) Throughput: 19.397226 GiB/sec, Avg_Latency: 805.494166 usecs ops: 589427 total_time 29.674981 secs
+++ jobs -p
++ kill 1541781 1541782 1541783 1541784

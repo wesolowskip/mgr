@@ -1,0 +1,14 @@
+[global]
+name=scratch_3_read_16_1
+xfer_type=3
+rw=read
+bs=1M
+size=2G
+runtime=30
+do_verify=0
+num_threads=16
+enable_nvlinks=1
+
+[job1]
+gpu_dev_id=0
+directory=/scratch/shared/pwesolowski/gds_job_0

@@ -1,0 +1,79 @@
++ INTERVAL=5
++ export CUFILE_ENV_PATH_JSON=/home2/faculty/pwesolowski/mgr/benchmark-many-gpus-scratch/cufile.json
++ CUFILE_ENV_PATH_JSON=/home2/faculty/pwesolowski/mgr/benchmark-many-gpus-scratch/cufile.json
++ RESULTS_DIR=benchmark-4-read-16-1-642679
++ mkdir -p benchmark-4-read-16-1-642679
++ envsubst
++ PID=3758540
++ sleep 1
++ /usr/local/cuda/gds/tools/gdsio benchmark-4-read-16-1-642679/job_config.gdsio
++ wait 3758540
++ iostat -cxzm 5
++ nvidia-smi dmon -d 5 -s putcm
++ dcgmi dmon -e 1009,1010 -d 5000
++ true
++ /usr/local/cuda/gds/tools/gds_stats -p 3758540 -l3
++ sleep 5
++ true
++ /usr/local/cuda/gds/tools/gds_stats -p 3758540 -l3
++ sleep 5
++ true
++ /usr/local/cuda/gds/tools/gds_stats -p 3758540 -l3
++ sleep 5
++ true
++ /usr/local/cuda/gds/tools/gds_stats -p 3758540 -l3
++ sleep 5
++ true
++ /usr/local/cuda/gds/tools/gds_stats -p 3758540 -l3
++ sleep 5
++ true
++ /usr/local/cuda/gds/tools/gds_stats -p 3758540 -l3
++ sleep 5
++ true
++ /usr/local/cuda/gds/tools/gds_stats -p 3758540 -l3
++ sleep 5
++ true
++ /usr/local/cuda/gds/tools/gds_stats -p 3758540 -l3
++ sleep 5
++ true
++ /usr/local/cuda/gds/tools/gds_stats -p 3758540 -l3
++ sleep 5
++ true
++ /usr/local/cuda/gds/tools/gds_stats -p 3758540 -l3
++ sleep 5
++ true
++ /usr/local/cuda/gds/tools/gds_stats -p 3758540 -l3
++ sleep 5
++ true
++ /usr/local/cuda/gds/tools/gds_stats -p 3758540 -l3
++ sleep 5
++ true
++ /usr/local/cuda/gds/tools/gds_stats -p 3758540 -l3
++ sleep 5
++ true
++ /usr/local/cuda/gds/tools/gds_stats -p 3758540 -l3
++ sleep 5
++ true
++ /usr/local/cuda/gds/tools/gds_stats -p 3758540 -l3
++ sleep 5
++ true
++ /usr/local/cuda/gds/tools/gds_stats -p 3758540 -l3
++ sleep 5
++ true
++ /usr/local/cuda/gds/tools/gds_stats -p 3758540 -l3
++ sleep 5
++ true
++ /usr/local/cuda/gds/tools/gds_stats -p 3758540 -l3
++ sleep 5
++ true
++ /usr/local/cuda/gds/tools/gds_stats -p 3758540 -l3
++ sleep 5
++ true
++ /usr/local/cuda/gds/tools/gds_stats -p 3758540 -l3
++ sleep 5
++ true
++ /usr/local/cuda/gds/tools/gds_stats -p 3758540 -l3
++ sleep 5
+IoType: READ XferType: CPU_CACHED_GPU Threads: 128 DataSetSize: 81332224/268435456(KiB) IOSize: 1024(KiB) Throughput: 0.999306 GiB/sec, Avg_Latency: 131407.749996 usecs ops: 79426 total_time 77.618314 secs
+++ jobs -p
++ kill 3758554 3758555 3758556 3758557

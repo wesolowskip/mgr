@@ -1,0 +1,15 @@
+[global]
+name=scratch_1_1_write_32_1
+xfer_type=1
+rw=write
+bs=1M
+size=2G
+runtime=30
+do_verify=0
+num_threads=32
+enable_nvlinks=1
+
+[job1]
+gpu_dev_id=0
+directory=/scratch/shared/pwesolowski/gds_job_0
+

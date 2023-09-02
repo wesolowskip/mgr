@@ -1,0 +1,34 @@
++ INTERVAL=5
++ export CUFILE_ENV_PATH_JSON=/home2/faculty/pwesolowski/mgr/benchmark-many-gpus-one-gpu/cufile.json
++ CUFILE_ENV_PATH_JSON=/home2/faculty/pwesolowski/mgr/benchmark-many-gpus-one-gpu/cufile.json
++ RESULTS_DIR=benchmark-1-write-16-0-642883
++ mkdir -p benchmark-1-write-16-0-642883
++ envsubst
++ PID=1774647
++ sleep 1
++ /usr/local/cuda/gds/tools/gdsio benchmark-1-write-16-0-642883/job_config.gdsio
++ wait 1774647
++ dcgmi dmon -e 1009,1010 -d 5000
++ iostat -cxzm 5
++ true
++ /usr/local/cuda/gds/tools/gds_stats -p 1774647 -l3
++ nvidia-smi dmon -d 5 -s putcm
++ sleep 5
++ true
++ /usr/local/cuda/gds/tools/gds_stats -p 1774647 -l3
++ sleep 5
++ true
++ /usr/local/cuda/gds/tools/gds_stats -p 1774647 -l3
++ sleep 5
++ true
++ /usr/local/cuda/gds/tools/gds_stats -p 1774647 -l3
++ sleep 5
++ true
++ /usr/local/cuda/gds/tools/gds_stats -p 1774647 -l3
++ sleep 5
++ true
++ /usr/local/cuda/gds/tools/gds_stats -p 1774647 -l3
++ sleep 5
+IoType: WRITE XferType: CPUONLY Threads: 16 DataSetSize: 416975872/16777216(KiB) IOSize: 1024(KiB) Throughput: 13.562061 GiB/sec, Avg_Latency: 1152.090631 usecs ops: 407203 total_time 29.321442 secs
+++ jobs -p
++ kill 1774668 1774669 1774670 1774671

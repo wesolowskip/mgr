@@ -1,0 +1,34 @@
++ INTERVAL=5
++ export CUFILE_ENV_PATH_JSON=/home2/faculty/pwesolowski/mgr/benchmark-many-gpus-scratch/cufile.json
++ CUFILE_ENV_PATH_JSON=/home2/faculty/pwesolowski/mgr/benchmark-many-gpus-scratch/cufile.json
++ RESULTS_DIR=benchmark-1-write-32-1-642629
++ mkdir -p benchmark-1-write-32-1-642629
++ envsubst
++ PID=3681745
++ sleep 1
++ /usr/local/cuda/gds/tools/gdsio benchmark-1-write-32-1-642629/job_config.gdsio
++ wait 3681745
++ iostat -cxzm 5
++ nvidia-smi dmon -d 5 -s putcm
++ dcgmi dmon -e 1009,1010 -d 5000
++ true
++ /usr/local/cuda/gds/tools/gds_stats -p 3681745 -l3
++ sleep 5
++ true
++ /usr/local/cuda/gds/tools/gds_stats -p 3681745 -l3
++ sleep 5
++ true
++ /usr/local/cuda/gds/tools/gds_stats -p 3681745 -l3
++ sleep 5
++ true
++ /usr/local/cuda/gds/tools/gds_stats -p 3681745 -l3
++ sleep 5
++ true
++ /usr/local/cuda/gds/tools/gds_stats -p 3681745 -l3
++ sleep 5
++ true
++ /usr/local/cuda/gds/tools/gds_stats -p 3681745 -l3
++ sleep 5
+IoType: WRITE XferType: CPUONLY Threads: 256 DataSetSize: 258765824/536870912(KiB) IOSize: 1024(KiB) Throughput: 6.716305 GiB/sec, Avg_Latency: 37166.671638 usecs ops: 252701 total_time 36.743170 secs
+++ jobs -p
++ kill 3681775 3681776 3681777 3681778

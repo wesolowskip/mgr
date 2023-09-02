@@ -1,0 +1,24 @@
++ INTERVAL=6
++ export CUFILE_ENV_PATH_JSON=/home2/faculty/pwesolowski/mgr/benchmark-scratch/cufile.json
++ CUFILE_ENV_PATH_JSON=/home2/faculty/pwesolowski/mgr/benchmark-scratch/cufile.json
++ RESULTS_DIR=benchmark-4-3-8-8G-642000
++ mkdir -p benchmark-4-3-8-8G-642000
++ PID=3012111
++ sleep 1
++ /usr/local/cuda/gds/tools/gdsio -D /scratch/shared/pwesolowski -d 0 -w 8 -s 8G -i 1M -x 4 -I 3 -T 60
++ wait 3012111
++ iostat -cxzm 6
++ true
++ /usr/local/cuda/gds/tools/gds_stats -p 3012111 -l3
++ dcgmi dmon -e 1009,1010 -d 6000
++ nvidia-smi dmon -d 6 -s putcm
++ sleep 6
++ true
++ /usr/local/cuda/gds/tools/gds_stats -p 3012111 -l3
++ sleep 6
++ true
++ /usr/local/cuda/gds/tools/gds_stats -p 3012111 -l3
+/var/spool/slurm/slurmd/job642000/slurm_script: line 28: 3012111 Killed                  /usr/local/cuda/gds/tools/gdsio -D /scratch/shared/pwesolowski -d 0 -w "$W" -s "$SIZE" -i 1M -x "$X" -I "$I" -T 60
+++ jobs -p
++ kill 3012126 3012127 3012128 3012129
+slurmstepd: error: Detected 1 oom-kill event(s) in StepId=642000.batch. Some of your processes may have been killed by the cgroup out-of-memory handler.

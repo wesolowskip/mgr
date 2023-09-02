@@ -1,0 +1,37 @@
++ INTERVAL=5
++ export CUFILE_ENV_PATH_JSON=/home2/faculty/pwesolowski/mgr/benchmark-many-gpus-scratch/cufile.json
++ CUFILE_ENV_PATH_JSON=/home2/faculty/pwesolowski/mgr/benchmark-many-gpus-scratch/cufile.json
++ RESULTS_DIR=benchmark-0-randread-32-0-642620
++ mkdir -p benchmark-0-randread-32-0-642620
++ envsubst
++ PID=3671257
++ sleep 1
++ /usr/local/cuda/gds/tools/gdsio benchmark-0-randread-32-0-642620/job_config.gdsio
++ wait 3671257
++ iostat -cxzm 5
++ nvidia-smi dmon -d 5 -s putcm
++ dcgmi dmon -e 1009,1010 -d 5000
++ true
++ /usr/local/cuda/gds/tools/gds_stats -p 3671257 -l3
++ sleep 5
++ true
++ /usr/local/cuda/gds/tools/gds_stats -p 3671257 -l3
++ sleep 5
++ true
++ /usr/local/cuda/gds/tools/gds_stats -p 3671257 -l3
++ sleep 5
++ true
++ /usr/local/cuda/gds/tools/gds_stats -p 3671257 -l3
++ sleep 5
++ true
++ /usr/local/cuda/gds/tools/gds_stats -p 3671257 -l3
++ sleep 5
++ true
++ /usr/local/cuda/gds/tools/gds_stats -p 3671257 -l3
++ sleep 5
++ true
++ /usr/local/cuda/gds/tools/gds_stats -p 3671257 -l3
++ sleep 5
+IoType: RANDREAD XferType: GPUD Threads: 256 DataSetSize: 256409600/536870912(KiB) IOSize: 1024(KiB) Throughput: 6.370534 GiB/sec, Avg_Latency: 39211.960444 usecs ops: 250400 total_time 38.384732 secs
+++ jobs -p
++ kill 3671400 3671401 3671402 3671403

@@ -1,0 +1,27 @@
+#!/bin/bash
+#SBATCH --partition cudatest 
+#SBATCH --mem 10G 
+#SBATCH --output=slurm-benchmark-%j.out
+#SBATCH --time 8:0:0
+#SBATCH --gpus 1
+#SBATCH --cpus-per-task 4
+
+set -xu
+
+rm -R /home2/faculty/pwesolowski/mgr/hdd_test/data/gdsio.*
+
+for SIZE in 2G 120M 500M 8G 32G
+do
+	for W in 16 4 8 32 64
+	do
+		for X in 1 0 2
+		do
+			for I in 1 0 2 3
+			do
+				X=$X I=$I W=$W SIZE=$SIZE ./start-benchmark.sh
+			done
+		done
+	done
+done
+echo "Submitted"
+

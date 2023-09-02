@@ -1,0 +1,70 @@
++ INTERVAL=5
++ export CUFILE_ENV_PATH_JSON=/home2/faculty/pwesolowski/mgr/benchmark-many-gpus-scratch/cufile.json
++ CUFILE_ENV_PATH_JSON=/home2/faculty/pwesolowski/mgr/benchmark-many-gpus-scratch/cufile.json
++ RESULTS_DIR=benchmark-3-randread-32-0-642668
++ mkdir -p benchmark-3-randread-32-0-642668
++ envsubst
++ PID=3735103
++ sleep 1
++ /usr/local/cuda/gds/tools/gdsio benchmark-3-randread-32-0-642668/job_config.gdsio
++ wait 3735103
++ iostat -cxzm 5
++ nvidia-smi dmon -d 5 -s putcm
++ dcgmi dmon -e 1009,1010 -d 5000
++ true
++ /usr/local/cuda/gds/tools/gds_stats -p 3735103 -l3
++ sleep 5
++ true
++ /usr/local/cuda/gds/tools/gds_stats -p 3735103 -l3
++ sleep 5
++ true
++ /usr/local/cuda/gds/tools/gds_stats -p 3735103 -l3
++ sleep 5
++ true
++ /usr/local/cuda/gds/tools/gds_stats -p 3735103 -l3
++ sleep 5
++ true
++ /usr/local/cuda/gds/tools/gds_stats -p 3735103 -l3
++ sleep 5
++ true
++ /usr/local/cuda/gds/tools/gds_stats -p 3735103 -l3
++ sleep 5
++ true
++ /usr/local/cuda/gds/tools/gds_stats -p 3735103 -l3
++ sleep 5
++ true
++ /usr/local/cuda/gds/tools/gds_stats -p 3735103 -l3
++ sleep 5
++ true
++ /usr/local/cuda/gds/tools/gds_stats -p 3735103 -l3
++ sleep 5
++ true
++ /usr/local/cuda/gds/tools/gds_stats -p 3735103 -l3
++ sleep 5
++ true
++ /usr/local/cuda/gds/tools/gds_stats -p 3735103 -l3
++ sleep 5
++ true
++ /usr/local/cuda/gds/tools/gds_stats -p 3735103 -l3
++ sleep 5
++ true
++ /usr/local/cuda/gds/tools/gds_stats -p 3735103 -l3
++ sleep 5
++ true
++ /usr/local/cuda/gds/tools/gds_stats -p 3735103 -l3
++ sleep 5
++ true
++ /usr/local/cuda/gds/tools/gds_stats -p 3735103 -l3
++ sleep 5
++ true
++ /usr/local/cuda/gds/tools/gds_stats -p 3735103 -l3
++ sleep 5
++ true
++ /usr/local/cuda/gds/tools/gds_stats -p 3735103 -l3
++ sleep 5
++ true
++ /usr/local/cuda/gds/tools/gds_stats -p 3735103 -l3
++ sleep 5
+IoType: RANDREAD XferType: CPU_ASYNC_GPU Threads: 256 DataSetSize: 254610432/536870912(KiB) IOSize: 1024(KiB) Throughput: 2.006247 GiB/sec, Avg_Latency: 124543.757399 usecs ops: 248643 total_time 121.029685 secs
+++ jobs -p
++ kill 3735125 3735126 3735127 3735128

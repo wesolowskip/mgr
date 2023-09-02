@@ -1,0 +1,48 @@
++ INTERVAL=6
++ export CUFILE_ENV_PATH_JSON=/home2/faculty/pwesolowski/mgr/benchmark-scratch/cufile.json
++ CUFILE_ENV_PATH_JSON=/home2/faculty/pwesolowski/mgr/benchmark-scratch/cufile.json
++ RESULTS_DIR=benchmark-0-0-4-2G-646206
++ mkdir -p benchmark-0-0-4-2G-646206
++ PID=3583854
++ sleep 1
++ /usr/local/cuda/gds/tools/gdsio -D /scratch/shared/pwesolowski -d 0 -w 4 -s 2G -i 1M -x 0 -I 0 -T 60
++ true
++ wait 3583854
++ /usr/local/cuda/gds/tools/gds_stats -p 3583854 -l3
++ iostat -cxzm 6
++ dcgmi dmon -e 1009,1010 -d 6000
++ nvidia-smi dmon -d 6 -s putcm
++ sleep 6
++ true
++ /usr/local/cuda/gds/tools/gds_stats -p 3583854 -l3
++ sleep 6
++ true
++ /usr/local/cuda/gds/tools/gds_stats -p 3583854 -l3
++ sleep 6
++ true
++ /usr/local/cuda/gds/tools/gds_stats -p 3583854 -l3
++ sleep 6
++ true
++ /usr/local/cuda/gds/tools/gds_stats -p 3583854 -l3
++ sleep 6
++ true
++ /usr/local/cuda/gds/tools/gds_stats -p 3583854 -l3
++ sleep 6
++ true
++ /usr/local/cuda/gds/tools/gds_stats -p 3583854 -l3
++ sleep 6
++ true
++ /usr/local/cuda/gds/tools/gds_stats -p 3583854 -l3
++ sleep 6
++ true
++ /usr/local/cuda/gds/tools/gds_stats -p 3583854 -l3
++ sleep 6
++ true
++ /usr/local/cuda/gds/tools/gds_stats -p 3583854 -l3
++ sleep 6
++ true
++ /usr/local/cuda/gds/tools/gds_stats -p 3583854 -l3
++ sleep 6
+IoType: READ XferType: GPUD Threads: 4 DataSetSize: 159905792/8388608(KiB) IOSize: 1024(KiB) Throughput: 2.571869 GiB/sec, Avg_Latency: 1519.110960 usecs ops: 156158 total_time 59.294644 secs
+++ jobs -p
++ kill 3583866 3583867 3583868 3583869

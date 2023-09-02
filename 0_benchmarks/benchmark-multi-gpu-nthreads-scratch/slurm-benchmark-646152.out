@@ -1,0 +1,36 @@
++ INTERVAL=5
++ export CUFILE_ENV_PATH_JSON=/home2/faculty/pwesolowski/mgr/benchmark-multi-gpu-nthreads-scratch/cufile.json
++ CUFILE_ENV_PATH_JSON=/home2/faculty/pwesolowski/mgr/benchmark-multi-gpu-nthreads-scratch/cufile.json
++ RESULTS_DIR=benchmark-2-1-randwrite-4-0-646152
++ mkdir -p benchmark-2-1-randwrite-4-0-646152
++ let 'NUM_LINES=11+4*1'
++ head -n 15 job_config.template
++ envsubst
++ rm benchmark-2-1-randwrite-4-0-646152/job_config.tmp
++ PID=3500935
++ sleep 1
++ /usr/local/cuda/gds/tools/gdsio benchmark-2-1-randwrite-4-0-646152/job_config.gdsio
++ true
++ dcgmi dmon -e 1009,1010 -d 5000
++ /usr/local/cuda/gds/tools/gds_stats -p 3500935 -l3
++ wait 3500935
++ nvidia-smi dmon -d 5 -s putcm
++ sleep 5
++ true
++ /usr/local/cuda/gds/tools/gds_stats -p 3500935 -l3
++ sleep 5
++ true
++ /usr/local/cuda/gds/tools/gds_stats -p 3500935 -l3
++ sleep 5
++ true
++ /usr/local/cuda/gds/tools/gds_stats -p 3500935 -l3
++ sleep 5
++ true
++ /usr/local/cuda/gds/tools/gds_stats -p 3500935 -l3
++ sleep 5
++ true
++ /usr/local/cuda/gds/tools/gds_stats -p 3500935 -l3
++ sleep 5
+IoType: RANDWRITE XferType: CPU_GPU Threads: 4 DataSetSize: 74609664/8388608(KiB) IOSize: 1024(KiB) Throughput: 2.422063 GiB/sec, Avg_Latency: 1612.734512 usecs ops: 72861 total_time 29.377156 secs
+++ jobs -p
++ kill 3500945 3500946 3500947

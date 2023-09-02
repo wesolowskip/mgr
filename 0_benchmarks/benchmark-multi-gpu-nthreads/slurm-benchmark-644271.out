@@ -1,0 +1,16 @@
++ INTERVAL=5
++ RESULTS_DIR=benchmark-1-1-randread-32-0-644271
++ mkdir -p benchmark-1-1-randread-32-0-644271
++ let 'NUM_LINES=11+4*1'
++ head -n 15 job_config.template
++ envsubst
++ rm benchmark-1-1-randread-32-0-644271/job_config.tmp
++ PID=2710468
++ sleep 1
++ /usr/local/cuda/gds/tools/gdsio benchmark-1-1-randread-32-0-644271/job_config.gdsio
++ wait 2710468
++ dcgmi dmon -e 1009,1010 -d 5000
++ nvidia-smi dmon -d 5 -s putcm
+IoType: RANDREAD XferType: CPUONLY Threads: 32 DataSetSize: 633981952/67108864(KiB) IOSize: 1024(KiB) Throughput: 19.890262 GiB/sec, Avg_Latency: 1570.996837 usecs ops: 619123 total_time 30.397402 secs
+++ jobs -p
++ kill 2710505 2710506
