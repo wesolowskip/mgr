@@ -1,4 +1,4 @@
-FROM cuml-prod
+FROM rapids-prod
 
 RUN apt remove -y libopenmpi3 openmpi-common libopenmpi-dev openmpi-bin
 
