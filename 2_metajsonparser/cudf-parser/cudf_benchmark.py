@@ -31,7 +31,7 @@ files_lines = {
 def benchmark_read_json(fname):
     for i in range(11):
         with CodeTimer(
-                f"{i=}, {fname=}, {os.environ['LIBCUDF_CUFILE_POLICY']=}, {os.environ['LIBCUDF_CUFILE_THREAD_COUNT']=}, {os.environ['LIBCUDF_CUFILE_SLICE_SIZE']=}"
+                f"{i=}, {fname=}, {os.environ['LIBCUDF_CUFILE_POLICY']=}, {os.environ.get('LIBCUDF_CUFILE_THREAD_COUNT')=}, {os.environ.get('LIBCUDF_CUFILE_SLICE_SIZE')=}"
         ):
             df = cudf.read_json(fname, lines=True, engine="cudf", compression=None)
             shape = df.shape
