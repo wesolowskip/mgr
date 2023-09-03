@@ -13,7 +13,7 @@ def benchmark_read_json(force_host_read, blocksize, cufile_params=None):
     ddf = dask_cudf.read_json(
         "/scratch/shared/pwesolowski/mgr-pipeline/joined-cuml/*.json", blocksize=blocksize,
     )
-    for i in range(6):
+    for i in range(2):
         with CodeTimer(f"{i=}, {force_host_read=}, {blocksize=}, {cufile_params=}"):
             rows = ddf.shape[0].compute()
         print(f"{rows=}")
@@ -21,17 +21,11 @@ def benchmark_read_json(force_host_read, blocksize, cufile_params=None):
 
 if __name__ == "__main__":
 
-    for blocksize in ["512MiB", "1GiB", "2GiB", "4GiB", "8GiB"]:
-        print("Working...")
-        os.environ["LIBCUDF_CUFILE_POLICY"] = "OFF"
-        benchmark_read_json(
-            force_host_read=True, blocksize=blocksize
-        )
-
+    for blocksize in reversed(["512MiB", "1GiB", "2GiB", "4GiB"]):
         os.environ["CUFILE_ENV_PATH_JSON"] = str(Path(__file__).parent.parent.resolve() / "cufile.json")
         os.environ["LIBCUDF_CUFILE_POLICY"] = "GDS"
 
-        for cufile_thread_count in [4, 8, 16, 32, 64]:  # 64 for NY resulted in OOM
+        for cufile_thread_count in [64, 32, 16, 8, 4]:  # 64 for NY resulted in OOM
             for cufile_slice_size_mb in [1]:
 
                 try:
@@ -46,3 +40,9 @@ if __name__ == "__main__":
                     traceback.print_exc()
                 gc.collect()
                 time.sleep(1)
+
+        print("Working...")
+        os.environ["LIBCUDF_CUFILE_POLICY"] = "OFF"
+        benchmark_read_json(
+            force_host_read=True, blocksize=blocksize
+        )

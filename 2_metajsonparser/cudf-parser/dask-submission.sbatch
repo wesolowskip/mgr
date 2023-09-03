@@ -1,9 +1,9 @@
 #!/bin/bash
 #SBATCH --gpus 1
-#SBATCH --mem 32G
+#SBATCH --mem 160G
 #SBATCH --cpus-per-gpu 8
-#SBATCH --time 5-0:0:0
-#SBATCH --partition long
+#SBATCH --time 18:0:0
+#SBATCH --partition short
 
 
 CONTAINER="${HOME}/containers/rapids-prod.sif"
