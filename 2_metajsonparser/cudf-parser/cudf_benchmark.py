@@ -6,9 +6,7 @@ from pathlib import Path
 
 os.environ["CUFILE_ENV_PATH_JSON"] = str(Path(__file__).parent.parent.resolve() / "cufile.json")
 
-
 from linetimer import CodeTimer
-
 import cudf
 
 # 484M	/scratch/shared/pwesolowski/mgr-pipeline/joined-cuml/West Virginia.json
@@ -30,30 +28,23 @@ files_lines = {
 }
 
 
-def benchmark_read_json(fname, count, force_host_read, cufile_params=None):
+def benchmark_read_json(fname):
     for i in range(11):
-        with CodeTimer(f"{i=}, {fname=}, {count=}, {force_host_read=}, {cufile_params=}"):
-            df = cudf.read_json(fname, lines=True, engine="cudf", convert_dates=False, compression=None)
+        with CodeTimer(
+                f"{i=}, {fname=}, {os.environ['LIBCUDF_CUFILE_POLICY']=}, {os.environ['LIBCUDF_CUFILE_THREAD_COUNT']=}, {os.environ['LIBCUDF_CUFILE_SLICE_SIZE']=}"
+        ):
+            df = cudf.read_json(fname, lines=True, engine="cudf", compression=None)
             shape = df.shape
         print(f"{shape=}")
         print(f"{df.memory_usage()=}")
         del df
 
 
-for file, lines in files_lines.items():
-    os.environ["LIBCUDF_CUFILE_POLICY"] = "OFF"
-    benchmark_read_json(file, lines, force_host_read=True)
+for file in files_lines:
 
-    os.environ["LIBCUDF_CUFILE_POLICY"] = "GDS"
-
-    for cufile_thread_count in [4, 8, 16, 32, 64]:  # 64 for NY resulted in OOM
-        for cufile_slice_size_mb in [1]:
-            try:
-                os.environ["LIBCUDF_CUFILE_THREAD_COUNT"] = str(cufile_thread_count)
-                os.environ["LIBCUDF_CUFILE_SLICE_SIZE"] = str(cufile_slice_size_mb * 1024 * 1024)
-                benchmark_read_json(file, lines, force_host_read=False,
-                                    cufile_params=f"{cufile_thread_count=}, {cufile_slice_size_mb=}")
-            except Exception:
-                traceback.print_exc()
-            gc.collect()
-            time.sleep(1)
+    try:
+        benchmark_read_json(file)
+    except Exception:
+        traceback.print_exc()
+    gc.collect()
+    time.sleep(1)
