@@ -1,0 +1,243 @@
+[WARN  tini (3599687)] Tini is not running as PID 1 .
+Zombie processes will not be re-parented to Tini, so zombie reaping won't work.
+To fix the problem, run Tini as PID 1.
+This container image and its contents are governed by the NVIDIA Deep Learning Container License.
+By pulling and using the container, you accept the terms and conditions of this license:
+https://developer.download.nvidia.com/licenses/NVIDIA_Deep_Learning_Container_License.pdf
+
+bash: cannot set terminal process group (-1): Inappropriate ioctl for device
+bash: no job control in this shell
++ for i in {1..6}
++ LIBCUDF_CUFILE_POLICY=OFF
++ python -u cudf_dask_benchmark.py
+Working...
+Code block 'blocksize='512MiB', os.environ['LIBCUDF_CUFILE_POLICY']='OFF', os.environ.get('LIBCUDF_CUFILE_THREAD_COUNT')=None, os.environ.get('LIBCUDF_CUFILE_SLICE_SIZE')=None' took: 470275.42773 ms
+rows=661937393
+Working...
+Code block 'blocksize='1GiB', os.environ['LIBCUDF_CUFILE_POLICY']='OFF', os.environ.get('LIBCUDF_CUFILE_THREAD_COUNT')=None, os.environ.get('LIBCUDF_CUFILE_SLICE_SIZE')=None' took: 474434.98116 ms
+rows=661937393
+Working...
+Code block 'blocksize='2GiB', os.environ['LIBCUDF_CUFILE_POLICY']='OFF', os.environ.get('LIBCUDF_CUFILE_THREAD_COUNT')=None, os.environ.get('LIBCUDF_CUFILE_SLICE_SIZE')=None' took: 41272.40256 ms
+Traceback (most recent call last):
+  File "/home2/faculty/pwesolowski/praca-mgr/pipelines-repo/2_metajsonparser/cudf-parser/cudf_dask_benchmark.py", line 35, in <module>
+    benchmark_read_json(blocksize=blocksize)
+  File "/home2/faculty/pwesolowski/praca-mgr/pipelines-repo/2_metajsonparser/cudf-parser/cudf_dask_benchmark.py", line 24, in benchmark_read_json
+    rows = ddf.shape[0].compute()
+  File "/opt/conda/envs/rapids/lib/python3.10/site-packages/dask/base.py", line 314, in compute
+    (result,) = compute(self, traverse=False, **kwargs)
+  File "/opt/conda/envs/rapids/lib/python3.10/site-packages/dask/base.py", line 599, in compute
+    results = schedule(dsk, keys, **kwargs)
+  File "/opt/conda/envs/rapids/lib/python3.10/site-packages/dask/threaded.py", line 89, in get
+    results = get_async(
+  File "/opt/conda/envs/rapids/lib/python3.10/site-packages/dask/local.py", line 511, in get_async
+    raise_exception(exc, tb)
+  File "/opt/conda/envs/rapids/lib/python3.10/site-packages/dask/local.py", line 319, in reraise
+    raise exc
+  File "/opt/conda/envs/rapids/lib/python3.10/site-packages/dask/local.py", line 224, in execute_task
+    result = _execute_task(task, data)
+  File "/opt/conda/envs/rapids/lib/python3.10/site-packages/dask/core.py", line 119, in _execute_task
+    return func(*(_execute_task(a, cache) for a in args))
+  File "/opt/conda/envs/rapids/lib/python3.10/site-packages/dask/utils.py", line 72, in apply
+    return func(*args, **kwargs)
+  File "/opt/conda/envs/rapids/lib/python3.10/site-packages/dask/dataframe/io/json.py", line 294, in read_json_chunk
+    df = engine(s, orient="records", lines=True, **kwargs)
+  File "/opt/conda/envs/rapids/lib/python3.10/site-packages/cudf/io/json.py", line 111, in read_json
+    df = libjson.read_json(
+  File "json.pyx", line 50, in cudf._lib.json.read_json
+  File "json.pyx", line 138, in cudf._lib.json.read_json
+MemoryError: std::bad_alloc: out_of_memory: CUDA error at: /opt/conda/envs/rapids/include/rmm/mr/device/cuda_memory_resource.hpp:70: cudaErrorMemoryAllocation out of memory
++ for i in {1..6}
++ LIBCUDF_CUFILE_POLICY=OFF
++ python -u cudf_dask_benchmark.py
+Working...
+Code block 'blocksize='512MiB', os.environ['LIBCUDF_CUFILE_POLICY']='OFF', os.environ.get('LIBCUDF_CUFILE_THREAD_COUNT')=None, os.environ.get('LIBCUDF_CUFILE_SLICE_SIZE')=None' took: 484062.96604 ms
+rows=661937393
+Working...
+Code block 'blocksize='1GiB', os.environ['LIBCUDF_CUFILE_POLICY']='OFF', os.environ.get('LIBCUDF_CUFILE_THREAD_COUNT')=None, os.environ.get('LIBCUDF_CUFILE_SLICE_SIZE')=None' took: 482196.06402 ms
+rows=661937393
+Working...
+Code block 'blocksize='2GiB', os.environ['LIBCUDF_CUFILE_POLICY']='OFF', os.environ.get('LIBCUDF_CUFILE_THREAD_COUNT')=None, os.environ.get('LIBCUDF_CUFILE_SLICE_SIZE')=None' took: 42120.47754 ms
+Traceback (most recent call last):
+  File "/home2/faculty/pwesolowski/praca-mgr/pipelines-repo/2_metajsonparser/cudf-parser/cudf_dask_benchmark.py", line 35, in <module>
+    benchmark_read_json(blocksize=blocksize)
+  File "/home2/faculty/pwesolowski/praca-mgr/pipelines-repo/2_metajsonparser/cudf-parser/cudf_dask_benchmark.py", line 24, in benchmark_read_json
+    rows = ddf.shape[0].compute()
+  File "/opt/conda/envs/rapids/lib/python3.10/site-packages/dask/base.py", line 314, in compute
+    (result,) = compute(self, traverse=False, **kwargs)
+  File "/opt/conda/envs/rapids/lib/python3.10/site-packages/dask/base.py", line 599, in compute
+    results = schedule(dsk, keys, **kwargs)
+  File "/opt/conda/envs/rapids/lib/python3.10/site-packages/dask/threaded.py", line 89, in get
+    results = get_async(
+  File "/opt/conda/envs/rapids/lib/python3.10/site-packages/dask/local.py", line 511, in get_async
+    raise_exception(exc, tb)
+  File "/opt/conda/envs/rapids/lib/python3.10/site-packages/dask/local.py", line 319, in reraise
+    raise exc
+  File "/opt/conda/envs/rapids/lib/python3.10/site-packages/dask/local.py", line 224, in execute_task
+    result = _execute_task(task, data)
+  File "/opt/conda/envs/rapids/lib/python3.10/site-packages/dask/core.py", line 119, in _execute_task
+    return func(*(_execute_task(a, cache) for a in args))
+  File "/opt/conda/envs/rapids/lib/python3.10/site-packages/dask/utils.py", line 72, in apply
+    return func(*args, **kwargs)
+  File "/opt/conda/envs/rapids/lib/python3.10/site-packages/dask/dataframe/io/json.py", line 294, in read_json_chunk
+    df = engine(s, orient="records", lines=True, **kwargs)
+  File "/opt/conda/envs/rapids/lib/python3.10/site-packages/cudf/io/json.py", line 111, in read_json
+    df = libjson.read_json(
+  File "json.pyx", line 50, in cudf._lib.json.read_json
+  File "json.pyx", line 138, in cudf._lib.json.read_json
+MemoryError: std::bad_alloc: out_of_memory: CUDA error at: /opt/conda/envs/rapids/include/rmm/mr/device/cuda_memory_resource.hpp:70: cudaErrorMemoryAllocation out of memory
++ for i in {1..6}
++ LIBCUDF_CUFILE_POLICY=OFF
++ python -u cudf_dask_benchmark.py
+Working...
+Code block 'blocksize='512MiB', os.environ['LIBCUDF_CUFILE_POLICY']='OFF', os.environ.get('LIBCUDF_CUFILE_THREAD_COUNT')=None, os.environ.get('LIBCUDF_CUFILE_SLICE_SIZE')=None' took: 482070.97905 ms
+rows=661937393
+Working...
+Code block 'blocksize='1GiB', os.environ['LIBCUDF_CUFILE_POLICY']='OFF', os.environ.get('LIBCUDF_CUFILE_THREAD_COUNT')=None, os.environ.get('LIBCUDF_CUFILE_SLICE_SIZE')=None' took: 478122.26544 ms
+rows=661937393
+Working...
+Code block 'blocksize='2GiB', os.environ['LIBCUDF_CUFILE_POLICY']='OFF', os.environ.get('LIBCUDF_CUFILE_THREAD_COUNT')=None, os.environ.get('LIBCUDF_CUFILE_SLICE_SIZE')=None' took: 32621.66055 ms
+Traceback (most recent call last):
+  File "/home2/faculty/pwesolowski/praca-mgr/pipelines-repo/2_metajsonparser/cudf-parser/cudf_dask_benchmark.py", line 35, in <module>
+    benchmark_read_json(blocksize=blocksize)
+  File "/home2/faculty/pwesolowski/praca-mgr/pipelines-repo/2_metajsonparser/cudf-parser/cudf_dask_benchmark.py", line 24, in benchmark_read_json
+    rows = ddf.shape[0].compute()
+  File "/opt/conda/envs/rapids/lib/python3.10/site-packages/dask/base.py", line 314, in compute
+    (result,) = compute(self, traverse=False, **kwargs)
+  File "/opt/conda/envs/rapids/lib/python3.10/site-packages/dask/base.py", line 599, in compute
+    results = schedule(dsk, keys, **kwargs)
+  File "/opt/conda/envs/rapids/lib/python3.10/site-packages/dask/threaded.py", line 89, in get
+    results = get_async(
+  File "/opt/conda/envs/rapids/lib/python3.10/site-packages/dask/local.py", line 511, in get_async
+    raise_exception(exc, tb)
+  File "/opt/conda/envs/rapids/lib/python3.10/site-packages/dask/local.py", line 319, in reraise
+    raise exc
+  File "/opt/conda/envs/rapids/lib/python3.10/site-packages/dask/local.py", line 224, in execute_task
+    result = _execute_task(task, data)
+  File "/opt/conda/envs/rapids/lib/python3.10/site-packages/dask/core.py", line 119, in _execute_task
+    return func(*(_execute_task(a, cache) for a in args))
+  File "/opt/conda/envs/rapids/lib/python3.10/site-packages/dask/utils.py", line 72, in apply
+    return func(*args, **kwargs)
+  File "/opt/conda/envs/rapids/lib/python3.10/site-packages/dask/dataframe/io/json.py", line 294, in read_json_chunk
+    df = engine(s, orient="records", lines=True, **kwargs)
+  File "/opt/conda/envs/rapids/lib/python3.10/site-packages/cudf/io/json.py", line 111, in read_json
+    df = libjson.read_json(
+  File "json.pyx", line 50, in cudf._lib.json.read_json
+  File "json.pyx", line 138, in cudf._lib.json.read_json
+MemoryError: std::bad_alloc: out_of_memory: CUDA error at: /opt/conda/envs/rapids/include/rmm/mr/device/cuda_memory_resource.hpp:70: cudaErrorMemoryAllocation out of memory
++ for i in {1..6}
++ LIBCUDF_CUFILE_POLICY=OFF
++ python -u cudf_dask_benchmark.py
+Working...
+Code block 'blocksize='512MiB', os.environ['LIBCUDF_CUFILE_POLICY']='OFF', os.environ.get('LIBCUDF_CUFILE_THREAD_COUNT')=None, os.environ.get('LIBCUDF_CUFILE_SLICE_SIZE')=None' took: 485711.55090 ms
+rows=661937393
+Working...
+Code block 'blocksize='1GiB', os.environ['LIBCUDF_CUFILE_POLICY']='OFF', os.environ.get('LIBCUDF_CUFILE_THREAD_COUNT')=None, os.environ.get('LIBCUDF_CUFILE_SLICE_SIZE')=None' took: 480296.06149 ms
+rows=661937393
+Working...
+Code block 'blocksize='2GiB', os.environ['LIBCUDF_CUFILE_POLICY']='OFF', os.environ.get('LIBCUDF_CUFILE_THREAD_COUNT')=None, os.environ.get('LIBCUDF_CUFILE_SLICE_SIZE')=None' took: 32182.19533 ms
+Traceback (most recent call last):
+  File "/home2/faculty/pwesolowski/praca-mgr/pipelines-repo/2_metajsonparser/cudf-parser/cudf_dask_benchmark.py", line 35, in <module>
+    benchmark_read_json(blocksize=blocksize)
+  File "/home2/faculty/pwesolowski/praca-mgr/pipelines-repo/2_metajsonparser/cudf-parser/cudf_dask_benchmark.py", line 24, in benchmark_read_json
+    rows = ddf.shape[0].compute()
+  File "/opt/conda/envs/rapids/lib/python3.10/site-packages/dask/base.py", line 314, in compute
+    (result,) = compute(self, traverse=False, **kwargs)
+  File "/opt/conda/envs/rapids/lib/python3.10/site-packages/dask/base.py", line 599, in compute
+    results = schedule(dsk, keys, **kwargs)
+  File "/opt/conda/envs/rapids/lib/python3.10/site-packages/dask/threaded.py", line 89, in get
+    results = get_async(
+  File "/opt/conda/envs/rapids/lib/python3.10/site-packages/dask/local.py", line 511, in get_async
+    raise_exception(exc, tb)
+  File "/opt/conda/envs/rapids/lib/python3.10/site-packages/dask/local.py", line 319, in reraise
+    raise exc
+  File "/opt/conda/envs/rapids/lib/python3.10/site-packages/dask/local.py", line 224, in execute_task
+    result = _execute_task(task, data)
+  File "/opt/conda/envs/rapids/lib/python3.10/site-packages/dask/core.py", line 119, in _execute_task
+    return func(*(_execute_task(a, cache) for a in args))
+  File "/opt/conda/envs/rapids/lib/python3.10/site-packages/dask/utils.py", line 72, in apply
+    return func(*args, **kwargs)
+  File "/opt/conda/envs/rapids/lib/python3.10/site-packages/dask/dataframe/io/json.py", line 294, in read_json_chunk
+    df = engine(s, orient="records", lines=True, **kwargs)
+  File "/opt/conda/envs/rapids/lib/python3.10/site-packages/cudf/io/json.py", line 111, in read_json
+    df = libjson.read_json(
+  File "json.pyx", line 50, in cudf._lib.json.read_json
+  File "json.pyx", line 138, in cudf._lib.json.read_json
+MemoryError: std::bad_alloc: out_of_memory: CUDA error at: /opt/conda/envs/rapids/include/rmm/mr/device/cuda_memory_resource.hpp:70: cudaErrorMemoryAllocation out of memory
++ for i in {1..6}
++ LIBCUDF_CUFILE_POLICY=OFF
++ python -u cudf_dask_benchmark.py
+Working...
+Code block 'blocksize='512MiB', os.environ['LIBCUDF_CUFILE_POLICY']='OFF', os.environ.get('LIBCUDF_CUFILE_THREAD_COUNT')=None, os.environ.get('LIBCUDF_CUFILE_SLICE_SIZE')=None' took: 485147.77421 ms
+rows=661937393
+Working...
+Code block 'blocksize='1GiB', os.environ['LIBCUDF_CUFILE_POLICY']='OFF', os.environ.get('LIBCUDF_CUFILE_THREAD_COUNT')=None, os.environ.get('LIBCUDF_CUFILE_SLICE_SIZE')=None' took: 478135.98068 ms
+rows=661937393
+Working...
+Code block 'blocksize='2GiB', os.environ['LIBCUDF_CUFILE_POLICY']='OFF', os.environ.get('LIBCUDF_CUFILE_THREAD_COUNT')=None, os.environ.get('LIBCUDF_CUFILE_SLICE_SIZE')=None' took: 26723.81334 ms
+Traceback (most recent call last):
+  File "/home2/faculty/pwesolowski/praca-mgr/pipelines-repo/2_metajsonparser/cudf-parser/cudf_dask_benchmark.py", line 35, in <module>
+    benchmark_read_json(blocksize=blocksize)
+  File "/home2/faculty/pwesolowski/praca-mgr/pipelines-repo/2_metajsonparser/cudf-parser/cudf_dask_benchmark.py", line 24, in benchmark_read_json
+    rows = ddf.shape[0].compute()
+  File "/opt/conda/envs/rapids/lib/python3.10/site-packages/dask/base.py", line 314, in compute
+    (result,) = compute(self, traverse=False, **kwargs)
+  File "/opt/conda/envs/rapids/lib/python3.10/site-packages/dask/base.py", line 599, in compute
+    results = schedule(dsk, keys, **kwargs)
+  File "/opt/conda/envs/rapids/lib/python3.10/site-packages/dask/threaded.py", line 89, in get
+    results = get_async(
+  File "/opt/conda/envs/rapids/lib/python3.10/site-packages/dask/local.py", line 511, in get_async
+    raise_exception(exc, tb)
+  File "/opt/conda/envs/rapids/lib/python3.10/site-packages/dask/local.py", line 319, in reraise
+    raise exc
+  File "/opt/conda/envs/rapids/lib/python3.10/site-packages/dask/local.py", line 224, in execute_task
+    result = _execute_task(task, data)
+  File "/opt/conda/envs/rapids/lib/python3.10/site-packages/dask/core.py", line 119, in _execute_task
+    return func(*(_execute_task(a, cache) for a in args))
+  File "/opt/conda/envs/rapids/lib/python3.10/site-packages/dask/utils.py", line 72, in apply
+    return func(*args, **kwargs)
+  File "/opt/conda/envs/rapids/lib/python3.10/site-packages/dask/dataframe/io/json.py", line 294, in read_json_chunk
+    df = engine(s, orient="records", lines=True, **kwargs)
+  File "/opt/conda/envs/rapids/lib/python3.10/site-packages/cudf/io/json.py", line 111, in read_json
+    df = libjson.read_json(
+  File "json.pyx", line 50, in cudf._lib.json.read_json
+  File "json.pyx", line 138, in cudf._lib.json.read_json
+MemoryError: std::bad_alloc: out_of_memory: CUDA error at: /opt/conda/envs/rapids/include/rmm/mr/device/cuda_memory_resource.hpp:70: cudaErrorMemoryAllocation out of memory
++ for i in {1..6}
++ LIBCUDF_CUFILE_POLICY=OFF
++ python -u cudf_dask_benchmark.py
+Working...
+Code block 'blocksize='512MiB', os.environ['LIBCUDF_CUFILE_POLICY']='OFF', os.environ.get('LIBCUDF_CUFILE_THREAD_COUNT')=None, os.environ.get('LIBCUDF_CUFILE_SLICE_SIZE')=None' took: 482955.30935 ms
+rows=661937393
+Working...
+Code block 'blocksize='1GiB', os.environ['LIBCUDF_CUFILE_POLICY']='OFF', os.environ.get('LIBCUDF_CUFILE_THREAD_COUNT')=None, os.environ.get('LIBCUDF_CUFILE_SLICE_SIZE')=None' took: 477467.20735 ms
+rows=661937393
+Working...
+Code block 'blocksize='2GiB', os.environ['LIBCUDF_CUFILE_POLICY']='OFF', os.environ.get('LIBCUDF_CUFILE_THREAD_COUNT')=None, os.environ.get('LIBCUDF_CUFILE_SLICE_SIZE')=None' took: 45943.09925 ms
+Traceback (most recent call last):
+  File "/home2/faculty/pwesolowski/praca-mgr/pipelines-repo/2_metajsonparser/cudf-parser/cudf_dask_benchmark.py", line 35, in <module>
+    benchmark_read_json(blocksize=blocksize)
+  File "/home2/faculty/pwesolowski/praca-mgr/pipelines-repo/2_metajsonparser/cudf-parser/cudf_dask_benchmark.py", line 24, in benchmark_read_json
+    rows = ddf.shape[0].compute()
+  File "/opt/conda/envs/rapids/lib/python3.10/site-packages/dask/base.py", line 314, in compute
+    (result,) = compute(self, traverse=False, **kwargs)
+  File "/opt/conda/envs/rapids/lib/python3.10/site-packages/dask/base.py", line 599, in compute
+    results = schedule(dsk, keys, **kwargs)
+  File "/opt/conda/envs/rapids/lib/python3.10/site-packages/dask/threaded.py", line 89, in get
+    results = get_async(
+  File "/opt/conda/envs/rapids/lib/python3.10/site-packages/dask/local.py", line 511, in get_async
+    raise_exception(exc, tb)
+  File "/opt/conda/envs/rapids/lib/python3.10/site-packages/dask/local.py", line 319, in reraise
+    raise exc
+  File "/opt/conda/envs/rapids/lib/python3.10/site-packages/dask/local.py", line 224, in execute_task
+    result = _execute_task(task, data)
+  File "/opt/conda/envs/rapids/lib/python3.10/site-packages/dask/core.py", line 119, in _execute_task
+    return func(*(_execute_task(a, cache) for a in args))
+  File "/opt/conda/envs/rapids/lib/python3.10/site-packages/dask/utils.py", line 72, in apply
+    return func(*args, **kwargs)
+  File "/opt/conda/envs/rapids/lib/python3.10/site-packages/dask/dataframe/io/json.py", line 294, in read_json_chunk
+    df = engine(s, orient="records", lines=True, **kwargs)
+  File "/opt/conda/envs/rapids/lib/python3.10/site-packages/cudf/io/json.py", line 111, in read_json
+    df = libjson.read_json(
+  File "json.pyx", line 50, in cudf._lib.json.read_json
+  File "json.pyx", line 138, in cudf._lib.json.read_json
+MemoryError: std::bad_alloc: out_of_memory: CUDA error at: /opt/conda/envs/rapids/include/rmm/mr/device/cuda_memory_resource.hpp:70: cudaErrorMemoryAllocation out of memory
